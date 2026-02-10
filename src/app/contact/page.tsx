@@ -31,15 +31,15 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Form Section */}
-      <section className="py-16 md:py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-background/50 pointer-events-none" />
+      <section className="py-16 md:py-24 relative overflow-hidden bg-slate-50">
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-slate-50 to-white pointer-events-none" />
         <Container>
-          <div className="grid lg:grid-cols-3 gap-12">
+          <div className="grid lg:grid-cols-3 gap-12 relative z-10">
             {/* Contact Info */}
             <div className="lg:col-span-1 space-y-8">
               <div>
-                <h2 className="text-2xl font-bold mb-6 text-foreground">Get in Touch</h2>
-                <p className="text-muted-foreground mb-8">
+                <h2 className="text-2xl font-bold mb-6 text-slate-900">Get in Touch</h2>
+                <p className="text-slate-600 mb-8">
                   Whether you have a question about our services, want to discuss a project,
                   or just want to say hello, we'd love to hear from you.
                 </p>
@@ -51,10 +51,10 @@ export default function ContactPage() {
                     <Mail className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1">Email</h3>
+                    <h3 className="font-semibold mb-1 text-slate-900">Email</h3>
                     <a
                       href="mailto:info@nextlevelmarketerz.com"
-                      className="text-foreground/70 hover:text-primary transition-colors"
+                      className="text-slate-600 hover:text-primary transition-colors"
                     >
                       info@nextlevelmarketerz.com
                     </a>
@@ -66,10 +66,10 @@ export default function ContactPage() {
                     <Phone className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1">Phone</h3>
+                    <h3 className="font-semibold mb-1 text-slate-900">Phone</h3>
                     <a
                       href="tel:+9714XXXXXXX"
-                      className="text-foreground/70 hover:text-primary transition-colors"
+                      className="text-slate-600 hover:text-primary transition-colors"
                     >
                       +971 4 XXX XXXX
                     </a>
@@ -81,16 +81,16 @@ export default function ContactPage() {
                     <MapPin className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1">Location</h3>
-                    <p className="text-foreground/70">Dubai, UAE</p>
+                    <h3 className="font-semibold mb-1 text-slate-900">Location</h3>
+                    <p className="text-slate-600">Dubai, UAE</p>
                   </div>
                 </div>
               </div>
 
               {/* Business Hours */}
-              <div className="pt-6 border-t border-foreground/10">
-                <h3 className="font-semibold mb-3">Business Hours</h3>
-                <div className="text-sm text-foreground/70 space-y-1">
+              <div className="pt-6 border-t border-slate-200">
+                <h3 className="font-semibold mb-3 text-slate-900">Business Hours</h3>
+                <div className="text-sm text-slate-600 space-y-1">
                   <p>Monday - Friday: 9:00 AM - 6:00 PM GST</p>
                   <p>Saturday: 10:00 AM - 4:00 PM GST</p>
                   <p>Sunday: Closed</p>
@@ -100,7 +100,7 @@ export default function ContactPage() {
 
             {/* Contact Form */}
             <div className="lg:col-span-2">
-              <div className="bg-card rounded-2xl p-6 md:p-8 border border-foreground/10">
+              <div className="bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-xl shadow-slate-200/50">
                 <ContactForm />
               </div>
             </div>
@@ -109,13 +109,13 @@ export default function ContactPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-background">
+      <section className="py-16 md:py-24 bg-white border-t border-slate-100">
         <Container>
           <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">
               Not Ready to Reach Out?
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
+            <p className="text-slate-600 max-w-2xl mx-auto mb-8">
               Explore our case studies to see what we've built for other clients, or
               learn more about our services.
             </p>
@@ -128,7 +128,7 @@ export default function ContactPage() {
               </a>
               <a
                 href="/services"
-                className="inline-flex items-center justify-center px-6 py-3 border border-primary/50 text-foreground rounded-lg font-semibold hover:bg-primary/10 transition-colors"
+                className="inline-flex items-center justify-center px-6 py-3 border border-slate-300 text-slate-700 rounded-lg font-semibold hover:bg-slate-50 transition-colors"
               >
                 Our Services
               </a>
