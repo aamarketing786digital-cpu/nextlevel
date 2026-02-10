@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* === NEO-GLASS-MINT THEME (Light Mode Default) === */
+    
+    /* Base Colors */
+    --background: 171 76% 97%;      /* Minty Cyan #F1FEFC */
+    --foreground: 222 47% 11%;      /* Slate 900 #0f172a */
+
+    /* Cards & Surfaces */
+    --card: 0 0% 100%;              /* Pure White */
+    --card-foreground: 222 47% 11%; /* Slate 900 */
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Primary - Gold (Action) */
+    --primary: 43 77% 55%;          /* Amber 500 #fbbf24 */
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary - Slate (Structure) */
+    --secondary: 210 40% 96.1%;     /* Slate 100 */
+    --secondary-foreground: 222 47% 11%;
+
+    /* Muted */
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215 16% 47%;
+
+    /* Accent - Cyan (Tech) */
+    --accent: 188 78% 41%;          /* Cyan 600 */
+    --accent-foreground: 0 0% 100%;
+
+    /* Destructive */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    /* Borders & Inputs */
+    --border: 214.3 31.8% 91.4%;    /* Slate 200 */
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 47.4% 11.2%;
+
+    /* Radius */
+    --radius: 0.75rem;
+
+    /* Custom Tokens */
+    --glass-border: 0 0% 100% / 0.5;
+    --glass-surface: 0 0% 100% / 0.6;
+  }
+
+  .dark, .section-dark {
+    /* === DARK TECH THEME (Hero/CTA) === */
+    --background: 222 47% 11%;      /* Deep Navy #0f172a */
+    --foreground: 210 40% 98%;      /* Slate 50 */
+    
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+    
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+    
+    --primary: 43 77% 55%;          /* Gold */
+    --primary-foreground: 222 47.4% 11.2%;
+    
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    
+    /* Custom Tokens */
+    --glass-border: 255 255 255 / 0.1;
+    --glass-surface: 255 255 255 / 0.05;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  /* Glass Card Utility */
+  .glass-card {
+    @apply bg-white/60 backdrop-blur-md border border-white/60 shadow-lg hover:shadow-xl transition-all duration-300;
+  }
+
+  .glass-card-dark {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-lg;
+  }
+  
+  /* Text Gradients */
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-amber-600;
+  }
+  
+  .text-gradient-cyan {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

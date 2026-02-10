@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "mcp__context7__query-docs",
+      "mcp__tavily__tavily_search",
+      "Bash(npm run build:*)",
+      "mcp__context7__resolve-library-id"
+    ]
+  }
+}

@@ -31,7 +31,16 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+This project follows the NextLevel Marketerz Constitution (v1.0.0+). The plan MUST verify:
+
+- **SOLID & Code Quality**: Components follow Single Responsibility; TypeScript strict mode enabled; no `any` types
+- **Research-First**: Latest API docs verified for all libraries (GSAP, Framer Motion, Three.js, etc.)
+- **CSS Variable Theming**: All colors use semantic variables (--primary, --secondary, etc.); no hardcoded Tailwind colors
+- **UI Library Strategy**: Shadcn UI for base components; Aceternity/Magic UI for hero sections with CSS variable adaptation
+- **Animation Performance**: GSAP ScrollTrigger with useGSAP cleanup; Framer Motion for micro-interactions; mobile degradation strategy
+- **Implementation Workflow**: Research → Plan → Scaffold → Implement → Verify sequence followed
+
+**Constitution Location**: `.specify/memory/constitution.md`
 
 ## Project Structure
 
