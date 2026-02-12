@@ -99,8 +99,8 @@ export function FounderNote() {
               Our Vision
             </h2>
             <h3 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-slate-900 mb-8 leading-tight">
-              <div className="overflow-hidden"><div className="reveal-text">Redefining</div></div>
-              <div className="overflow-hidden"><div className="reveal-text"><span className="text-gradient-gold">Digital Excellence</span></div></div>
+              <div className="overflow-hidden"><div className="reveal-text pb-3">Redefining</div></div>
+              <div className="overflow-hidden"><div className="reveal-text pb-3"><span className="text-gradient-gold">Digital Excellence</span></div></div>
             </h3>
             <div className="space-y-6 text-lg text-slate-600 leading-relaxed max-w-xl fade-in">
               <p>

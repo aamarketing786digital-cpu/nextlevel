@@ -68,9 +68,9 @@ export function Testimonials() {
       <Container className="relative z-10 mb-16">
         <div className="text-center w-full max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-slate-900 mb-6 flex justify-center items-center gap-x-3 gap-y-2 flex-wrap w-full">
-            <div className="overflow-hidden"><div className="reveal-text">Trusted</div></div>
-            <div className="overflow-hidden"><div className="reveal-text">by</div></div>
-            <div className="overflow-hidden"><div className="reveal-text"><span className="text-primary">Visionaries</span></div></div>
+            <div className="overflow-hidden"><div className="reveal-text pb-3">Trusted</div></div>
+            <div className="overflow-hidden"><div className="reveal-text pb-3">by</div></div>
+            <div className="overflow-hidden"><div className="reveal-text pb-3"><span className="text-primary">Visionaries</span></div></div>
           </h2>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto testimonial-element">
             Join the ranks of industry leaders who have transformed their digital presence with our AI-driven strategies.

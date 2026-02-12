@@ -198,3 +198,9 @@ if (!prefersReducedMotion) {
 | Jumping on scroll | Ensure `overflow-x: hidden` on body |
 | Memory leaks | Always return cleanup from useGSAP |
 | Mobile issues | Use `ignoreMobileResize: true` in ScrollTrigger |
+
+## Related Skill References
+- **Text reveal animations**: `animations/text-reveal.md` — overflow-hidden patterns, descender clipping fix
+- **Horizontal scroll sections**: `animations/horizontal-scroll.md` — pinned scrub, tab nav, snap
+- **Preloader animations**: `animations/preloaders.md` — 5 production-ready loading patterns
+- **Common pitfalls**: `workflow/pitfalls.md` — 10 most common frontend bugs with fixes

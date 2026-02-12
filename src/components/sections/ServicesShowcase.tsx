@@ -175,7 +175,7 @@ export function ServicesShowcase() {
 
       <div ref={containerRef} className="flex h-screen w-[500%] will-change-transform">
         {services.map((service, index) => (
-          <div key={service.id} className={cn("service-panel panel-${index} relative w-screen h-full flex items-center justify-center px-6 pb-6 pt-48 md:p-24 overflow-hidden bg-slate-50")}>
+          <div key={service.id} className={cn("service-panel panel-${index} relative w-screen h-full flex items-center justify-center px-6 pb-6 pt-24 md:pt-32 md:px-24 md:pb-24 overflow-hidden bg-slate-50")}>
               
               {/* Background Elements */}
               <div className="absolute inset-0 z-0">

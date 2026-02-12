@@ -89,6 +89,19 @@
   * {
     @apply border-border;
   }
+  html {
+    font-size: 14px; /* Scale down from 16px — matches ~87% zoom on 1080p screens */
+  }
+  @media (min-width: 1536px) {
+    html {
+      font-size: 15px; /* Slightly larger on 2K+ screens */
+    }
+  }
+  @media (min-width: 1920px) {
+    html {
+      font-size: 16px; /* Full size on ultrawide/4K */
+    }
+  }
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;

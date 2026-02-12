@@ -56,6 +56,10 @@ Select the specific techniques to achieve the vision.
 | Effect | Tool | Reference |
 |--------|------|-----------|
 | **Scroll Storytelling** | GSAP ScrollTrigger | `animations/gsap.md` |
+| **Text Reveals** | GSAP + overflow-hidden | `animations/text-reveal.md` |
+| **Horizontal Scroll** | GSAP Pin + Scrub | `animations/horizontal-scroll.md` |
+| **Curtain Reveals** | GSAP Timeline | `animations/curtain-reveal.md` |
+| **Preloader Intros** | GSAP Timeline | `animations/preloaders.md` |
 | **3D Scenes** | Three.js (Canvas) | `animations/threejs.md` |
 | **Data Globes** | Globe.gl (Heavy) | `animations/globe-gl.md` |
 | **Decorative Globes** | Cobe.js (Light) | `animations/cobejs.md` |
@@ -66,6 +70,7 @@ Select the specific techniques to achieve the vision.
 #### 🎨 CSS & Visual Polish
 | Effect | Technique | Reference |
 |--------|-----------|-----------|
+| **Responsive Scaling** | Root font-size + Container | `css/responsive-scaling.md` |
 | **Glassmorphism** | Backdrop filters + Noise | `css/tailwindcss.md` |
 | **Glowing Borders** | Mask Composite / Gradient | `css/border-gradient.md` |
 | **Soft Edges** | Alpha Masking | `css/alpha-masking.md` |
@@ -75,6 +80,12 @@ Select the specific techniques to achieve the vision.
 #### 📐 Design Patterns
 - **Landing Pages**: `design/landing-page.md` (Structure, Copy, Conversion)
 - **Pricing Tables**: `design/pricing-page.md` (Psychology, Layout)
+- **Bento Grids**: `design/bento-grid.md` (Asymmetric Card Layouts, Spanning)
+- **Tab Navigation**: `design/tabs-navigation.md` (Pill, Underline, Segmented, Sidebar)
+- **Section Theming**: `design/section-theming.md` (Contrast, Contact Forms, Dark/Light)
+
+#### ⚠️ Pitfalls & Solutions
+- **Common Bugs**: `workflow/pitfalls.md` — 10 most common frontend bugs with fixes
 
 ## Phase 3: Execution
 1. **Setup**: Initialize components with `workflow/vercel-best-practices.md` constraints (SSR safety).
