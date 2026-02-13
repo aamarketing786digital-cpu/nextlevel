@@ -4,6 +4,7 @@ import { Suspense, useRef } from "react";
 import dynamic from "next/dynamic";
 import { useMounted } from "@/hooks/useMounted";
 import { useMobileDetection } from "@/hooks/useMobileDetection";
+import { NeuralNetwork } from "@/components/ui/neural-network";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Sparkles } from "lucide-react";
 import { useGSAP } from "@gsap/react";
@@ -142,7 +143,12 @@ export function Hero() {
                 <HeroScene />
              </Suspense>
           ) : (
-             <StaticHeroImage />
+             <>
+               <StaticHeroImage />
+               <div className="absolute inset-0 z-[1]">
+                 <NeuralNetwork density="low" className="opacity-40" />
+               </div>
+             </>
           )}
       </div>
 

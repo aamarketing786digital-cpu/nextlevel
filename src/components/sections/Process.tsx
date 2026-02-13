@@ -92,16 +92,16 @@ export function Process() {
   );
 
   return (
-    <section ref={containerRef} className="py-24 relative overflow-hidden bg-background">
+    <section ref={containerRef} className="py-16 md:py-24 relative overflow-hidden bg-background">
       <Container>
-        <div className="text-center mb-20 max-w-3xl mx-auto">
+        <div className="text-center mb-12 md:mb-20 max-w-3xl mx-auto px-4">
           <span className="text-primary font-medium tracking-wide uppercase text-sm mb-4 block">
             How We Work
           </span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-slate-900 mb-6">
+          <h2 className="text-3xl md:text-5xl font-display font-bold text-slate-900 mb-4 md:mb-6">
             Our Proven <span className="text-primary">Process</span>
           </h2>
-          <p className="text-lg text-slate-600">
+          <p className="text-base md:text-lg text-slate-600">
             From concept to launch, we follow a rigorous methodology to ensure excellence at every step.
           </p>
         </div>
@@ -116,35 +116,35 @@ export function Process() {
             className="absolute left-4 md:left-1/2 top-0 bottom-0 w-1 bg-primary origin-top -translate-x-1/2" 
           />
 
-          <div className="space-y-12 md:space-y-24">
+          <div className="space-y-8 md:space-y-24">
             {steps.map((step, index) => (
               <div
                 key={step.id}
                 className={cn(
-                  "process-item relative flex items-center md:justify-between group",
+                  "process-item relative flex items-start md:items-center md:justify-between group",
                   index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                 )}
               >
                 {/* Timeline Dot */}
-                <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full border-4 border-background bg-slate-200 z-10 flex items-center justify-center transition-colors duration-500 group-hover:bg-primary group-hover:scale-110 shadow-sm">
-                   <div className="w-2.5 h-2.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute left-4 md:left-1/2 -translate-x-1/2 top-6 md:top-auto w-6 h-6 md:w-8 md:h-8 rounded-full border-4 border-background bg-slate-200 z-10 flex items-center justify-center transition-colors duration-500 group-hover:bg-primary group-hover:scale-110 shadow-sm">
+                   <div className="w-1.5 h-1.5 md:w-2.5 md:h-2.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
 
                 {/* Content Card */}
                 <div className={cn(
-                    "ml-16 md:ml-0 md:w-[45%] p-8 rounded-3xl glass-card border border-white/40 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1",
+                    "ml-12 md:ml-0 md:w-[45%] p-5 md:p-8 rounded-2xl md:rounded-3xl glass-card border border-white/40 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1",
                     index % 2 === 0 ? "mr-auto" : "ml-auto"
                 )}>
-                    <div className="flex items-center gap-4 mb-4">
-                        <div className={cn("p-3 rounded-2xl shadow-sm", step.color)}>
+                    <div className="flex items-center gap-3 md:gap-4 mb-3 md:mb-4">
+                        <div className={cn("p-2 md:p-3 rounded-xl md:rounded-2xl shadow-sm", step.color)}>
                             {step.icon}
                         </div>
-                        <span className="text-4xl font-display font-bold text-slate-200/50 absolute top-4 right-6 pointer-events-none">
+                        <span className="text-2xl md:text-4xl font-display font-bold text-slate-200/50 absolute top-3 right-4 md:top-4 md:right-6 pointer-events-none">
                             0{step.id}
                         </span>
                     </div>
-                    <h3 className="text-xl font-bold text-slate-900 mb-3">{step.title}</h3>
-                    <p className="text-slate-600 leading-relaxed">{step.description}</p>
+                    <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-2 md:mb-3">{step.title}</h3>
+                    <p className="text-sm md:text-base text-slate-600 leading-relaxed">{step.description}</p>
                 </div>
               </div>
             ))}

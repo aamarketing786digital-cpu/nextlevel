@@ -30,7 +30,7 @@ const valueProps = [
                 WebkitMaskImage: "radial-gradient(circle at top left, transparent 0%, transparent 35%, black 60%)"
             }}
         >
-            <NeuralNetwork className="opacity-100" />
+            <NeuralNetwork density="high" className="opacity-100" />
         </div>
     ),
     colSpan: 2,
