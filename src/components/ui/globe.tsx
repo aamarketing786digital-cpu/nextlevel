@@ -51,7 +51,7 @@ export const Globe = ({ className }: { className?: string }) => {
       ],
       onRender: (state) => {
         state.phi = phi;
-        phi += 0.003;
+        phi += isMobile ? 0.002 : 0.003;
       },
     });
 

@@ -91,6 +91,8 @@
   }
   html {
     font-size: 14px; /* Scale down from 16px — matches ~87% zoom on 1080p screens */
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
   }
   @media (min-width: 1536px) {
     html {
@@ -111,7 +113,13 @@
 @layer components {
   /* Glass Card Utility */
   .glass-card {
-    @apply bg-white/60 backdrop-blur-md border border-white/60 shadow-lg hover:shadow-xl transition-all duration-300;
+    @apply bg-white/60 border border-white/60 shadow-lg hover:shadow-xl transition-all duration-300;
+    backdrop-filter: blur(4px);
+  }
+  @media (min-width: 768px) {
+    .glass-card {
+      backdrop-filter: blur(12px);
+    }
   }
 
   .glass-card-dark {

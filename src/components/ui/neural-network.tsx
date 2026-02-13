@@ -99,8 +99,19 @@ export const NeuralNetwork = ({ className, density = "normal" }: NeuralNetworkPr
       }
     };
 
+    const isMobileDevice = width < 768;
+    let frameCount = 0;
+
     const animate = () => {
       if (!ctx) return;
+      frameCount++;
+      
+      // Throttle to ~30fps on mobile to reduce scroll jank
+      if (isMobileDevice && frameCount % 2 !== 0) {
+        animationFrameId = requestAnimationFrame(animate);
+        return;
+      }
+
       ctx.clearRect(0, 0, width, height);
       
       const config = DENSITY_CONFIG[densityRef.current];
