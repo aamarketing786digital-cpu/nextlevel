@@ -85,7 +85,7 @@ function AnimatedHeadline() {
         <Button
           size="lg"
           asChild
-          className="bg-primary hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5 transition-all text-lg px-8 h-14"
+          className="rounded-full bg-primary hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5 transition-all text-lg px-8 h-14"
         >
           <a href="/contact">
             Start Your Journey
@@ -95,7 +95,7 @@ function AnimatedHeadline() {
         <Button
           size="lg"
           variant="outline"
-          className="border-primary/20 hover:bg-primary/5 transition-all text-lg px-8 h-14"
+          className="rounded-full border-primary/20 hover:bg-primary/5 transition-all text-lg px-8 h-14"
           asChild
         >
           <a href="/work">View Our Work</a>
@@ -137,16 +137,18 @@ export function Hero() {
       </div>
 
       {/* Background 3D or Static */}
-      <div className="absolute inset-0 z-0 opacity-80 mix-blend-screen pointer-events-none">
+      <div className="absolute inset-0 z-0 pointer-events-none">
           {show3D ? (
-             <Suspense fallback={<StaticHeroImage />}>
-                <HeroScene />
-             </Suspense>
+             <div className="w-full h-full opacity-80 mix-blend-screen">
+               <Suspense fallback={<StaticHeroImage />}>
+                  <HeroScene />
+               </Suspense>
+             </div>
           ) : (
              <>
                <StaticHeroImage />
                <div className="absolute inset-0 z-[1]">
-                 <NeuralNetwork density="low" className="opacity-40" />
+                 <NeuralNetwork density="low" className="opacity-30" />
                </div>
              </>
           )}

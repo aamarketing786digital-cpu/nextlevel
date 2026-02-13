@@ -92,7 +92,7 @@ export function ContactForm() {
           <Button
             onClick={() => setFormStatus("idle")}
             variant="outline"
-            className="mt-6"
+            className="mt-6 rounded-full"
           >
             Send Another Message
           </Button>
@@ -279,7 +279,7 @@ export function ContactForm() {
               type="submit"
               size="lg"
               disabled={isSubmitting || formStatus === "submitting"}
-              className="w-full sm:w-auto"
+              className="w-full sm:w-auto rounded-full"
             >
               {isSubmitting || formStatus === "submitting" ? (
                 <>

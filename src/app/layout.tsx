@@ -54,7 +54,7 @@ export default function RootLayout({
         </a>
         <Preloader />
         <Navbar />
-        <div className="relative z-10 bg-background shadow-2xl rounded-b-[3rem] min-h-screen">
+        <div className="relative z-10 bg-background shadow-2xl rounded-b-xl md:rounded-b-[3rem] min-h-screen transform-gpu">
           <main id="main-content" tabIndex={-1}>
             {children}
           </main>

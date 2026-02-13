@@ -132,8 +132,8 @@ export function Process() {
 
                 {/* Content Card */}
                 <div className={cn(
-                    "ml-12 md:ml-0 md:w-[45%] p-5 md:p-8 rounded-2xl md:rounded-3xl glass-card border border-white/40 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1",
-                    index % 2 === 0 ? "mr-auto" : "ml-auto"
+                    "ml-12 w-[calc(100%-3.5rem)] md:ml-0 md:w-[45%] p-5 md:p-8 rounded-2xl md:rounded-3xl glass-card border border-white/40 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1",
+                    index % 2 === 0 ? "md:mr-auto" : "md:ml-auto"
                 )}>
                     <div className="flex items-center gap-3 md:gap-4 mb-3 md:mb-4">
                         <div className={cn("p-2 md:p-3 rounded-xl md:rounded-2xl shadow-sm", step.color)}>

@@ -17,7 +17,9 @@ export const Globe = ({ className }: { className?: string }) => {
     const container = containerRef.current;
 
     // Responsive sizing based on container
-    const size = Math.min(container.clientWidth, container.clientHeight, 600);
+    const containerW = container.clientWidth;
+    const containerH = container.clientHeight || containerW; // fallback if height is 0
+    const size = Math.min(containerW, containerH, 600);
     const isMobile = window.innerWidth < 768;
     const dpr = isMobile ? Math.min(window.devicePixelRatio, 1.5) : Math.min(window.devicePixelRatio, 2);
     
