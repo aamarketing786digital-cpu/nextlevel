@@ -252,8 +252,8 @@
 - [X] T084 [P] Implement dynamic imports for heavy components (HeroScene, Aceternity components) using next/dynamic
 - [ ] T085 [P] Add will-change CSS property only to actively animating elements, remove after animation
 - [X] T086 [P] Verify RTL layout support for Arabic content (add dir="rtl" attribute to html element)
-- [ ] T087 Add bundle analysis script to package.json for monitoring bundle size
-- [ ] T088 [P] Create vercel.json with build configuration and environment variables
+- [X] T087 Add bundle analysis script to package.json for monitoring bundle size
+- [X] T088 [P] Create vercel.json with build configuration and environment variables
 - [ ] T089 Add Lighthouse CI configuration for performance regression testing
 - [ ] T090 [P] Create Playwright E2E test for contact form submission in tests/e2e/contact-form.spec.ts
 
@@ -304,12 +304,12 @@
 
 ### Phase 10G: GSAP ScrollTrigger Migration
 
-- [ ] T114 [P] Remove all CSS `reveal-on-scroll`, `fade-from-left`, `fade-from-right`, `scale-in` classes from globals.css (keep the `.is-visible` variants for brief backward compat)
-- [ ] T115 Update src/components/sections/CompanyStory.tsx: replace CSS reveal classes with GSAP `useGSAP` + ScrollTrigger for text reveals
-- [ ] T116 [P] Update src/components/sections/TeamSection.tsx: replace CSS reveal classes with GSAP `useGSAP` + `ScrollTrigger.batch()` for staggered card reveal
-- [ ] T117 [P] Update src/components/sections/Values.tsx: replace CSS reveal classes with GSAP `useGSAP` + ScrollTrigger for icon reveal
-- [ ] T118 [P] Update src/components/sections/CaseStudies.tsx: verify GSAP parallax is working (not CSS-only), add proper `useGSAP` cleanup
-- [ ] T119 Add `ScrollTrigger.normalizeScroll(true)` for mobile smooth scrolling in src/app/layout.tsx or a global ScrollTrigger setup hook
+- [X] T114 [P] Remove all CSS `reveal-on-scroll`, `fade-from-left`, `fade-from-right`, `scale-in` classes from globals.css (keep the `.is-visible` variants for brief backward compat)
+- [X] T115 Update src/components/sections/CompanyStory.tsx: replace CSS reveal classes with GSAP `useGSAP` + ScrollTrigger for text reveals
+- [X] T116 [P] Update src/components/sections/TeamSection.tsx: replace CSS reveal classes with GSAP `useGSAP` + `ScrollTrigger.batch()` for staggered card reveal
+- [X] T117 [P] Update src/components/sections/Values.tsx: replace CSS reveal classes with GSAP `useGSAP` + ScrollTrigger for icon reveal
+- [X] T118 [P] Update src/components/sections/CaseStudies.tsx: verify GSAP parallax is working (not CSS-only), add proper `useGSAP` cleanup
+- [X] T119 Add `ScrollTrigger.normalizeScroll(true)` for mobile smooth scrolling in src/app/layout.tsx or a global ScrollTrigger setup hook
 
 **Checkpoint**: Visual Overhaul complete — site matches reference quality with immersive particle hero, horizontal-scroll services, glassmorphic cards, testimonials, and GSAP throughout
 
@@ -318,9 +318,9 @@
 ### Accessibility (WCAG 2.1 AA Compliance)
 
 - [ ] T091 [P] Run axe-core or Lighthouse accessibility audit and address all violations to achieve WCAG 2.1 AA compliance
-- [ ] T092 [P] Add skip-to-content link for keyboard navigation (hidden until focused, jumps to main content)
-- [ ] T093 [P] Verify focus indicators visible on all interactive elements (buttons, links, form inputs) - add custom focus styles if needed
-- [ ] T094 [P] Add ARIA labels to all icon-only buttons and decorative elements
+- [X] T092 [P] Add skip-to-content link for keyboard navigation (hidden until focused, jumps to main content)
+- [X] T093 [P] Verify focus indicators visible on all interactive elements (buttons, links, form inputs) - add custom focus styles if needed
+- [X] T094 [P] Add ARIA labels to all icon-only buttons and decorative elements
 - [ ] T095 [P] Test screen reader compatibility with NVDA (Windows) or VoiceOver (macOS) for critical user paths (Hero → Contact form submission)
 
 ---
