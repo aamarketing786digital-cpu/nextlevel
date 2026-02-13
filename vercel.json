@@ -4,16 +4,6 @@
   "installCommand": "npm install",
   "framework": "nextjs",
   "regions": ["iad1"],
-  "env": {
-    "BREVO_API_KEY": "@brevo-api-key",
-    "NEXT_PUBLIC_SITE_URL": "https://nextlevelmarketerz.com"
-  },
-  "build": {
-    "env": {
-      "BREVO_CONTACT_LIST_ID": "@brevo-contact-list-id",
-      "BREVO_NEWSLETTER_LIST_ID": "@brevo-newsletter-list-id"
-    }
-  },
   "headers": [
     {
       "source": "/(.*)",
