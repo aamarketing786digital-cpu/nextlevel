@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { cn } from "@/lib/utils";
-import { Loader2 } from "lucide-react";
 
 // Register GSAP plugins if needed
 if (typeof window !== "undefined") {
@@ -165,7 +164,7 @@ export function PreloaderScramble({ onComplete }: PreloaderProps) {
             if(!textRef.current) return;
             
             textRef.current.innerText = targetText.split("")
-                .map((char, index) => {
+                .map((_char, index) => {
                     if(index < iteration) return targetText[index];
                     return chars[Math.floor(Math.random() * chars.length)];
                 }).join("");

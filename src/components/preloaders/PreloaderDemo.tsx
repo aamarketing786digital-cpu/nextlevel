@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { 
     PreloaderMinimal, 
@@ -10,13 +10,11 @@ import {
     PreloaderCurtain 
 } from "@/components/preloaders/Variations";
 import { RefreshCw, Layout, Code, Circle, VenetianMask, Type, X } from "lucide-react";
-import { usePathname } from "next/navigation";
 
 export function PreloaderDemo() {
   const [currentPreloader, setCurrentPreloader] = useState<number | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const pathname = usePathname();
 
   // Reset or handle route changes if needed, but for now purely manual trigger
   
