@@ -115,7 +115,7 @@ export function Hero() {
   const sceneScale = isMobile ? 0.55 : 1;
 
   return (
-    <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-background section-dark text-foreground">
+    <section className="relative min-h-[85dvh] md:min-h-screen w-full flex items-center justify-center overflow-hidden bg-background section-dark text-foreground">
       {/* Background Pattern */}
       <div className="absolute inset-0 z-0 bg-slate-950 pointer-events-none overflow-hidden">
           {/* Noise Texture */}
@@ -151,7 +151,7 @@ export function Hero() {
           )}
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 py-20 text-center">
+      <div className="relative z-10 container mx-auto px-4 py-12 md:py-20 text-center">
         <AnimatedHeadline />
       </div>
       
