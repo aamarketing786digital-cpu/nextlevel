@@ -30,7 +30,7 @@ function StaticHeroImage() {
 
 function AnimatedHeadline() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const titleText = "Next Level Marketerz";
+  const titleText = "Next Level";
   
   useGSAP(() => {
     if (!containerRef.current) return;
@@ -41,9 +41,9 @@ function AnimatedHeadline() {
     tl.from(".hero-badge", { y: -20, opacity: 0, duration: 0.8 });
     
     // Text Chars
-    tl.from(".hero-char", {
-        y: 50,
-        opacity: 0,
+    tl.to(".hero-char", {
+        y: 0,
+        opacity: 1,
         stagger: 0.03, // Faster stagger for longer text
         duration: 0.8,
         ease: "back.out(1.7)"
@@ -68,7 +68,7 @@ function AnimatedHeadline() {
 
       <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-display font-bold leading-tight text-foreground tracking-tight max-w-5xl">
         {titleText.split("").map((char, i) => (
-            <span key={i} className="hero-char inline-block whitespace-pre">{char}</span>
+            <span key={i} className="hero-char inline-block whitespace-pre opacity-0 translate-y-[50px]">{char}</span>
         ))}
       </h1>
 

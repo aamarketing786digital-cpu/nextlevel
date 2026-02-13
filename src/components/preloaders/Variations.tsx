@@ -260,11 +260,21 @@ export function PreloaderFluid({ onComplete }: PreloaderProps) {
     // Hide the dot initially
     tl.set(dotRef.current, { opacity: 0, scale: 0 });
 
-    // 1. Fade in logo text
-    tl.from(logoRef.current, { opacity: 0, scale: 0.8, duration: 0.6, ease: "back.out(1.7)" });
+    // 1. Reveal logo text (handling opacity-0 to prevent FOUC)
+    tl.fromTo(logoRef.current, 
+        { opacity: 0, scale: 0.8 },
+        { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.7)" }
+    );
 
-    // 2. Hold logo visible
-    tl.to({}, { duration: 1.5 });
+    // 2. Pulse animation during hold
+    tl.to(logoRef.current, { 
+        scale: 1.05, 
+        opacity: 0.8, 
+        duration: 0.5, 
+        yoyo: true, 
+        repeat: 3, 
+        ease: "sine.inOut" 
+    });
 
     // 3. Fade out logo
     tl.to(logoRef.current, { opacity: 0, scale: 0.5, duration: 0.4, ease: "power2.in" });
@@ -297,9 +307,8 @@ export function PreloaderFluid({ onComplete }: PreloaderProps) {
       className="fixed inset-0 z-[9999] flex items-center justify-center bg-background"
     >
       {/* Brand Logo/Name */}
-      <div ref={logoRef} className="absolute z-20 text-center">
-          <h2 className="font-display text-4xl md:text-6xl font-bold text-foreground tracking-tight">Next Level Marketerz</h2>
-          <p className="text-sm md:text-base text-muted-foreground tracking-widest uppercase mt-2">Marketerz</p>
+      <div ref={logoRef} className="absolute z-20 text-center opacity-0">
+          <h2 className="font-display text-4xl md:text-6xl font-bold text-foreground tracking-tight">Next Level</h2>
       </div>
       
       {/* Expanding dot — hidden via CSS until GSAP reveals it */}
