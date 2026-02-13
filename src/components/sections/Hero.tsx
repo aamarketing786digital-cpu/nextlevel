@@ -27,9 +27,10 @@ function StaticHeroImage() {
   );
 }
 
+
 function AnimatedHeadline() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const titleText = "NextLevel";
+  const titleText = "Next Level Marketerz";
   
   useGSAP(() => {
     if (!containerRef.current) return;
@@ -43,7 +44,7 @@ function AnimatedHeadline() {
     tl.from(".hero-char", {
         y: 50,
         opacity: 0,
-        stagger: 0.05,
+        stagger: 0.03, // Faster stagger for longer text
         duration: 0.8,
         ease: "back.out(1.7)"
     }, "-=0.4");
@@ -65,9 +66,9 @@ function AnimatedHeadline() {
         <span className="text-sm font-medium text-primary">AI-Powered Growth</span>
       </div>
 
-      <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-bold leading-tight text-foreground tracking-tight">
+      <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-display font-bold leading-tight text-foreground tracking-tight max-w-5xl">
         {titleText.split("").map((char, i) => (
-            <span key={i} className="hero-char inline-block">{char}</span>
+            <span key={i} className="hero-char inline-block whitespace-pre">{char}</span>
         ))}
       </h1>
 
@@ -110,7 +111,8 @@ export function Hero() {
   
   // Show 3D on all devices, but optimize count for mobile
   const show3D = mounted;
-  const particleCount = isMobile ? 100 : 300;
+  const particleCount = isMobile ? 150 : 300;
+  const sceneScale = isMobile ? 0.55 : 1;
 
   return (
     <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-background section-dark text-foreground">
@@ -141,7 +143,7 @@ export function Hero() {
           {show3D ? (
              <div className="w-full h-full opacity-80 mix-blend-screen">
                <Suspense fallback={<StaticHeroImage />}>
-                  <HeroScene count={particleCount} />
+                  <HeroScene count={particleCount} scale={sceneScale} />
                </Suspense>
              </div>
           ) : (

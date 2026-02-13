@@ -129,7 +129,7 @@ export function ValueProp() {
   return (
     <section
       ref={sectionRef}
-      className="py-20 md:py-28 bg-background relative overflow-hidden"
+      className="py-20 md:py-28 bg-white dark:bg-slate-950 relative overflow-hidden" id="value-prop"
     >
       {/* Subtle background interaction */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent pointer-events-none opacity-50" />
@@ -143,7 +143,7 @@ export function ValueProp() {
             <span className="text-xs font-bold text-primary uppercase tracking-wider">Why Us</span>
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6">
-            Why Choose <span className="text-gradient-gold">NextLevel</span>?
+            Why Choose <span className="text-gradient-gold">Next Level Marketerz</span>?
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             We combine creativity, technology, and data to deliver results that

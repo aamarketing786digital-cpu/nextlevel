@@ -31,7 +31,7 @@ function FooterContent() {
             {/* Brand Column */}
             <div className="col-span-2 lg:col-span-2">
                  <Link href="/" className="flex items-center space-x-2 mb-6">
-                    <span className="font-display text-3xl font-bold text-white">NextLevel</span>
+                    <span className="font-display text-3xl font-bold text-white">Next Level Marketerz</span>
                  </Link>
                  <p className="text-slate-400 text-lg leading-relaxed max-w-sm">
                     Ascension to digital excellence. We craft experiences that define the future of interaction.
@@ -86,7 +86,7 @@ function FooterContent() {
         {/* Massive Text at Bottom */}
         <div className="border-t border-white/5 pt-12 flex flex-col md:flex-row justify-between items-end">
             <div className="text-slate-500 text-sm mb-4 md:mb-0">
-                © {new Date().getFullYear()} NextLevel Marketerz. Dubai, UAE.
+                &copy; {new Date().getFullYear()} Next Level Marketerz. Dubai, UAE.
             </div>
              {/* Big Text */}
             <div className="font-display font-bold text-[12vw] leading-none text-white/5 select-none pointer-events-none">

@@ -23,7 +23,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 md:px-6 relative z-10">
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-display font-bold text-white mb-8 tracking-tight">
-              About <span className="text-gradient-gold">NextLevel</span>
+              About <span className="text-gradient-gold">Next Level Marketerz</span>
             </h1>
             <p className="text-lg md:text-xl text-slate-300 leading-relaxed font-light">
               We're a team of passionate marketers, developers, and designers
