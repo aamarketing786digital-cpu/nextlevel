@@ -150,14 +150,15 @@ function NetworkSphere({ count = 300, radius = 4 }: { count?: number; radius?: n
   );
 }
 
-function Scene() {
+
+function Scene({ count = 300 }: { count?: number }) {
   return (
     <>
       <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} color="#00bfff" intensity={1} />
       
       <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
-        <NetworkSphere count={300} radius={4.5} />
+        <NetworkSphere count={count} radius={4.5} />
       </Float>
 
       <OrbitControls 
@@ -171,7 +172,7 @@ function Scene() {
   );
 }
 
-export function HeroScene() {
+export function HeroScene({ count = 300 }: { count?: number }) {
   
   return (
     <div className="h-full w-full absolute inset-0 z-0">
@@ -180,7 +181,7 @@ export function HeroScene() {
         gl={{ antialias: true, alpha: true }}
         dpr={[1, 2]}
       >
-        <Scene />
+        <Scene count={count} />
       </Canvas>
     </div>
   );

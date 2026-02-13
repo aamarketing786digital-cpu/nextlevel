@@ -24,7 +24,7 @@ const valueProps = [
     // Covers the full card but fades out at top-left to avoid text
     header: (
         <div 
-            className="absolute inset-0 z-0 overflow-hidden" 
+            className="hidden md:block absolute inset-0 z-0 overflow-hidden" 
             style={{ 
                 maskImage: "radial-gradient(circle at top left, transparent 0%, transparent 35%, black 60%)",
                 WebkitMaskImage: "radial-gradient(circle at top left, transparent 0%, transparent 35%, black 60%)"
@@ -77,7 +77,7 @@ const valueProps = [
     description: <div className="md:w-1/2">While we're rooted in the UAE, our strategies span the Middle East and beyond. Think global, act local.</div>,
     icon: <LucideGlobe className="w-8 h-8" />,
     colSpan: 2,
-    header: <div className="absolute inset-0 md:inset-auto md:right-[-40%] md:bottom-[-100%] md:w-[100%] md:h-[200%] z-0 rounded-full overflow-hidden pointer-events-none opacity-20 md:opacity-40"><Globe className="opacity-100" /></div>,
+    header: <div className="hidden md:block absolute inset-0 md:inset-auto md:right-[-40%] md:bottom-[-100%] md:w-[100%] md:h-[200%] z-0 rounded-full overflow-hidden pointer-events-none opacity-20 md:opacity-40"><Globe className="opacity-100" /></div>,
   },
 ];
 

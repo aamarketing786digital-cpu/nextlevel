@@ -4,7 +4,6 @@ import { Suspense, useRef } from "react";
 import dynamic from "next/dynamic";
 import { useMounted } from "@/hooks/useMounted";
 import { useMobileDetection } from "@/hooks/useMobileDetection";
-import { NeuralNetwork } from "@/components/ui/neural-network";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Sparkles } from "lucide-react";
 import { useGSAP } from "@gsap/react";
@@ -109,8 +108,9 @@ export function Hero() {
   const mounted = useMounted();
   const isMobile = useMobileDetection();
   
-  // Only show 3D on desktop for performance
-  const show3D = mounted && !isMobile;
+  // Show 3D on all devices, but optimize count for mobile
+  const show3D = mounted;
+  const particleCount = isMobile ? 100 : 300;
 
   return (
     <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-background section-dark text-foreground">
@@ -141,16 +141,11 @@ export function Hero() {
           {show3D ? (
              <div className="w-full h-full opacity-80 mix-blend-screen">
                <Suspense fallback={<StaticHeroImage />}>
-                  <HeroScene />
+                  <HeroScene count={particleCount} />
                </Suspense>
              </div>
           ) : (
-             <>
-               <StaticHeroImage />
-               <div className="absolute inset-0 z-[1]">
-                 <NeuralNetwork density="low" className="opacity-30" />
-               </div>
-             </>
+             <StaticHeroImage />
           )}
       </div>
 
