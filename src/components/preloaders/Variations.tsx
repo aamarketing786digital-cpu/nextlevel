@@ -308,7 +308,8 @@ export function PreloaderFluid({ onComplete }: PreloaderProps) {
     >
       {/* Brand Logo/Name */}
       <div ref={logoRef} className="absolute z-20 text-center opacity-0">
-          <h2 className="font-display text-4xl md:text-6xl font-bold text-foreground tracking-tight">Next Level</h2>
+          <h2 className="font-display text-4xl md:text-6xl font-bold text-gradient-gold tracking-tight">Next Level</h2>
+          <p className="text-sm md:text-base text-muted-foreground tracking-widest uppercase mt-2">Marketerz</p>
       </div>
       
       {/* Expanding dot — hidden via CSS until GSAP reveals it */}
