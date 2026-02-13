@@ -164,6 +164,7 @@ function DesktopServices() {
          trigger: triggerRef.current,
          pin: true,
          scrub: 1,
+         invalidateOnRefresh: true,
          snap: {
              snapTo: 1 / (totalPanels - 1),
              duration: { min: 0.2, max: 0.5 },
@@ -207,6 +208,10 @@ function DesktopServices() {
        xPercent: -100 * (totalPanels - 1),
        ease: "none",
     });
+
+    // Refresh after a short delay to ensure accurate measurements
+    const refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 500);
+    return () => clearTimeout(refreshTimer);
  
   }, { scope: triggerRef });
  
