@@ -154,6 +154,100 @@ export const SERVICES: Service[] = [
   },
 ] as const;
 
+// Expanded Services List (from user requirements for Phase 2)
+export const ALL_SERVICES = [
+  "Lead Generation",
+  "Web Development",
+  "Mobile App development",
+  "Website Design Figma",
+  "Mobile App Design",
+  "Graphic Design",
+  "Website Hosting",
+  "WhatsApp Business API",
+  "ZOHO",
+  "Email Marketing",
+  "Amazon Marketing",
+  "E-commerce Marketplace",
+  "Events",
+  "SMS Marketing",
+] as const;
+
+// Comprehensive Mega Services Category Map (from User Layout Request)
+export const MEGA_SERVICES = {
+  "Digital Marketing": [
+    "Search Engine Optimization (SEO)",
+    "Social Media Marketing",
+    "Influencer Marketing",
+    "PR & Outreach",
+    "Email Marketing",
+    "Amazon Marketing",
+    "E-Commerce Marketplace",
+    "SMS Marketing"
+  ],
+  "Web & App Development": [
+    "Web Development",
+    "Mobile App Development",
+    "Website Hosting",
+    "WhatsApp Business API",
+    "ZOHO"
+  ],
+  "Design Agency": [
+    "Website Design Figma",
+    "Mobile App Design",
+    "Graphic Design",
+    "Branding"
+  ],
+  "Advertising & Paid Media": [
+    "Google Ads",
+    "Facebook Ads",
+    "Instagram Ads",
+    "Snapchat Ads",
+    "X Ads",
+    "Reddit Ads",
+    "Pinterest Ads",
+    "Linkedin Ads",
+    "TikTok Ads",
+    "Youtube Ads"
+  ],
+  "Lead Generation": [
+    "LinkedIn",
+    "Hospital",
+    "Beauty And Wellness Center",
+    "Medical Clinics",
+    "Hotels",
+    "Restaurants And Bars",
+    "B2B Companies",
+    "Real Estate",
+    "School And Colleges",
+    "Skills And Training Center",
+    "Insurance Industries",
+    "Fintech",
+    "IT Industries",
+    "Security Industries"
+  ],
+  "Video Production": [
+    "Corporate Video Production",
+    "3D Video Production",
+    "SaaS Explainer Video Production",
+    "Financial Video Production",
+    "Social Video Production",
+    "Motion Graphic Videos"
+  ],
+  "Explainer Video Production": [
+    "Corporate Explainer Videos",
+    "B2B Explainer Videos",
+    "Tech Explainer Videos"
+  ],
+  "Animated Videos": [
+    "3D Animated CGI",
+    "Product Videos",
+    "2D Animated Videos"
+  ],
+  "Events": [
+    "Exhibition Stand"
+  ]
+} as const;
+
 // Case Studies Data
 export const CASE_STUDIES: CaseStudy[] = [
   {

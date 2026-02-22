@@ -4,20 +4,20 @@ import { useRef, useMemo, useEffect, useState } from "react";
 import { Canvas, useFrame, invalidate } from "@react-three/fiber";
 import { OrbitControls, Float } from "@react-three/drei";
 import * as THREE from "three";
+import { useMobileDetection } from "@/hooks/useMobileDetection";
 
-function NetworkSphere({ count = 300, radius = 4 }: { count?: number; radius?: number }) {
+function NetworkSphere({ count = 300, radius = 5 }: { count?: number; radius?: number }) {
   const pointsRef = useRef<THREE.Points>(null!);
   const linesRef = useRef<THREE.LineSegments>(null!);
   const groupRef = useRef<THREE.Group>(null!);
-  
-  // Mouse position for interaction
   const mouse = useRef(new THREE.Vector2());
+  const isMobile = useMobileDetection();
   
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
       mouse.current.x = (event.clientX / window.innerWidth) * 2 - 1;
       mouse.current.y = -(event.clientY / window.innerHeight) * 2 + 1;
-      invalidate(); // Force render on mouse move
+      invalidate();
     };
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
@@ -28,18 +28,17 @@ function NetworkSphere({ count = 300, radius = 4 }: { count?: number; radius?: n
     const colors = new Float32Array(count * 3);
     const linePositions = [];
     
-    // Create particles in a more organic "cloud" rather than just a shell
-    const color1 = new THREE.Color("#fbbf24"); // Amber-400
-    const color2 = new THREE.Color("#22d3ee"); // Cyan-400
+    // Tech-Luxury Palette: Crisp Whites and Deep Amber/Gold
+    const color1 = new THREE.Color("#ffffff"); // Pure white core
+    const color2 = new THREE.Color("#fbbf24"); // Amber edge
     const tempColor = new THREE.Color();
 
     const particles = [];
 
     for (let i = 0; i < count; i++) {
-        // Randomized spherical distribution
         const theta = Math.random() * Math.PI * 2;
         const phi = Math.acos((Math.random() * 2) - 1);
-        const r = radius * (0.8 + Math.random() * 0.4); // 0.8 to 1.2 variation
+        const r = radius * (0.8 + Math.random() * 0.5); 
 
         const x = r * Math.sin(phi) * Math.cos(theta);
         const y = r * Math.sin(phi) * Math.sin(theta);
@@ -51,23 +50,22 @@ function NetworkSphere({ count = 300, radius = 4 }: { count?: number; radius?: n
 
         particles.push(new THREE.Vector3(x, y, z));
 
-        // Color gradient based on position
-        const yNorm = (y + radius) / (radius * 2);
-        tempColor.lerpColors(color2, color1, yNorm);
+        const distance = Math.sqrt(x*x + y*y + z*z);
+        const intensity = Math.max(0, 1 - Math.abs(distance - radius) / (radius * 0.5));
+        
+        // Lerp towards gold on the outside, white in the center
+        tempColor.lerpColors(color1, color2, intensity);
         colors[i * 3] = tempColor.r;
         colors[i * 3 + 1] = tempColor.g;
         colors[i * 3 + 2] = tempColor.b;
     }
 
-    // Connect nearby particles but fewer lines for cleaner look
-    const connectionDist = radius * 0.4;
-    
+    const connectionDist = radius * 0.45;
     for (let i = 0; i < count; i++) {
-        // Limit connections per particle to avoid mess
         let connections = 0;
         for (let j = i + 1; j < count; j++) {
             const dist = particles[i].distanceTo(particles[j]);
-            if (dist < connectionDist && connections < 3) {
+            if (dist < connectionDist && connections < 4) {
                 linePositions.push(
                     particles[i].x, particles[i].y, particles[i].z,
                     particles[j].x, particles[j].y, particles[j].z
@@ -77,29 +75,27 @@ function NetworkSphere({ count = 300, radius = 4 }: { count?: number; radius?: n
         }
     }
 
-    const lineGeo = new Float32Array(linePositions);
-    
     return {
-        points: { positions: p, colors: colors },
-        lines: lineGeo
+        points: { positions: p, colors },
+        lines: new Float32Array(linePositions)
     };
   }, [count, radius]);
 
   useFrame((state) => {
     if (!groupRef.current) return;
+    
+    // Desktop: Faster/Reactive. Mobile: Slower/Majestic.
+    const baseRotationSpeed = isMobile ? 0.0001 : 0.0005;
+    const lerpFactor = isMobile ? 0.02 : 0.03;
+    const mouseInfluence = isMobile ? 0.05 : 0.15;
 
-    // Smooth rotation - INVERTED direction relative to cursor
-    groupRef.current.rotation.y += 0.001;
-    groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, -mouse.current.y * 0.1, 0.05);
-    groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, groupRef.current.rotation.y - mouse.current.x * 0.05, 0.05);
+    groupRef.current.rotation.y += baseRotationSpeed; 
+    groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, -mouse.current.y * mouseInfluence, lerpFactor);
+    groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, groupRef.current.rotation.y - mouse.current.x * mouseInfluence, lerpFactor);
     
-    // Breathing opacity
     if (linesRef.current && linesRef.current.material) {
-        (linesRef.current.material as THREE.LineBasicMaterial).opacity = 0.15 + Math.sin(state.clock.elapsedTime * 0.5) * 0.05;
+        (linesRef.current.material as THREE.LineBasicMaterial).opacity = 0.05 + Math.sin(state.clock.elapsedTime * 0.2) * 0.05;
     }
-    
-    // We intentionally invalidate to keep the rotation and breathing opacity alive
-    // This only runs when frameloop is active (i.e. when canvas is visible due to demand)
     invalidate();
   });
 
@@ -107,63 +103,30 @@ function NetworkSphere({ count = 300, radius = 4 }: { count?: number; radius?: n
     <group ref={groupRef}>
       <points ref={pointsRef}>
         <bufferGeometry>
-          <bufferAttribute
-            attach="attributes-position"
-            itemSize={3}
-            count={count}
-            array={points.positions}
-            args={[points.positions, 3]}
-          />
-          <bufferAttribute
-            attach="attributes-color"
-            itemSize={3}
-            count={count}
-            array={points.colors}
-            args={[points.colors, 3]}
-          />
+          <bufferAttribute attach="attributes-position" itemSize={3} count={count} array={points.positions} args={[points.positions, 3]} />
+          <bufferAttribute attach="attributes-color" itemSize={3} count={count} array={points.colors} args={[points.colors, 3]} />
         </bufferGeometry>
-        <pointsMaterial
-          size={0.15}
-          vertexColors
-          transparent
-          opacity={0.9}
-          sizeAttenuation
-          depthWrite={false}
-          blending={THREE.AdditiveBlending}
-        />
+        <pointsMaterial size={0.12} vertexColors transparent opacity={0.6} sizeAttenuation depthWrite={false} blending={THREE.AdditiveBlending} />
       </points>
 
       <lineSegments ref={linesRef}>
         <bufferGeometry>
-          <bufferAttribute
-            attach="attributes-position"
-            itemSize={3}
-            count={lines.length / 3}
-            array={lines}
-            args={[lines, 3]}
-          />
+          <bufferAttribute attach="attributes-position" itemSize={3} count={lines.length / 3} array={lines} args={[lines, 3]} />
         </bufferGeometry>
-        <lineBasicMaterial
-          color="#fbbf24"
-          transparent
-          opacity={0.15}
-          blending={THREE.AdditiveBlending}
-          depthWrite={false}
-        />
+        <lineBasicMaterial color="#ffffff" transparent opacity={0.1} blending={THREE.AdditiveBlending} depthWrite={false} />
       </lineSegments>
     </group>
   );
 }
 
-
-
 function Scene({ count = 300, scale = 1 }: { count?: number; scale?: number }) {
   return (
     <>
-      <ambientLight intensity={0.5} />
-      <pointLight position={[10, 10, 10]} color="#00bfff" intensity={1} />
+      <ambientLight intensity={0.2} />
+      <pointLight position={[10, 10, 10]} color="#fbbf24" intensity={2} decay={2} distance={30} />
+      <pointLight position={[-10, -10, -10]} color="#ffffff" intensity={1} decay={2} distance={30} />
       
-      <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
+      <Float speed={1} rotationIntensity={0.2} floatIntensity={0.2}>
         <group scale={scale}>
             <NetworkSphere count={count} radius={4.5} />
         </group>
@@ -180,7 +143,7 @@ function Scene({ count = 300, scale = 1 }: { count?: number; scale?: number }) {
   );
 }
 
-export function HeroScene({ count = 300, scale = 1 }: { count?: number; scale?: number }) {
+export function HeroScene({ count = 400, scale = 1 }: { count?: number; scale?: number }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(true);
 

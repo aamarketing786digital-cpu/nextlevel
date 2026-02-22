@@ -1,5 +1,4 @@
 import { Hero } from "@/components/sections/Hero";
-import { SocialProof } from "@/components/sections/SocialProof";
 import { ValueProp } from "@/components/sections/ValueProp";
 import { Process } from "@/components/sections/Process"; // Import
 import { ServicesShowcase } from "@/components/sections/ServicesShowcase";
@@ -7,6 +6,9 @@ import { WorkShowcase } from "@/components/sections/WorkShowcase";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { FounderNote } from "@/components/sections/FounderNote";
 import { Newsletter } from "@/components/sections/Newsletter";
+import { PressLogos } from "@/components/sections/PressLogos";
+import { VideoTestimonials } from "@/components/sections/VideoTestimonials";
+import { ServiceExpertise } from "@/components/sections/ServiceExpertise";
 
 export default function HomePage() {
   return (
@@ -14,23 +16,30 @@ export default function HomePage() {
         {/* Hero Section with 3D Scene */}
         <Hero />
 
-        {/* Social Proof - Client Logos Marquee */}
-        <SocialProof />
-
         {/* Value Proposition - Bento Grid */}
         <ValueProp />
 
-        {/* Process - Vertical Timeline (GSAP) */}
-        <Process />
 
         {/* Services Showcase - Horizontal Scroll (GSAP) */}
         <ServicesShowcase />
 
+        {/* Comprehensive Services - Split Desktop / List Mobile */}
+        <ServiceExpertise />
+
+        {/* Process - Vertical Timeline (GSAP) */}
+        <Process />
+        
         {/* Work Showcase - Curtain Reveal (GSAP) */}
         <WorkShowcase />
 
-        {/* Testimonials - Infinite Marquee */}
+        {/* Text Testimonials - Infinite Marquee */}
         <Testimonials />
+
+        {/* Video Testimonials - Interactive Grid */}
+        <VideoTestimonials />
+
+        {/* Press Logos - As Seen In Marquee */}
+        <PressLogos />
 
         {/* Founder's Note - CEO Section */}
         <FounderNote />

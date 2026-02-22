@@ -4,32 +4,33 @@
 
 @layer base {
   :root {
-    /* === NEO-GLASS-MINT THEME (Light Mode Default) === */
+    /* === TECH-LUXURY THEME (Light Mode Default - ~80% of site) === */
+    /* Clean, crisp slate and white with refined gold accents */
     
     /* Base Colors */
-    --background: 171 76% 97%;      /* Minty Cyan #F1FEFC */
-    --foreground: 222 47% 11%;      /* Slate 900 #0f172a */
+    --background: 0 0% 100%;       /* Pure White */
+    --foreground: 222 47% 11%;     /* Deep Slate 900 */
 
     /* Cards & Surfaces */
-    --card: 0 0% 100%;              /* Pure White */
-    --card-foreground: 222 47% 11%; /* Slate 900 */
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    /* Primary - Gold (Action) */
-    --primary: 43 77% 55%;          /* Amber 500 #fbbf24 */
+    /* Primary - Amber/Gold */
+    --primary: 43 77% 55%;         /* Amber 500 */
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary - Slate (Structure) */
-    --secondary: 210 40% 96.1%;     /* Slate 100 */
+    /* Secondary - Slate structure */
+    --secondary: 210 40% 98%;      /* Slate 50 */
     --secondary-foreground: 222 47% 11%;
 
-    /* Muted */
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215 16% 47%;
+    /* Muted (for secondary text/backgrounds) */
+    --muted: 210 40% 96.1%;        /* Slate 100 */
+    --muted-foreground: 215 16% 47%; /* Slate 500 */
 
-    /* Accent - Cyan (Tech) */
-    --accent: 188 78% 41%;          /* Cyan 600 */
+    /* Accent - Tech Cyan/Blue */
+    --accent: 200 98% 39%;         /* Light blue */
     --accent-foreground: 0 0% 100%;
 
     /* Destructive */
@@ -37,37 +38,42 @@
     --destructive-foreground: 210 40% 98%;
 
     /* Borders & Inputs */
-    --border: 214.3 31.8% 91.4%;    /* Slate 200 */
+    --border: 214.3 31.8% 91.4%;   /* Slate 200 */
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 47.4% 11.2%;
 
     /* Radius */
     --radius: 0.75rem;
 
-    /* Custom Tokens */
-    --glass-border: 0 0% 100% / 0.5;
-    --glass-surface: 0 0% 100% / 0.6;
+    /* Custom Premium Tokens */
+    --glass-border: 0 0% 0% / 0.1;
+    --glass-surface: 255 255 255 / 0.8;
   }
 
   .dark, .section-dark {
-    /* === DARK TECH THEME (Hero/CTA) === */
-    --background: 222 47% 11%;      /* Deep Navy #0f172a */
-    --foreground: 210 40% 98%;      /* Slate 50 */
+    /* === GOD-TIER DARK THEME (Hero, CTAs - ~20% of site) === */
+    /* Pitch black/slate-950 with cinematic lighting */
     
-    --card: 222 47% 11%;
+    --background: 225 39% 4%;      /* Very Deep Slate/Black #06080e */
+    --foreground: 210 40% 98%;     /* Slate 50 */
+    
+    --card: 225 39% 4%;
     --card-foreground: 210 40% 98%;
     
-    --popover: 222 47% 11%;
+    --popover: 225 39% 4%;
     --popover-foreground: 210 40% 98%;
     
-    --primary: 43 77% 55%;          /* Gold */
-    --primary-foreground: 222 47.4% 11.2%;
+    /* Primary Action */
+    --primary: 43 77% 55%;         /* Amber 500 */
+    --primary-foreground: 222 47.4% 11.2%; /* Dark Slate 900 for high contrast text on gold */
     
-    --secondary: 217.2 32.6% 17.5%;
+    /* Elegant Dark Structure */
+    --secondary: 217.2 32.6% 17.5%; /* Slate 800 */
     --secondary-foreground: 210 40% 98%;
     
+    /* Subdued text/backgrounds */
     --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted-foreground: 215 20.2% 65.1%; /* Slate 400 */
     
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
@@ -79,7 +85,7 @@
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
     
-    /* Custom Tokens */
+    /* Premium Frost Tokens */
     --glass-border: 255 255 255 / 0.1;
     --glass-surface: 255 255 255 / 0.05;
   }
@@ -90,45 +96,49 @@
     @apply border-border;
   }
   html {
-    font-size: 14px; /* Scale down from 16px — matches ~87% zoom on 1080p screens */
+    font-size: 14px; 
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
   }
   @media (min-width: 1536px) {
     html {
-      font-size: 15px; /* Slightly larger on 2K+ screens */
+      font-size: 15px; 
     }
   }
   @media (min-width: 1920px) {
     html {
-      font-size: 16px; /* Full size on ultrawide/4K */
+      font-size: 16px; 
     }
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body bg-slate-50; /* Add slight off-white overall */
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight;
   }
 }
 
 @layer components {
-  /* Glass Card Utility */
+  /* Premium Light Mode Card */
   .glass-card {
-    @apply bg-white/90 border border-white/60 shadow-lg hover:shadow-xl transition-all duration-300;
+    @apply bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300;
   }
   @media (min-width: 768px) {
     .glass-card {
-      @apply bg-white/60;
+      background-color: rgba(255, 255, 255, 0.8);
       backdrop-filter: blur(12px);
     }
   }
 
+  /* Premium Dark Mode Card */
   .glass-card-dark {
-    @apply bg-white/10 border border-white/10 shadow-lg;
+    @apply bg-white/[0.03] border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] hover:bg-white/[0.05] transition-all;
   }
   @media (min-width: 768px) {
     .glass-card-dark {
-      @apply bg-white/5;
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
   }
   
@@ -175,5 +185,20 @@
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
+  }
+
+  /* Custom elegant scrollbar for horizontal containers like Mega Menu */
+  .custom-scrollbar::-webkit-scrollbar {
+    height: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
   }
 }

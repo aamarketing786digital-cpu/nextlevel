@@ -122,13 +122,13 @@ export default function ContactPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="/work"
-                className="inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors"
+                className="inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground rounded-full font-semibold hover:bg-primary/90 transition-colors shadow-lg hover:shadow-primary/20"
               >
                 View Our Work
               </a>
               <a
                 href="/services"
-                className="inline-flex items-center justify-center px-6 py-3 border border-slate-300 text-slate-700 rounded-lg font-semibold hover:bg-slate-50 transition-colors"
+                className="inline-flex items-center justify-center px-6 py-3 border border-slate-300 text-slate-700 rounded-full font-semibold hover:bg-slate-50 transition-colors"
               >
                 Our Services
               </a>

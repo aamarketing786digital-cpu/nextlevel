@@ -145,10 +145,19 @@ export function ValueProp() {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6">
             Why Choose <span className="text-gradient-gold">Next Level Marketerz</span>?
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            We combine creativity, technology, and data to deliver results that
-            transform businesses. Here's what sets us apart.
-          </p>
+          <div className="space-y-6 text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed font-light text-left md:text-center mt-8">
+              <p>
+                At NextLevel Marketerz, a top of the line 360 agency in the Middle East, our services are unique because we believe in delivering nothing but the best. Starting from the very first phase of each project with a deep knowledge of your brand, which means each campaign is based on robust research, creativity, and strategic insights.
+              </p>
+              
+              <p>
+                We take the time and care in everything we do, from full-scale 360° branding campaigns to the smallest element of UX/UI design. That commitment to excellence has sprung us to the top of the minds of major brands, and <span className="font-semibold px-3 py-1 bg-primary/10 text-foreground border border-primary/20 rounded-full whitespace-nowrap">90% of our business comes from client referrals.</span>
+              </p>
+
+              <p>
+                At NextLevel Marketerz, we seamlessly combine creativity, strategy, and cutting-edge technology to deliver tangible results. We want to make your brand shine by executing innovative digital marketing campaigns that directly impact your business growth.
+              </p>
+          </div>
         </div>
 
         <div ref={gridRef} className="mx-auto max-w-[90rem]">

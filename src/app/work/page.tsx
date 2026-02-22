@@ -46,13 +46,13 @@ export default function WorkPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors"
+                className="inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold hover:bg-primary/90 transition-colors shadow-lg hover:shadow-primary/20"
               >
                 Start Your Project
               </Link>
               <Link
                 href="/services"
-                className="inline-flex items-center justify-center px-8 py-4 border border-primary/50 text-foreground rounded-lg font-semibold hover:bg-primary/10 transition-colors"
+                className="inline-flex items-center justify-center px-8 py-4 border border-primary/50 text-foreground rounded-full font-semibold hover:bg-primary/10 transition-colors"
               >
                 Explore Services
               </Link>

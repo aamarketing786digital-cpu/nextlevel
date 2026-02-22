@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { ServicesShowcase } from "@/components/sections/ServicesShowcase";
+import { ServiceExpertise } from "@/components/sections/ServiceExpertise";
 
 export const metadata: Metadata = {
   title: "Our Services | NextLevel Marketerz",
@@ -32,6 +33,9 @@ export default function ServicesPage() {
       {/* Services Showcase - Horizontal Scroll (GSAP) */}
       <ServicesShowcase />
 
+      {/* Comprehensive Services - Split Desktop / List Mobile */}
+      <ServiceExpertise />
+
       {/* CTA Section */}
       <section className="py-16 md:py-24 bg-background border-t border-border/50">
         <div className="container mx-auto px-4 md:px-6">
@@ -42,7 +46,7 @@ export default function ServicesPage() {
             </p>
             <a
               href="/contact"
-              className="inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors"
+              className="inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold hover:bg-primary/90 transition-colors shadow-lg hover:shadow-primary/20"
             >
               Get in Touch
             </a>
