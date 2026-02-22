@@ -113,7 +113,7 @@ export function Process() {
           {/* Vertical Line Foreground (Animated Color) */}
           <div 
             ref={lineRef}
-            className="absolute left-4 md:left-1/2 top-0 bottom-0 w-1 bg-primary origin-top -translate-x-1/2" 
+            className="absolute left-4 md:left-1/2 top-0 bottom-0 w-1 bg-primary origin-top -translate-x-1/2 will-change-transform" 
           />
 
           <div className="space-y-8 md:space-y-24">

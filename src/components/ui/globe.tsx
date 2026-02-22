@@ -15,6 +15,7 @@ export const Globe = ({ className }: { className?: string }) => {
 
     const canvas = canvasRef.current;
     const container = containerRef.current;
+    let isIntersecting = true;
 
     // Responsive sizing based on container
     const containerW = container.clientWidth;
@@ -50,12 +51,22 @@ export const Globe = ({ className }: { className?: string }) => {
         { location: [1.3521, 103.8198], size: 0.05 },
       ],
       onRender: (state) => {
+        if (!isIntersecting) return;
         state.phi = phi;
         phi += isMobile ? 0.002 : 0.003;
       },
     });
 
+    const observer = new IntersectionObserver(
+      (entries) => {
+        isIntersecting = entries[0].isIntersecting;
+      },
+      { threshold: 0 }
+    );
+    observer.observe(canvas);
+
     return () => {
+      observer.disconnect();
       globe.destroy();
     };
   }, []);

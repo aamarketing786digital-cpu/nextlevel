@@ -113,17 +113,23 @@
 @layer components {
   /* Glass Card Utility */
   .glass-card {
-    @apply bg-white/60 border border-white/60 shadow-lg hover:shadow-xl transition-all duration-300;
-    backdrop-filter: blur(4px);
+    @apply bg-white/90 border border-white/60 shadow-lg hover:shadow-xl transition-all duration-300;
   }
   @media (min-width: 768px) {
     .glass-card {
+      @apply bg-white/60;
       backdrop-filter: blur(12px);
     }
   }
 
   .glass-card-dark {
-    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-lg;
+    @apply bg-white/10 border border-white/10 shadow-lg;
+  }
+  @media (min-width: 768px) {
+    .glass-card-dark {
+      @apply bg-white/5;
+      backdrop-filter: blur(12px);
+    }
   }
   
   /* Text Gradients */

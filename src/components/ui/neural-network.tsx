@@ -31,6 +31,7 @@ export const NeuralNetwork = ({ className, density = "normal" }: NeuralNetworkPr
     let height = 0;
     let particles: Particle[] = [];
     let animationFrameId: number;
+    let isIntersecting = true;
 
     const mouseDistance = 150;
 
@@ -103,7 +104,7 @@ export const NeuralNetwork = ({ className, density = "normal" }: NeuralNetworkPr
     let frameCount = 0;
 
     const animate = () => {
-      if (!ctx) return;
+      if (!ctx || !isIntersecting) return;
       frameCount++;
       
       // Throttle to ~30fps on mobile to reduce scroll jank
@@ -141,6 +142,7 @@ export const NeuralNetwork = ({ className, density = "normal" }: NeuralNetworkPr
 
     const mouse = { x: 0, y: 0 };
     const handleMouseMove = (e: MouseEvent) => {
+        if (!isIntersecting) return;
         const rect = canvas.getBoundingClientRect();
         mouse.x = e.clientX - rect.left;
         mouse.y = e.clientY - rect.top;
@@ -150,14 +152,30 @@ export const NeuralNetwork = ({ className, density = "normal" }: NeuralNetworkPr
         width = canvas.width = canvas.clientWidth;
         height = canvas.height = canvas.clientHeight;
         init();
+        if (isIntersecting) {
+            // Ensure we kickstart animation if it was paused
+            cancelAnimationFrame(animationFrameId);
+            animate();
+        }
     });
 
+    const intersectionObserver = new IntersectionObserver((entries) => {
+      isIntersecting = entries[0].isIntersecting;
+      if (isIntersecting) {
+        animate();
+      } else {
+        cancelAnimationFrame(animationFrameId);
+      }
+    }, { threshold: 0 });
+
     resizeObserver.observe(canvas);
+    intersectionObserver.observe(canvas);
     canvas.addEventListener("mousemove", handleMouseMove);
-    animate();
+    // animate() will be called by intersection observer
 
     return () => {
       resizeObserver.disconnect();
+      intersectionObserver.disconnect();
       canvas.removeEventListener("mousemove", handleMouseMove);
       cancelAnimationFrame(animationFrameId);
     };

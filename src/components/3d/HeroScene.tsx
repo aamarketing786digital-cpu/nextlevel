@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useMemo, useEffect } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { useRef, useMemo, useEffect, useState } from "react";
+import { Canvas, useFrame, invalidate } from "@react-three/fiber";
 import { OrbitControls, Float } from "@react-three/drei";
 import * as THREE from "three";
 
@@ -17,6 +17,7 @@ function NetworkSphere({ count = 300, radius = 4 }: { count?: number; radius?: n
     const handleMouseMove = (event: MouseEvent) => {
       mouse.current.x = (event.clientX / window.innerWidth) * 2 - 1;
       mouse.current.y = -(event.clientY / window.innerHeight) * 2 + 1;
+      invalidate(); // Force render on mouse move
     };
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
@@ -96,6 +97,10 @@ function NetworkSphere({ count = 300, radius = 4 }: { count?: number; radius?: n
     if (linesRef.current && linesRef.current.material) {
         (linesRef.current.material as THREE.LineBasicMaterial).opacity = 0.15 + Math.sin(state.clock.elapsedTime * 0.5) * 0.05;
     }
+    
+    // We intentionally invalidate to keep the rotation and breathing opacity alive
+    // This only runs when frameloop is active (i.e. when canvas is visible due to demand)
+    invalidate();
   });
 
   return (
@@ -176,13 +181,25 @@ function Scene({ count = 300, scale = 1 }: { count?: number; scale?: number }) {
 }
 
 export function HeroScene({ count = 300, scale = 1 }: { count?: number; scale?: number }) {
-  
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsVisible(entry.isIntersecting);
+    }, { threshold: 0 });
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="h-full w-full absolute inset-0 z-0">
+    <div ref={containerRef} className="h-full w-full absolute inset-0 z-0">
       <Canvas
         camera={{ position: [0, 0, 12], fov: 45 }}
         gl={{ antialias: true, alpha: true }}
         dpr={[1, 2]}
+        frameloop={isVisible ? "always" : "demand"}
       >
         <Scene count={count} scale={scale} />
       </Canvas>
