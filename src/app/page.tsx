@@ -9,6 +9,8 @@ import { Newsletter } from "@/components/sections/Newsletter";
 import { PressLogos } from "@/components/sections/PressLogos";
 import { VideoTestimonials } from "@/components/sections/VideoTestimonials";
 import { ServiceExpertise } from "@/components/sections/ServiceExpertise";
+import { CtaBento } from "@/components/sections/CtaBento";
+import { FaqSection } from "@/components/sections/FaqSection";
 
 export default function HomePage() {
   return (
@@ -43,6 +45,12 @@ export default function HomePage() {
 
         {/* Founder's Note - CEO Section */}
         <FounderNote />
+
+        {/* Custom Bento Call To Action */}
+        <CtaBento />
+
+        {/* Frequently Asked Questions */}
+        <FaqSection />
 
         {/* Newsletter - Magnetic Input */}
         <Newsletter />
