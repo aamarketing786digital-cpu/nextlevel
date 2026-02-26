@@ -162,7 +162,7 @@ export function PreloaderScramble({ onComplete }: PreloaderProps) {
 
 ---
 
-## 4. Fluid Circle (Expanding Dot + Brand Logo)
+## 4. Fluid Circle (Spot Reveal)
 Brand logo fades in, holds, then dot appears and expands to fill viewport.
 
 ```tsx
@@ -178,37 +178,58 @@ export function PreloaderFluid({ onComplete }: PreloaderProps) {
 
     // Hide dot initially
     tl.set(dotRef.current, { opacity: 0, scale: 0 });
+
     // 1. Logo in
-    tl.from(logoRef.current, { opacity: 0, scale: 0.8, duration: 0.6, ease: "back.out(1.7)" });
-    // 2. Hold
-    tl.to({}, { duration: 1.5 });
+    tl.fromTo(logoRef.current,
+      { opacity: 0, scale: 0.8 },
+      { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.7)" }
+    );
+
+    // 2. Pulse during hold
+    tl.to(logoRef.current, {
+      scale: 1.05,
+      opacity: 0.8,
+      duration: 0.5,
+      yoyo: true,
+      repeat: 3,
+      ease: "sine.inOut"
+    });
+
     // 3. Logo out
     tl.to(logoRef.current, { opacity: 0, scale: 0.5, duration: 0.4, ease: "power2.in" });
+
     // 4. Show dot + pulse
     tl.to(dotRef.current, { opacity: 1, scale: 1, duration: 0.2, ease: "power2.out" });
     tl.to(dotRef.current, { scale: 1.5, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" });
+
     // 5. Expand
     const size = Math.max(window.innerWidth, window.innerHeight) * 1.5;
     tl.to(dotRef.current, { width: size * 2, height: size * 2, duration: 1.2, ease: "expo.inOut" });
+
     // 6. Fade
     tl.to(containerRef.current, { opacity: 0, duration: 0.5, delay: -0.2 });
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="fixed inset-0 z-[9999] flex items-center justify-center bg-zinc-950">
-      {/* Brand */}
-      <div ref={logoRef} className="absolute z-20 text-center">
-        <h2 className="font-display text-4xl md:text-6xl font-bold text-white tracking-tight">NextLevel</h2>
-        <p className="text-sm md:text-base text-zinc-400 tracking-widest uppercase mt-2">Marketerz</p>
+    <div ref={containerRef} className="fixed inset-0 z-[9999] flex items-center justify-center bg-white">
+      {/* Brand Logo */}
+      <div ref={logoRef} className="absolute z-20 text-center opacity-0">
+        <h2 className="font-display text-4xl md:text-6xl font-bold tracking-tight">
+          <span className="bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 bg-clip-text text-transparent">
+            NextLevel
+          </span>
+        </h2>
+        <p className="text-sm md:text-base text-amber-700/70 tracking-widest uppercase mt-2 font-semibold">Marketerz</p>
       </div>
+
       {/* Dot (hidden initially) */}
-      <div ref={dotRef} className="w-4 h-4 rounded-full bg-white relative z-10" />
+      <div ref={dotRef} className="w-4 h-4 rounded-full bg-gradient-to-br from-amber-500 to-amber-600 relative z-10" />
     </div>
   );
 }
 ```
 
-**Key techniques**: `gsap.set` to hide dot initially, `back.out` for bouncy logo entrance, sequenced logo→dot→expand flow.
+**Key techniques**: `gsap.set` to hide dot initially, `back.out` for bouncy logo entrance, `yoyo: true, repeat: 3` for pulse effect, sequenced logo→dot→expand flow.
 
 ---
 
@@ -237,7 +258,10 @@ export function PreloaderCurtain({ onComplete }: PreloaderProps) {
   return (
     <div ref={containerRef} className="fixed inset-0 z-[9999] flex flex-col md:flex-row pointer-events-none">
       {[...Array(5)].map((_, i) => (
-        <div key={i} className={cn("panel-strip flex-1 border-r border-zinc-900/50 relative overflow-hidden", i % 2 === 0 ? "bg-zinc-950" : "bg-zinc-900")}>
+        <div key={i} className={cn(
+          "panel-strip flex-1 border-r border-zinc-900/50 relative overflow-hidden",
+          i % 2 === 0 ? "bg-zinc-950" : "bg-zinc-900"
+        )}>
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-primary/10 opacity-30" />
         </div>
       ))}

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { NAVIGATION_LINKS } from "@/lib/constants";
+import { NAVIGATION_LINKS, getServiceUrl } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import {
   Sheet,
@@ -18,6 +18,7 @@ export function Navbar() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,7 +63,11 @@ export function Navbar() {
               // Special Mega Menu handling for Services
               if (link.label === "Services") {
                 return (
-                  <div key={link.href} className="group relative">
+                  <div 
+                    key={link.href} 
+                    className="group relative"
+                    onMouseEnter={() => setIsMegaMenuOpen(true)}
+                  >
                     <Link
                       href={link.href}
                       className={cn(
@@ -77,107 +82,114 @@ export function Navbar() {
                     </Link>
 
                     {/* Mega Menu Dropdown */}
-                    <div className="fixed top-[88px] left-1/2 -translate-x-1/2 w-[95vw] max-w-[1800px] pt-4 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 z-[100]">
+                    <div 
+                      className={cn(
+                        "fixed top-[88px] left-1/2 -translate-x-1/2 w-[95vw] max-w-[1800px] pt-4 transition-all duration-300 z-[100]",
+                        isMegaMenuOpen 
+                          ? "opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto" 
+                          : "opacity-0 pointer-events-none"
+                      )}
+                    >
                       {/* Invisible bridge to keep hover active */}
                       <div className="absolute top-0 left-0 w-full h-8 bg-transparent -translate-y-full" />
                       
                       <div className="bg-background border border-border/10 rounded-3xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] pb-16 pt-12 px-8 md:px-12 w-full max-h-[85vh] overflow-y-auto">
-                        <div className="w-full mx-auto columns-2 md:columns-4 lg:columns-6 xl:columns-8 gap-x-8 gap-y-12 text-sm">
+                        <div className="w-full mx-auto columns-2 md:columns-4 lg:columns-6 xl:columns-8 gap-x-8 gap-y-12 text-sm" onClick={() => setIsMegaMenuOpen(false)}>
                            
                            {/* BLOCK: SEO / Core Marketing */}
                            <div className="flex flex-col space-y-3 break-inside-avoid mb-10">
-                             <Link href="/contact" className="text-foreground font-semibold hover:text-primary transition-colors">SEO</Link>
-                             <Link href="/contact" className="text-foreground font-semibold hover:text-primary transition-colors">Social Media</Link>
-                             <Link href="/contact" className="text-foreground font-semibold hover:text-primary transition-colors">Influencer Marketing</Link>
-                             <Link href="/contact" className="text-foreground font-semibold hover:text-primary transition-colors">PR & Outreach</Link>
-                             <Link href="/contact" className="text-foreground font-semibold hover:text-primary transition-colors">Video Marketing</Link>
-                             <Link href="/contact" className="text-foreground font-semibold hover:text-primary transition-colors">Branding</Link>
-                             <Link href="/contact" className="text-foreground font-semibold hover:text-primary transition-colors">Web Development</Link>
-                             <Link href="/contact" className="text-foreground font-semibold hover:text-primary transition-colors">Mobile App Development</Link>
-                             <Link href="/contact" className="text-foreground font-semibold hover:text-primary transition-colors">Website Design Figma</Link>
+                             <Link href={getServiceUrl("Search Engine Optimization (SEO)")} className="text-foreground font-semibold hover:text-primary transition-colors">SEO</Link>
+                             <Link href={getServiceUrl("Social Media Marketing")} className="text-foreground font-semibold hover:text-primary transition-colors">Social Media</Link>
+                             <Link href={getServiceUrl("Influencer Marketing")} className="text-foreground font-semibold hover:text-primary transition-colors">Influencer Marketing</Link>
+                             <Link href={getServiceUrl("PR & Outreach")} className="text-foreground font-semibold hover:text-primary transition-colors">PR & Outreach</Link>
+                             <Link href={getServiceUrl("Video Production")} className="text-foreground font-semibold hover:text-primary transition-colors">Video Marketing</Link>
+                             <Link href={getServiceUrl("Branding")} className="text-foreground font-semibold hover:text-primary transition-colors">Branding</Link>
+                             <Link href={getServiceUrl("Web Development")} className="text-foreground font-semibold hover:text-primary transition-colors">Web Development</Link>
+                             <Link href={getServiceUrl("Mobile App Development")} className="text-foreground font-semibold hover:text-primary transition-colors">Mobile App Development</Link>
+                             <Link href={getServiceUrl("Website Design Figma")} className="text-foreground font-semibold hover:text-primary transition-colors">Website Design Figma</Link>
                            </div>
 
                            {/* BLOCK: Mobile Design & Ecosystem */}
                            <div className="flex flex-col space-y-3 break-inside-avoid mb-10">
                              <h4 className="text-foreground font-semibold mb-1">Mobile App Design</h4>
-                             <Link href="/contact" className="text-foreground font-semibold hover:text-primary transition-colors">Graphic Design</Link>
-                             <Link href="/contact" className="text-foreground font-semibold hover:text-primary transition-colors">Website Hosting</Link>
-                             <Link href="/contact" className="text-foreground font-semibold hover:text-primary transition-colors">WhatsApp Business API</Link>
-                             <Link href="/contact" className="text-foreground font-semibold hover:text-primary transition-colors">ZOHO</Link>
-                             <Link href="/contact" className="text-foreground font-semibold hover:text-primary transition-colors">Email Marketing</Link>
-                             <Link href="/contact" className="text-foreground font-semibold hover:text-primary transition-colors">Amazon Marketing</Link>
-                             <Link href="/contact" className="text-foreground font-semibold hover:text-primary transition-colors">E-Commerce Marketplace</Link>
-                             <Link href="/contact" className="text-foreground font-semibold hover:text-primary transition-colors">SMS Marketing</Link>
+                             <Link href={getServiceUrl("Graphic Design")} className="text-foreground font-semibold hover:text-primary transition-colors">Graphic Design</Link>
+                             <Link href={getServiceUrl("Website Hosting")} className="text-foreground font-semibold hover:text-primary transition-colors">Website Hosting</Link>
+                             <Link href={getServiceUrl("WhatsApp Business API")} className="text-foreground font-semibold hover:text-primary transition-colors">WhatsApp Business API</Link>
+                             <Link href={getServiceUrl("ZOHO")} className="text-foreground font-semibold hover:text-primary transition-colors">ZOHO</Link>
+                             <Link href={getServiceUrl("Email Marketing")} className="text-foreground font-semibold hover:text-primary transition-colors">Email Marketing</Link>
+                             <Link href={getServiceUrl("Amazon Marketing")} className="text-foreground font-semibold hover:text-primary transition-colors">Amazon Marketing</Link>
+                             <Link href={getServiceUrl("E-Commerce Marketplace")} className="text-foreground font-semibold hover:text-primary transition-colors">E-Commerce Marketplace</Link>
+                             <Link href={getServiceUrl("SMS Marketing")} className="text-foreground font-semibold hover:text-primary transition-colors">SMS Marketing</Link>
                            </div>
 
                            {/* BLOCK: Paid Media Left */}
                            <div className="flex flex-col space-y-3 break-inside-avoid mb-10">
                              <h4 className="text-foreground font-semibold mb-1">Paid Media</h4>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Google Ads</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Facebook Ads</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Instagram Ads</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Snapchat Ads</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">X Ads</Link>
+                             <Link href={getServiceUrl("Google Ads")} className="text-muted-foreground hover:text-primary transition-colors">Google Ads</Link>
+                             <Link href={getServiceUrl("Facebook Ads")} className="text-muted-foreground hover:text-primary transition-colors">Facebook Ads</Link>
+                             <Link href={getServiceUrl("Instagram Ads")} className="text-muted-foreground hover:text-primary transition-colors">Instagram Ads</Link>
+                             <Link href={getServiceUrl("Snapchat Ads")} className="text-muted-foreground hover:text-primary transition-colors">Snapchat Ads</Link>
+                             <Link href={getServiceUrl("X Ads")} className="text-muted-foreground hover:text-primary transition-colors">X Ads</Link>
                            </div>
 
                            {/* BLOCK: Paid Media Right (Reddit/Pinterest/etc) */}
                            <div className="flex flex-col space-y-3 break-inside-avoid mb-10">
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Reddit Ads</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Pinterest Ads</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Linkedin Ads</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">TikTok Ads</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Youtube Ads</Link>
+                             <Link href={getServiceUrl("Reddit Ads")} className="text-muted-foreground hover:text-primary transition-colors">Reddit Ads</Link>
+                             <Link href={getServiceUrl("Pinterest Ads")} className="text-muted-foreground hover:text-primary transition-colors">Pinterest Ads</Link>
+                             <Link href={getServiceUrl("Linkedin Ads")} className="text-muted-foreground hover:text-primary transition-colors">Linkedin Ads</Link>
+                             <Link href={getServiceUrl("TikTok Ads")} className="text-muted-foreground hover:text-primary transition-colors">TikTok Ads</Link>
+                             <Link href={getServiceUrl("Youtube Ads")} className="text-muted-foreground hover:text-primary transition-colors">Youtube Ads</Link>
                            </div>
 
                            {/* BLOCK: Lead Gen Left & Events */}
                            <div className="flex flex-col space-y-3 break-inside-avoid mb-10">
                              <h4 className="text-foreground font-semibold mb-1">Lead Generation</h4>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">LinkedIn</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Hospital</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Beauty And Wellness Center</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Medical Clinics</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Hotels</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Restaurants And Bars</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">B2B Companies</Link>
+                             <Link href={getServiceUrl("LinkedIn")} className="text-muted-foreground hover:text-primary transition-colors">LinkedIn</Link>
+                             <Link href={getServiceUrl("Hospital")} className="text-muted-foreground hover:text-primary transition-colors">Hospital</Link>
+                             <Link href={getServiceUrl("Beauty And Wellness Center")} className="text-muted-foreground hover:text-primary transition-colors">Beauty And Wellness Center</Link>
+                             <Link href={getServiceUrl("Medical Clinics")} className="text-muted-foreground hover:text-primary transition-colors">Medical Clinics</Link>
+                             <Link href={getServiceUrl("Hotels")} className="text-muted-foreground hover:text-primary transition-colors">Hotels</Link>
+                             <Link href={getServiceUrl("Restaurants And Bars")} className="text-muted-foreground hover:text-primary transition-colors">Restaurants And Bars</Link>
+                             <Link href={getServiceUrl("B2B Companies")} className="text-muted-foreground hover:text-primary transition-colors">B2B Companies</Link>
 
                              <h4 className="text-foreground font-semibold mt-4 mb-1">Events</h4>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Exhibition Stand</Link>
+                             <Link href={getServiceUrl("Exhibition Stand")} className="text-muted-foreground hover:text-primary transition-colors">Exhibition Stand</Link>
                            </div>
 
                            {/* BLOCK: Lead Gen Right (Real Estate/Fintech/etc) */}
                            <div className="flex flex-col space-y-3 break-inside-avoid mb-10">
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Real Estate</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">School And Colleges</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Skills And Training Center</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Insurance Industries</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Fintech</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">IT Industries</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Security Industries</Link>
+                             <Link href={getServiceUrl("Real Estate")} className="text-muted-foreground hover:text-primary transition-colors">Real Estate</Link>
+                             <Link href={getServiceUrl("School And Colleges")} className="text-muted-foreground hover:text-primary transition-colors">School And Colleges</Link>
+                             <Link href={getServiceUrl("Skills And Training Center")} className="text-muted-foreground hover:text-primary transition-colors">Skills And Training Center</Link>
+                             <Link href={getServiceUrl("Insurance Industries")} className="text-muted-foreground hover:text-primary transition-colors">Insurance Industries</Link>
+                             <Link href={getServiceUrl("Fintech")} className="text-muted-foreground hover:text-primary transition-colors">Fintech</Link>
+                             <Link href={getServiceUrl("IT Industries")} className="text-muted-foreground hover:text-primary transition-colors">IT Industries</Link>
+                             <Link href={getServiceUrl("Security Industries")} className="text-muted-foreground hover:text-primary transition-colors">Security Industries</Link>
                            </div>
 
                            {/* BLOCK: Video Prod & Explainer Video */}
                            <div className="flex flex-col space-y-3 break-inside-avoid mb-10">
                              <h4 className="text-foreground font-semibold mb-1">Video Production</h4>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Corporate Video Production</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">3D Video Production</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">SaaS Explainer Video Production</Link>
+                             <Link href={getServiceUrl("Corporate Video Production")} className="text-muted-foreground hover:text-primary transition-colors">Corporate Video Production</Link>
+                             <Link href={getServiceUrl("3D Video Production")} className="text-muted-foreground hover:text-primary transition-colors">3D Video Production</Link>
+                             <Link href={getServiceUrl("SaaS Explainer Video Production")} className="text-muted-foreground hover:text-primary transition-colors">SaaS Explainer Video Production</Link>
 
                              <h4 className="text-foreground font-semibold mt-4 mb-1">Explainer Video Production</h4>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Corporate Explainer Videos</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">B2B Explainer Videos</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Tech Explainer Videos</Link>
+                             <Link href={getServiceUrl("Corporate Explainer Videos")} className="text-muted-foreground hover:text-primary transition-colors">Corporate Explainer Videos</Link>
+                             <Link href={getServiceUrl("B2B Explainer Videos")} className="text-muted-foreground hover:text-primary transition-colors">B2B Explainer Videos</Link>
+                             <Link href={getServiceUrl("Tech Explainer Videos")} className="text-muted-foreground hover:text-primary transition-colors">Tech Explainer Videos</Link>
                            </div>
 
                            {/* BLOCK: Rest of Video Prod & Animated Video */}
                            <div className="flex flex-col space-y-3 break-inside-avoid mb-10">
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Financial Video Production</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Social Video Production</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Motion Graphic Videos</Link>
+                             <Link href={getServiceUrl("Financial Video Production")} className="text-muted-foreground hover:text-primary transition-colors">Financial Video Production</Link>
+                             <Link href={getServiceUrl("Social Video Production")} className="text-muted-foreground hover:text-primary transition-colors">Social Video Production</Link>
+                             <Link href={getServiceUrl("Motion Graphic Videos")} className="text-muted-foreground hover:text-primary transition-colors">Motion Graphic Videos</Link>
 
                              <h4 className="text-foreground font-semibold mt-4 mb-1">Animated Videos</h4>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">3D Animated CGI</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Product Videos</Link>
-                             <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">2D Animated Videos</Link>
+                             <Link href={getServiceUrl("3D Animated CGI")} className="text-muted-foreground hover:text-primary transition-colors">3D Animated CGI</Link>
+                             <Link href={getServiceUrl("Product Videos")} className="text-muted-foreground hover:text-primary transition-colors">Product Videos</Link>
+                             <Link href={getServiceUrl("2D Animated Videos")} className="text-muted-foreground hover:text-primary transition-colors">2D Animated Videos</Link>
                            </div>
 
                         </div>

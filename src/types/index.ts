@@ -9,6 +9,18 @@ export interface Service {
   features: string[];
   pricing?: PricingTier;
   technologies: string[];
+  process?: ProcessStep[];
+  stats?: ServiceStat[];
+}
+
+export interface ProcessStep {
+  title: string;
+  description: string;
+}
+
+export interface ServiceStat {
+  value: string;
+  label: string;
 }
 
 export interface PricingTier {

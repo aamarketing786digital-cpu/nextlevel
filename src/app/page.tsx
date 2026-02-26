@@ -8,8 +8,8 @@ import { FounderNote } from "@/components/sections/FounderNote";
 import { Newsletter } from "@/components/sections/Newsletter";
 import { PressLogos } from "@/components/sections/PressLogos";
 import { VideoTestimonials } from "@/components/sections/VideoTestimonials";
-import { ServiceExpertise } from "@/components/sections/ServiceExpertise";
-import { CtaBento } from "@/components/sections/CtaBento";
+import { ExpandedServices } from "@/components/sections/ExpandedServices";
+import { RankingCta } from "@/components/sections/RankingCta";
 import { FaqSection } from "@/components/sections/FaqSection";
 
 export default function HomePage() {
@@ -25,12 +25,12 @@ export default function HomePage() {
         {/* Services Showcase - Horizontal Scroll (GSAP) */}
         <ServicesShowcase />
 
-        {/* Comprehensive Services - Split Desktop / List Mobile */}
-        <ServiceExpertise />
+      {/* Comprehensive Services - All 55 Services Listed */}
+      <ExpandedServices />
 
         {/* Process - Vertical Timeline (GSAP) */}
         <Process />
-        
+
         {/* Work Showcase - Curtain Reveal (GSAP) */}
         <WorkShowcase />
 
@@ -46,8 +46,8 @@ export default function HomePage() {
         {/* Founder's Note - CEO Section */}
         <FounderNote />
 
-        {/* Custom Bento Call To Action */}
-        <CtaBento />
+        {/* Custom Bento Call To Action: Ranking #1 */}
+        <RankingCta />
 
         {/* Frequently Asked Questions */}
         <FaqSection />

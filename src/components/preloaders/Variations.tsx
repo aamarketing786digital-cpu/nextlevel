@@ -241,8 +241,8 @@ export function PreloaderScramble({ onComplete }: PreloaderProps) {
 
 
 /* =========================================
-   VARIATION 4: FLUID CIRCLE
-   Scaling dot overlay
+   VARIATION 4: FLUID CIRCLE (SPOT REVEAL)
+   Scaling dot overlay with light background
    ========================================= */
 export function PreloaderFluid({ onComplete }: PreloaderProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -261,19 +261,19 @@ export function PreloaderFluid({ onComplete }: PreloaderProps) {
     tl.set(dotRef.current, { opacity: 0, scale: 0 });
 
     // 1. Reveal logo text (handling opacity-0 to prevent FOUC)
-    tl.fromTo(logoRef.current, 
+    tl.fromTo(logoRef.current,
         { opacity: 0, scale: 0.8 },
         { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.7)" }
     );
 
     // 2. Pulse animation during hold
-    tl.to(logoRef.current, { 
-        scale: 1.05, 
-        opacity: 0.8, 
-        duration: 0.5, 
-        yoyo: true, 
-        repeat: 3, 
-        ease: "sine.inOut" 
+    tl.to(logoRef.current, {
+        scale: 1.05,
+        opacity: 0.8,
+        duration: 0.5,
+        yoyo: true,
+        repeat: 3,
+        ease: "sine.inOut"
     });
 
     // 3. Fade out logo
@@ -282,7 +282,7 @@ export function PreloaderFluid({ onComplete }: PreloaderProps) {
     // 4. Show dot and pulse
     tl.to(dotRef.current, { opacity: 1, scale: 1, duration: 0.2, ease: "power2.out" });
     tl.to(dotRef.current, { scale: 1.5, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" });
-    
+
     // 5. Scale dot up massively to cover screen
     const size = Math.max(window.innerWidth, window.innerHeight) * 1.5;
     tl.to(dotRef.current, {
@@ -291,7 +291,7 @@ export function PreloaderFluid({ onComplete }: PreloaderProps) {
         duration: 1.2,
         ease: "expo.inOut",
     });
-    
+
     // 6. Fade out
     tl.to(containerRef.current, {
         opacity: 0,
@@ -304,18 +304,26 @@ export function PreloaderFluid({ onComplete }: PreloaderProps) {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-background"
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-white"
     >
+      {/* Gradient Orbs for atmosphere */}
+      <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[120px] animate-pulse" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[400px] h-[400px] bg-amber-600/5 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: "0.5s" }} />
+
       {/* Brand Logo/Name */}
-      <div ref={logoRef} className="absolute z-20 text-center opacity-0">
-          <h2 className="font-display text-4xl md:text-6xl font-bold text-gradient-gold tracking-tight">Next Level</h2>
-          <p className="text-sm md:text-base text-muted-foreground tracking-widest uppercase mt-2">Marketerz</p>
+      <div ref={logoRef} className="absolute z-20 text-center opacity-0 flex flex-col items-center justify-center">
+          <h2 className="font-display text-5xl md:text-7xl font-bold tracking-tight">
+              <span className="text-[#eab651]">
+                  Next Level
+              </span>
+          </h2>
+          <p className="text-xs md:text-sm text-slate-400 tracking-[0.3em] uppercase mt-3 font-semibold">MARKETERZ</p>
       </div>
-      
+
       {/* Expanding dot — hidden via CSS until GSAP reveals it */}
       <div
         ref={dotRef}
-        className="w-4 h-4 rounded-full bg-primary relative z-10 opacity-0 scale-0"
+        className="w-4 h-4 rounded-full bg-gradient-to-br from-amber-500 to-amber-600 relative z-10 opacity-0 scale-0"
       />
     </div>
   );
