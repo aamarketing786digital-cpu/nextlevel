@@ -118,7 +118,7 @@ export function RankingCta() {
             <div ref={rightGridRef} className="flex flex-col sm:flex-row gap-4 md:gap-6">
               
               {/* Left Column of Bento */}
-              <div className="flex-1 flex flex-col gap-4 md:gap-6">
+              <div className="flex-1 min-w-0 flex flex-col gap-4 md:gap-6">
                 {/* Card 1: Top Left - Texture & Glass Pill (Square-ish) */}
                 <div className="relative rounded-[2rem] overflow-hidden group shadow-sm bg-amber-100 aspect-square">
                   <Image
@@ -153,13 +153,13 @@ export function RankingCta() {
               </div>
 
               {/* Right Column of Bento */}
-              <div className="flex-1 flex flex-col gap-4 md:gap-6 sm:mt-8 lg:mt-0">
+              <div className="flex-1 min-w-0 flex flex-col gap-4 md:gap-6 sm:mt-8 lg:mt-0">
                 {/* Card 2: Top Right - Call Us Now (Tall) */}
                 <Link href="tel:+971563377016" className="rounded-[2rem] bg-white border border-slate-100 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] p-8 flex flex-col justify-start group hover:border-amber-200 transition-colors duration-500 aspect-[4/5]">
                   <p className="text-2xl text-slate-400 font-light mb-6 group-hover:text-amber-600 transition-colors duration-300">Call Us Now!</p>
-                  <div className="text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-display font-medium text-slate-800 leading-[1.1] tracking-tight">
+                  <div className="text-3xl lg:text-4xl xl:text-4xl font-display font-medium text-slate-800 leading-[1.1] tracking-tight">
                     +971 <br />
-                    563377016
+                    56 337 7016
                   </div>
                 </Link>
 
