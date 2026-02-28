@@ -68,10 +68,10 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold mb-1 text-slate-900">Phone</h3>
                     <a
-                      href="tel:+9714XXXXXXX"
+                      href="tel:+971563377016"
                       className="text-slate-600 hover:text-primary transition-colors"
                     >
-                      +971 4 XXX XXXX
+                      +971 563377016
                     </a>
                   </div>
                 </div>
@@ -82,7 +82,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1 text-slate-900">Location</h3>
-                    <p className="text-slate-600">Dubai, UAE</p>
+                    <p className="text-slate-600">AlSUAIDI Building, Office 205<br/>Al Murar, Deira<br/>Dubai, UAE</p>
                   </div>
                 </div>
               </div>

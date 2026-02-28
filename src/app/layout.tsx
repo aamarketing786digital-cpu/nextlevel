@@ -4,6 +4,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { BodyWrapper } from "@/components/layout/BodyWrapper";
 import { Preloader } from "@/components/preloaders/Preloader";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -60,6 +61,7 @@ export default function RootLayout({
           </main>
         </div>
         <Footer />
+        <WhatsAppButton phoneNumber="+971563377016" message="Hi, I am interested in your services." />
       </BodyWrapper>
     </html>
   );

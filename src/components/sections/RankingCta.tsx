@@ -71,7 +71,7 @@ export function RankingCta() {
             </h2>
 
             <p className="text-lg text-slate-600 mb-6 font-light">
-              Dial <span className="font-semibold text-slate-900">04-332-0808</span> for a free demo and discovery call!
+              Dial <span className="font-semibold text-slate-900">+971 563377016</span> for a free demo and discovery call!
             </p>
 
             <p className="text-lg text-slate-500 mb-8 font-light">
@@ -135,7 +135,7 @@ export function RankingCta() {
                       <a href="mailto:info@nextlevel.com" className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-lg text-blue-500 hover:bg-blue-50 transition-colors">
                         <Mail className="w-5 h-5" />
                       </a>
-                      <a href="tel:043320808" className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-lg text-green-500 hover:bg-green-50 transition-colors">
+                      <a href="tel:+971563377016" className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-lg text-green-500 hover:bg-green-50 transition-colors">
                         <Phone className="w-5 h-5" />
                       </a>
                     </div>
@@ -155,11 +155,11 @@ export function RankingCta() {
               {/* Right Column of Bento */}
               <div className="flex-1 flex flex-col gap-4 md:gap-6 sm:mt-8 lg:mt-0">
                 {/* Card 2: Top Right - Call Us Now (Tall) */}
-                <Link href="tel:043320808" className="rounded-[2rem] bg-white border border-slate-100 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] p-8 flex flex-col justify-start group hover:border-amber-200 transition-colors duration-500 aspect-[4/5]">
+                <Link href="tel:+971563377016" className="rounded-[2rem] bg-white border border-slate-100 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] p-8 flex flex-col justify-start group hover:border-amber-200 transition-colors duration-500 aspect-[4/5]">
                   <p className="text-2xl text-slate-400 font-light mb-6 group-hover:text-amber-600 transition-colors duration-300">Call Us Now!</p>
-                  <div className="text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-display font-medium text-slate-800 leading-[1.1] tracking-tight">
-                    04-332-<br />
-                    0808
+                  <div className="text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-display font-medium text-slate-800 leading-[1.1] tracking-tight">
+                    +971 <br />
+                    563377016
                   </div>
                 </Link>
 
