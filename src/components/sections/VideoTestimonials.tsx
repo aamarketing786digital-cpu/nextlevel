@@ -23,6 +23,7 @@ export function VideoTestimonials({ testimonials = [] }: VideoTestimonialsProps)
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [activeVideo, setActiveVideo] = useState<string | null>(null);
 
   const checkScrollState = () => {
     if (scrollContainerRef.current) {
@@ -95,6 +96,16 @@ export function VideoTestimonials({ testimonials = [] }: VideoTestimonialsProps)
           {testimonials.map((video) => (
             <div 
               key={video._id} 
+              onClick={() => {
+                if (video.youtubeId) {
+                  setActiveVideo(video.youtubeId);
+                } else if (video.videoUrl) {
+                  const match = video.videoUrl.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))((\w|-){11})/);
+                  if (match && match[1]) {
+                    setActiveVideo(match[1]);
+                  }
+                }
+              }}
               className="group relative rounded-3xl overflow-hidden bg-slate-900 border border-white/10 flex-shrink-0 w-[85vw] md:w-[calc(50%-12px)] aspect-[16/9] flex flex-col cursor-pointer transition-transform duration-500 hover:border-primary/50 snap-start"
             >
               {/* Thumbnail Image Background */}
@@ -145,6 +156,37 @@ export function VideoTestimonials({ testimonials = [] }: VideoTestimonialsProps)
         </div>
       </Container>
       
+      {/* Video Modal Overlay */}
+      {activeVideo && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 md:p-8 backdrop-blur-sm" onClick={() => setActiveVideo(null)}>
+          <button 
+            onClick={() => setActiveVideo(null)}
+            className="absolute top-6 right-6 p-2 bg-white/10 hover:bg-white/20 rounded-full text-white/70 hover:text-white transition-colors z-[110]"
+          >
+            <span className="sr-only">Close</span>
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          
+          <div 
+            className="w-full max-w-5xl aspect-video rounded-2xl overflow-hidden bg-black shadow-2xl relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <iframe
+              width="100%"
+              height="100%"
+              src={`https://www.youtube.com/embed/${activeVideo}?autoplay=1`}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="absolute inset-0"
+            ></iframe>
+          </div>
+        </div>
+      )}
+
       <style>{`
         .hide-scrollbar::-webkit-scrollbar {
           display: none;
