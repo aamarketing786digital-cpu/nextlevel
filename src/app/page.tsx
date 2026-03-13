@@ -41,8 +41,8 @@ export default async function HomePage() {
     "rating": rating
   }`
 
-  // Fetch videos (case studies/tutorials)
-  const videoTestimonialsQuery = `*[_type == "video" && videoType == "caseStudy"] | order(publishedAt desc)[0...4]{
+  // Fetch videos (case studies/tutorials/insights)
+  const videoTestimonialsQuery = `*[_type == "video"] | order(publishedAt desc)[0...4]{
     _id,
     "client": title,
     title,
