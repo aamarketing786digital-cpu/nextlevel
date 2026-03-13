@@ -2,7 +2,6 @@
 
 import { useRef } from "react";
 import { Container } from "@/components/layout/Container";
-import { TESTIMONIALS } from "@/lib/constants";
 import { TestimonialMarquee } from "@/components/aceternity/testimonial-marquee";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -13,7 +12,20 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-export function Testimonials() {
+interface ReviewType {
+  name: string;
+  role: string;
+  company: string;
+  image: string;
+  quote: string;
+  rating: number;
+}
+
+interface TestimonialsProps {
+  testimonials: ReviewType[];
+}
+
+export function Testimonials({ testimonials = [] }: TestimonialsProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
   useGSAP(() => {
@@ -80,12 +92,12 @@ export function Testimonials() {
 
       {/* Infinite Marquee - Row 1 (Left) */}
       <div className="testimonial-element relative w-full mb-8">
-         <TestimonialMarquee items={TESTIMONIALS} direction="right" speed="slow" />
+         <TestimonialMarquee items={testimonials} direction="right" speed="slow" />
       </div>
 
        {/* Infinite Marquee - Row 2 (Right) */}
       <div className="testimonial-element relative w-full">
-         <TestimonialMarquee items={[...TESTIMONIALS].reverse()} direction="left" speed="slow" />
+         <TestimonialMarquee items={[...testimonials].reverse()} direction="left" speed="slow" />
       </div>
     </section>
   );

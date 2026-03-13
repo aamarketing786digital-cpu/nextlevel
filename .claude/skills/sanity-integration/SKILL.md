@@ -991,6 +991,9 @@ if (relatedProducts.length < 3) {
 | CDN serving stale content | `useCdn: true` with ISR | Set `useCdn: false` for ISR |
 | Type errors | Sanity types not matching | Create proper TypeScript interfaces |
 | Params not awaited | Forgetting `await params` | Next.js 15 requires async params |
+| Next.js build crash on references | Null or unpublished references `[0]` | Always use optional chaining (e.g., `cat.slug?.current`) when mapping GROQ populated arrays to avoid build prerender failures |
+| Sanity `_key` error on array items | Objects inside `array` schemas missing `name` | Provide `name` and `title` to the `type: "object"` inside the `of: []` schema definition |
+| Next.js `revalidateTag` TS Error | Experimental versions require `profile` args | Use `revalidatePath('/path', 'page')` instead of `revalidateTag` for broader stability across minor Next.js updates |
 
 ---
 

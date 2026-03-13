@@ -5,42 +5,21 @@ import { Container } from "@/components/layout/Container";
 import { ChevronRight, ChevronLeft, Play } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const VIDEO_TESTIMONIALS = [
-  {
-    id: "1",
-    client: "Cert",
-    title: "CERT's Success Story",
-    description: "Learn how we helped them launch a powerful eCommerce presence from website to full-scale digital marketing & PR success.",
-    thumbnail: "/images/case-studies/telecom-ai.jpg", 
-    brandColor: "bg-emerald-500", 
-  },
-  {
-    id: "2",
-    client: "Nereen Healthcare",
-    title: "How Nereen Healthcare Built Its Digital Identity",
-    description: "See how we helped them launch a powerful eCommerce presence. From website to full-scale digital marketing & PR success.",
-    thumbnail: "/images/case-studies/fashion-ecommerce.jpg",
-    brandColor: "bg-blue-600",
-  },
-  {
-    id: "3",
-    client: "EZ Deals",
-    title: "How we generated massive leads & sales for EZ Deals",
-    description: "Powerful SEO & digital marketing ranked their website on Google's 1st page. Real growth, real results achieved with the same budget.",
-    thumbnail: "/images/case-studies/real-estate-seo.jpg",
-    brandColor: "bg-cyan-500",
-  },
-  {
-    id: "4",
-    client: "TechVentures",
-    title: "Scaling TechVentures in the GCC",
-    description: "How our AI chatbot integration and digital strategy reduced their acquisition costs by 40% in just 3 months.",
-    thumbnail: "/images/case-studies/fintech-brand.jpg",
-    brandColor: "bg-purple-500",
-  }
-];
+export interface VideoTestimonialType {
+  _id: string;
+  client: string;
+  title: string;
+  description: string;
+  thumbnailUrl?: string; // Resolved from sanity image
+  videoUrl?: string;
+  youtubeId?: string; // Derived from videoUrl if applicable
+}
 
-export function VideoTestimonials() {
+interface VideoTestimonialsProps {
+  testimonials: VideoTestimonialType[];
+}
+
+export function VideoTestimonials({ testimonials = [] }: VideoTestimonialsProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
@@ -113,15 +92,15 @@ export function VideoTestimonials() {
           className="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory hide-scrollbar"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
-          {VIDEO_TESTIMONIALS.map((video) => (
+          {testimonials.map((video) => (
             <div 
-              key={video.id} 
+              key={video._id} 
               className="group relative rounded-3xl overflow-hidden bg-slate-900 border border-white/10 flex-shrink-0 w-[85vw] md:w-[calc(50%-12px)] aspect-[16/9] flex flex-col cursor-pointer transition-transform duration-500 hover:border-primary/50 snap-start"
             >
               {/* Thumbnail Image Background */}
               <div 
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-60"
-                style={{ backgroundImage: `url(${video.thumbnail})` }}
+                style={{ backgroundImage: `url(${video.thumbnailUrl || '/images/case-studies/placeholder.jpg'})` }}
               />
               
               {/* Dark Gradient Overlay for Text */}

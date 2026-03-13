@@ -31,7 +31,30 @@ export default async function HomePage() {
     readTime
   }`
 
-  const posts = await client.fetch(postsQuery)
+  const testimonialsQuery = `*[_type == "testimonial" && featured == true] | order(order asc)[0...10]{
+    "name": name,
+    "role": coalesce(role, ""),
+    "company": company,
+    "image": avatar.asset->url,
+    "quote": quote,
+    "rating": rating
+  }`
+
+  const videoTestimonialsQuery = `*[_type == "video" && videoType == "testimonial" && featured == true] | order(featuredOrder asc)[0...4]{
+    _id,
+    "client": title,
+    title,
+    description,
+    "thumbnailUrl": customThumbnail.asset->url,
+    "videoUrl": youtubeUrl,
+    "youtubeId": videoId
+  }`
+
+  const [posts, testimonials, videoTestimonials] = await Promise.all([
+    client.fetch(postsQuery, {}, { next: { tags: ["posts"] } }),
+    client.fetch(testimonialsQuery, {}, { next: { tags: ["testimonials"] } }),
+    client.fetch(videoTestimonialsQuery, {}, { next: { tags: ["videos"] } }),
+  ])
 
   return (
     <div className="flex flex-col">
@@ -55,10 +78,10 @@ export default async function HomePage() {
         <WorkShowcase />
 
         {/* Text Testimonials - Infinite Marquee */}
-        <Testimonials />
+        <Testimonials testimonials={testimonials || []} />
 
         {/* Video Testimonials - Interactive Grid */}
-        <VideoTestimonials />
+        <VideoTestimonials testimonials={videoTestimonials || []} />
 
         {/* Press Logos - As Seen In Marquee */}
         <PressLogos />
