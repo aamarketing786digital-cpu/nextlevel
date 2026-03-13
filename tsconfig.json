@@ -24,6 +24,15 @@
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "@/sanity/*": [
+        "./sanity/*"
+      ],
+      "@/types/*": [
+        "./types/*"
+      ],
+      "@config/*": [
+        "./*"
       ]
     },
     "noUnusedLocals": true,

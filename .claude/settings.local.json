@@ -5,7 +5,13 @@
       "mcp__context7__query-docs",
       "mcp__tavily__tavily_search",
       "Bash(npm run build:*)",
-      "mcp__context7__resolve-library-id"
+      "mcp__context7__resolve-library-id",
+      "Bash(cd \"D:\\\\GIAIC\\\\Real World Projects\\\\Agency\" && npx tsc --noEmit 2>&1 | head -30)",
+      "Bash(cd \"D:\\\\GIAIC\\\\Real World Projects\\\\Agency\" && npm list @sanity/icons 2>&1 | head -3)",
+      "Bash(cd \"D:\\\\GIAIC\\\\Real World Projects\\\\Agency\" && npx tsc --noEmit 2>&1 | head -20)",
+      "Bash(cd \"D:\\\\GIAIC\\\\Real World Projects\\\\Agency\" && npx tsc --noEmit 2>&1 | head -25)",
+      "Bash(cd \"D:\\\\GIAIC\\\\Real World Projects\\\\Agency\" && npx tsc --noEmit 2>&1 | head -15)",
+      "Bash(cd \"D:\\\\GIAIC\\\\Real World Projects\\\\Agency\" && npx tsc --noEmit 2>&1)"
     ]
   }
 }

@@ -12,6 +12,7 @@ import type {
 export const NAVIGATION_LINKS: NavLink[] = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
+  { href: "/blog", label: "Blog" },
   { href: "/work", label: "Work" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
@@ -30,6 +31,7 @@ export const FOOTER_LINKS = {
   company: [
     { href: "/about", label: "About Us" },
     { href: "/work", label: "Case Studies" },
+    { href: "/blog", label: "Blog" },
     { href: "/contact", label: "Contact" },
   ],
   services: [
