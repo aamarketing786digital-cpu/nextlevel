@@ -31,6 +31,7 @@ export default async function HomePage() {
     readTime
   }`
 
+  // Fetch recent testimonials
   const testimonialsQuery = `*[_type == "testimonial" && featured == true] | order(order asc)[0...10]{
     "name": name,
     "role": coalesce(role, ""),
@@ -40,7 +41,8 @@ export default async function HomePage() {
     "rating": rating
   }`
 
-  const videoTestimonialsQuery = `*[_type == "video" && videoType == "testimonial" && featured == true] | order(featuredOrder asc)[0...4]{
+  // Fetch videos (case studies/tutorials)
+  const videoTestimonialsQuery = `*[_type == "video" && videoType == "caseStudy"] | order(publishedAt desc)[0...4]{
     _id,
     "client": title,
     title,
@@ -50,10 +52,21 @@ export default async function HomePage() {
     "youtubeId": videoId
   }`
 
-  const [posts, testimonials, videoTestimonials] = await Promise.all([
+  // Fetch case studies
+  const caseStudiesQuery = `*[_type == "caseStudy"] | order(publishedAt desc)[0...4]{
+    _id,
+    title,
+    "slug": slug.current,
+    "category": client.industry,
+    "image": heroImage.asset->url,
+    "description": tagline
+  }`
+
+  const [posts, testimonials, videoTestimonials, caseStudies] = await Promise.all([
     client.fetch(postsQuery, {}, { next: { tags: ["posts"] } }),
     client.fetch(testimonialsQuery, {}, { next: { tags: ["testimonials"] } }),
     client.fetch(videoTestimonialsQuery, {}, { next: { tags: ["videos"] } }),
+    client.fetch(caseStudiesQuery, {}, { next: { tags: ["case-studies"] } }),
   ])
 
   return (
@@ -75,7 +88,7 @@ export default async function HomePage() {
         <Process />
 
         {/* Work Showcase - Curtain Reveal (GSAP) */}
-        <WorkShowcase />
+        <WorkShowcase caseStudies={caseStudies || []} />
 
         {/* Text Testimonials - Infinite Marquee */}
         <Testimonials testimonials={testimonials || []} />
