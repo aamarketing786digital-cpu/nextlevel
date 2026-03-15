@@ -8,12 +8,10 @@ import crypto from 'crypto'
  * This endpoint receives webhook events from Sanity when content is published/updated.
  * It revalidates Next.js cache tags for the affected content.
  *
- * Manual signature verification for Next.js 15+ compatibility
- *
- * Sanity Webhook Signature Format:
+ * Sanity Webhook Signature Format (Timestamp-based):
  * - Header: 'sanity-webhook-signature'
- * - Format: 'sha256=<hex>' or just '<hex>'
- * - Algorithm: HMAC-SHA256
+ * - Format: 't=<timestamp>,v1=<signature>'
+ * - Algorithm: HMAC-SHA256 of 'timestamp.body' (concatenated)
  *
  * Setup:
  * 1. Add SANITY_WEBHOOK_SECRET to .env.local
@@ -21,7 +19,6 @@ import crypto from 'crypto'
  * 3. URL: https://yourdomain.com/api/webhook
  * 4. Secret: Use the same value as SANITY_WEBHOOK_SECRET
  * 5. Events: Check "All documents" or specific types
- * 6. IMPORTANT: For GROQ-powered webhooks, use the exact secret in both places
  */
 
 export const runtime = 'nodejs'
@@ -32,55 +29,89 @@ type WebhookPayload = {
   slug?: { current: string }
 }
 
+interface SignatureParts {
+  timestamp: string
+  signature: string
+}
+
 /**
- * Verify webhook signature
- * Handles both 'sha256=<hex>' and '<hex>' formats
+ * Parse Sanity's timestamp-based signature format
+ * Format: 't=<timestamp>,v1=<signature>'
+ */
+function parseSignature(signatureHeader: string): SignatureParts | null {
+  const parts = signatureHeader.split(',')
+  const result: Partial<SignatureParts> = {}
+
+  for (const part of parts) {
+    const [key, value] = part.split('=')
+    if (key === 't') {
+      result.timestamp = value
+    } else if (key === 'v1') {
+      result.signature = value
+    }
+  }
+
+  if (!result.timestamp || !result.signature) {
+    return null
+  }
+
+  return result as SignatureParts
+}
+
+/**
+ * Verify webhook signature using Sanity's timestamp-based format
+ * The signature is HMAC-SHA256 of 'timestamp.body' (no separator)
  */
 function verifySignature(
   body: string,
-  signature: string,
+  signatureHeader: string,
   secret: string
 ): boolean {
-  // Compute HMAC-SHA256 signature
+  // Parse the signature header
+  const parts = parseSignature(signatureHeader)
+  if (!parts) {
+    console.error('[Webhook] Invalid signature format:', signatureHeader)
+    return false
+  }
+
+  const { timestamp, signature: receivedSignature } = parts
+
+  // Check timestamp is recent (within 5 minutes) to prevent replay attacks
+  const now = Math.floor(Date.now() / 1000)
+  const timestampNum = parseInt(timestamp, 10)
+  const tolerance = 300 // 5 minutes
+
+  if (Math.abs(now - timestampNum) > tolerance) {
+    console.error('[Webhook] Signature timestamp too old or too far in future:', {
+      timestamp: timestampNum,
+      now,
+      diff: now - timestampNum,
+    })
+    return false
+  }
+
+  // Create the payload to sign: timestamp + '.' + body
+  const payload = `${timestamp}.${body}`
+
+  // Compute HMAC-SHA256
   const hmac = crypto.createHmac('sha256', secret)
-  hmac.update(body, 'utf8')
-  const digest = hmac.digest('hex')
+  hmac.update(payload, 'utf8')
+  const expectedSignature = hmac.digest('hex')
 
-  // Sanity may send signature in different formats:
-  // 1. 'sha256=<hex>' (with prefix)
-  // 2. '<hex>' (without prefix, just the hash)
-
-  // Extract the actual signature value if it has a prefix
-  let receivedSignature = signature.trim()
-
-  // Handle 'sha256=' prefix format
-  if (receivedSignature.startsWith('sha256=')) {
-    receivedSignature = receivedSignature.substring(7) // Remove 'sha256='
-  }
-
-  // Also handle other possible prefixes
-  const match = receivedSignature.match(/^[a-z0-9_]+=(.+)$/)
-  if (match) {
-    receivedSignature = match[1]
-  }
-
-  // Compare using timing-safe comparison
-  // Convert to buffers for safe comparison
+  // Timing-safe comparison
   const receivedBuffer = Buffer.from(receivedSignature, 'utf8')
-  const expectedBuffer = Buffer.from(digest, 'utf8')
+  const expectedBuffer = Buffer.from(expectedSignature, 'utf8')
 
-  // First check length (timingSafeEqual throws if lengths differ)
   if (receivedBuffer.length !== expectedBuffer.length) {
     console.error('[Webhook] Signature length mismatch:', {
       received: receivedBuffer.length,
       expected: expectedBuffer.length,
       receivedPreview: receivedSignature.substring(0, 20),
-      expectedPreview: digest.substring(0, 20),
+      expectedPreview: expectedSignature.substring(0, 20),
     })
     return false
   }
 
-  // Timing-safe comparison
   return crypto.timingSafeEqual(receivedBuffer, expectedBuffer)
 }
 
@@ -96,42 +127,22 @@ export async function POST(req: Request) {
     // Get raw body for signature verification
     const rawBody = await req.text()
 
-    // Try multiple possible header names for the signature
-    const signatureHeaders = [
-      'sanity-webhook-signature',
-      'x-sanity-webhook-signature',
-      'sanity-signature',
-    ]
+    // Get signature header - Sanity uses 'sanity-webhook-signature'
+    const signatureHeader = req.headers.get('sanity-webhook-signature')
 
-    let signature: string | null = null
-    for (const headerName of signatureHeaders) {
-      const headerValue = req.headers.get(headerName)
-      if (headerValue) {
-        signature = headerValue
-        console.log(`[Webhook] Found signature in header: ${headerName}`)
-        break
-      }
-    }
-
-    if (!signature) {
-      console.error('[Webhook] Missing signature header. Tried:', signatureHeaders.join(', '))
+    if (!signatureHeader) {
+      console.error('[Webhook] Missing signature header')
       console.error('[Webhook] Available headers:', Array.from(req.headers.keys()).join(', '))
       return new Response('Missing signature', { status: 401 })
     }
 
     // Verify signature
-    const isValid = verifySignature(rawBody, signature, secret)
+    const isValid = verifySignature(rawBody, signatureHeader, secret)
 
     if (!isValid) {
-      console.error('[Webhook] Invalid signature')
-      console.error('[Webhook] Signature received:', signature.substring(0, 50))
-
-      // Log what we expected for debugging
-      const hmac = crypto.createHmac('sha256', secret)
-      hmac.update(rawBody, 'utf8')
-      const expected = `sha256=${hmac.digest('hex')}`
-      console.error('[Webhook] Expected format:', expected.substring(0, 50))
-
+      console.error('[Webhook] ❌ Invalid signature')
+      console.error('[Webhook] Make sure SANITY_WEBHOOK_SECRET in .env.local matches the webhook secret in Sanity dashboard')
+      console.error('[Webhook] Sanity dashboard: https://www.sanity.io/manage/project/yhqmz717/api/webhooks')
       return new Response('Invalid signature', { status: 401 })
     }
 
