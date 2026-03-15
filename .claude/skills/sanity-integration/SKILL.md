@@ -3,7 +3,7 @@ name: sanity-integration
 description: Build production Sanity CMS integrations with Next.js, SEO optimization, and MCP tools. Use when adding Sanity CMS for products, blogs, services, events, portfolios, or any content-managed features to websites. Handles schema design, API routes, SEO, image optimization, Live Content API, and reusable component patterns.
 allowed-tools: Read, Write, Glob, Grep, Edit, mcp__context7__*, mcp__tavily__*
 category: fullstack
-version: 1.5.0
+version: 1.6.0
 ---
 
 # Sanity CMS Integration
@@ -1154,10 +1154,19 @@ To achieve B2 certification in this skill:
 
 ---
 
-**Version**: 1.5.0
+**Version**: 1.6.0
 **Last Updated**: 2025-03-15
 **Proficiency Framework**: CEFR + Bloom's Taxonomy + DigComp
 **Progression**: A2 → A2 → B1 → B1 → B1 → B2 → B2 → B2 → B2
+
+## What's New (v1.6.0)
+
+- **NEW: Complete webhook signature setup guide** - Secret generation, ngrok local testing, step-by-step configuration
+- **NEW: Webhook headers reference** - Headers Sanity sends (`X-Sanity-Webhook-Signature`, etc.)
+- **NEW: CORS configuration for webhooks** - Cross-origin webhook handling
+- **NEW: Environment variables reference table** - Where to find each value
+- **IMPROVED: Security practices** - Placeholder values only, no actual secrets in docs
+- **NEW: Token generation guide** - API read token setup steps
 
 ## What's New (v1.5.0)
 

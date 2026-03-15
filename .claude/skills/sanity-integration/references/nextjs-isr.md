@@ -485,6 +485,145 @@ export async function POST(request: NextRequest) {
 export const dynamic = 'force-dynamic'
 ```
 
+### Webhook Signature & Secret Setup
+
+#### Step 1: Generate Webhook Secret
+
+Generate a cryptographically secure random secret for webhook signature verification:
+
+```bash
+# Option 1: Using Node.js (recommended)
+node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
+
+# Option 2: Using Python
+python3 -c "import secrets; print(secrets.token_urlsafe(32))"
+
+# Option 3: Using OpenSSL
+openssl rand -base64 32
+```
+
+**Example output:** `YOUR_GENERATED_SECRET_HERE_REPLACE_THIS=`
+
+> ⚠️ **Never share your actual secret or commit it to git.** The output above is an example format only.
+
+#### Step 2: Add to Environment Variables
+
+Add the generated secret to your `.env.local` file:
+
+```bash
+# .env.local
+SANITY_WEBHOOK_SECRET=your_generated_secret_here
+```
+
+**IMPORTANT:**
+- Never commit `.env.local` to git. Add it to `.gitignore`.
+- Use a different secret for production vs development.
+- Rotate secrets periodically.
+
+#### Step 3: Configure Webhook in Sanity Dashboard
+
+1. Go to [sanity.io/manage](https://www.sanity.io/manage)
+2. Select your project
+3. Navigate to **API** → **Webhooks**
+4. Click **Create new webhook**
+
+Fill in the form:
+
+| Field | Value | Description |
+|-------|-------|-------------|
+| **Name** | `Next.js ISR Revalidation` | Descriptive name for the webhook |
+| **URL** | `https://your-domain.com/api/webhook/sanity` | Your API route (use ngrok for local testing) |
+| **Secret** | `aQOH5Yf3fnMnbhsI4Mr3Xv7SGmcaPf5CU6jA8r+ysCY=` | Paste the secret you generated |
+| **Projection** | `{ "_type", "slug": slug.current, "operation" }` | Fields to include in webhook payload |
+| **Filter** | `_type in ["product", "post", "postCategory", "category"]` | Only trigger for these types |
+
+**Projection Examples:**
+```javascript
+// Minimal (recommended)
+{ "_type", "slug": slug.current }
+
+// Include operation type
+{ "_type", "slug": slug.current, "operation" }
+
+// Include more fields
+{ "_type", "slug": slug.current, "_id", "publishedAt" }
+```
+
+**Filter Examples:**
+```javascript
+// All documents
+_type in defined().select()
+
+// Specific types only
+_type in ["product", "post"]
+
+// Exclude drafts
+!(_id in path("drafts.**"))
+
+// Only published documents
+_id in path("published.**")
+```
+
+#### Step 4: Local Testing with ngrok
+
+For local development, expose your local server to the internet:
+
+```bash
+# Install ngrok
+npm install -g ngrok
+
+# Start your Next.js dev server
+npm run dev
+
+# In another terminal, start ngrok
+ngrok http 3000
+```
+
+Use the ngrok URL in your Sanity webhook configuration:
+```
+URL: https://abc123.ngrok-free.app/api/webhook/sanity
+```
+
+**Note:** Update the webhook URL when deploying to production.
+
+#### Step 5: Test Webhook
+
+1. In Sanity Studio, create/update a document
+2. Check your server logs for webhook payload:
+```
+Webhook received: { type: 'product', operation: 'update', slug: 'my-product' }
+Revalidated tag: products
+Revalidated tag: featured
+Revalidated tag: categories
+```
+
+3. Verify the response in Sanity webhook logs (should show 200 OK)
+
+### Complete Environment Setup
+
+```bash
+# .env.local - Template (replace values with your own)
+NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id_here
+NEXT_PUBLIC_SANITY_DATASET=production
+SANITY_WEBHOOK_SECRET=your_generated_secret_here
+SANITY_API_READ_TOKEN=your_api_read_token_here
+```
+
+**Where to find values:**
+| Variable | Where to Get |
+|----------|-------------|
+| `NEXT_PUBLIC_SANITY_PROJECT_ID` | sanity.io/manage → Project → Settings → API |
+| `NEXT_PUBLIC_SANITY_DATASET` | Usually "production" (create custom in dataset settings) |
+| `SANITY_WEBHOOK_SECRET` | Generate yourself using commands above |
+| `SANITY_API_READ_TOKEN` | sanity.io/manage → API → Tokens → Add API token |
+
+**Token Generation:**
+1. Go to [sanity.io/manage](https://www.sanity.io/manage)
+2. Navigate to **API** → **Tokens**
+3. Click **Add API token**
+4. Select permissions: `Read` for webhooks
+5. Copy the generated token (starts with `sk`)
+
 ### Sanity Dashboard Configuration
 
 Configure your webhook at [sanity.io/manage](https://www.sanity.io/manage):
@@ -511,6 +650,49 @@ node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
 | Cache not clearing | Forgetting to revalidate dependent tags | Map content relationships (e.g., product → categories) |
 | CORS errors | Missing CORS headers | Add `Access-Control-Allow-*` headers |
 | Next.js 15 type error | `revalidateTag(tag)` with 1 arg | Use `revalidateTag(tag, {})` |
+| Secret mismatch | Secret differs between `.env` and Sanity dashboard | Copy secret exactly, no extra spaces |
+
+### Webhook Constants Reference
+
+```typescript
+// Signature header name (exported for reference)
+export const WEBHOOK_SIGNATURE_HEADER = 'x-sanity-webhook-signature'
+
+// Sanity sends this header with HMAC signature
+// parseBody validates it automatically
+```
+
+**Headers Sanity Sends:**
+```http
+POST /api/webhook/sanity HTTP/1.1
+Content-Type: application/json
+X-Sanity-Webhook-Signature: sha256=<hmac-signature>
+X-Sanity-Webhook-ID: <unique-webhook-id>
+X-Sanity-Project-ID: <your-project-id>
+```
+
+### CORS Configuration
+
+If your Next.js app is on a different domain than Sanity:
+
+```typescript
+// app/api/webhook/sanity/route.ts
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 204,
+    headers: {
+      'Access-Control-Allow-Origin': process.env.SANITY_WEBHOOK_ORIGIN || '*',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, X-Sanity-Webhook-Signature',
+    },
+  })
+}
+```
+
+Set `SANITY_WEBHOOK_ORIGIN` in `.env.local`:
+```bash
+SANITY_WEBHOOK_ORIGIN=https://your-sanity-project.api.sanity.io
+```
 
 ### Tag Revalidation Strategy
 
