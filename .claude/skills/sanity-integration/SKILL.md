@@ -991,11 +991,12 @@ if (relatedProducts.length < 3) {
 | CDN serving stale content | `useCdn: true` with ISR | Set `useCdn: false` for ISR |
 | Type errors | Sanity types not matching | Create proper TypeScript interfaces |
 | Params not awaited | Forgetting `await params` | Next.js 15 requires async params |
-| **Webhook 401 Invalid signature** | Using `@sanity/webhook` directly | Use `parseBody` from `next-sanity/webhook` |
+| **Webhook 401 Invalid signature** | Wrong signature format/encoding | Sanity uses timestamp-based Base64 format (see below) |
+| **Webhook timestamp validation failed** | Timestamp in wrong unit | Sanity sends milliseconds, convert to seconds |
+| **Webhook signature length mismatch** | Using hex instead of Base64 | Sanity uses Base64-encoded signatures |
 | **Cache not clearing** | Missing `cache: 'force-cache'` | Next.js 15 requires explicit cache mode |
 | **RevalidateTag type error** | Single argument in Next.js 15 | Use `revalidateTag(tag, {})` |
 | **Stale data after webhook** | Not setting `revalidate: false` with tags | Disable time-based when using tags |
-| **Body already read error** | Manual `request.json()` before verification | Let `parseBody` handle raw body |
 
 ---
 
@@ -1154,10 +1155,19 @@ To achieve B2 certification in this skill:
 
 ---
 
-**Version**: 1.6.0
+**Version**: 1.7.0
 **Last Updated**: 2025-03-15
 **Proficiency Framework**: CEFR + Bloom's Taxonomy + DigComp
 **Progression**: A2 → A2 → B1 → B1 → B1 → B2 → B2 → B2 → B2
+
+## What's New (v1.7.0)
+
+- **🔥 CRITICAL DISCOVERY: Sanity webhook signature format** - Sanity uses timestamp-based Base64 encoding, NOT simple hex format
+- **NEW: Correct webhook implementation for Next.js 15+** - Manual implementation with proper timestamp and Base64 handling
+- **NEW: Sanity webhook signature specification** - Documented actual format: `t=<timestamp>,v1=<signature>` with Base64 encoding
+- **FIXED: Webhook timestamp validation** - Sanity sends timestamps in milliseconds, need conversion for validation
+- **FIXED: Webhook signature encoding** - Sanity uses Base64 (43-44 chars), not hex (64 chars)
+- **UPDATED: Common pitfalls section** - Added specific webhook signature issues and solutions
 
 ## What's New (v1.6.0)
 

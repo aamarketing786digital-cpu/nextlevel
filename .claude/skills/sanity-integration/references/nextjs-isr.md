@@ -393,97 +393,193 @@ export async function revalidateAllPosts() {
 
 ## Webhook Integration
 
-### ⚠️ CRITICAL: Use `next-sanity/webhook` for Next.js App Router
+### ⚠️ CRITICAL: Sanity Webhook Signature Format (2025)
 
-**Do NOT use `@sanity/webhook` directly** - it requires manual raw body handling which is error-prone in Next.js App Router. Instead, use `parseBody` from `next-sanity/webhook` which properly handles raw body reading and signature verification.
+**Sanity uses a timestamp-based signature format with Base64 encoding**, NOT the simple `sha256=<hex>` format.
 
-### Recommended Implementation
-
-**Webhook helper (`sanity/lib/webhook.ts`):**
-```typescript
-import { parseBody } from 'next-sanity/webhook'
-import type { NextRequest } from 'next/server'
-
-const secret = process.env.SANITY_WEBHOOK_SECRET || ''
-
-export async function verifyWebhookSignature<T = Record<string, unknown>>(
-  request: NextRequest,
-  waitForConsistency: boolean = true
-): Promise<{ isValidSignature: boolean | null; body: T | null }> {
-  if (!secret) {
-    console.error('SANITY_WEBHOOK_SECRET is not configured')
-    return { isValidSignature: false, body: null }
-  }
-
-  try {
-    // parseBody handles raw body reading and signature verification
-    // waitForConsistency ensures queries won't get stale data after revalidation
-    const result = await parseBody<T>(request, secret, waitForConsistency)
-    return result
-  } catch (error) {
-    console.error('Error parsing webhook body:', error)
-    return { isValidSignature: false, body: null }
-  }
-}
-
-export const WEBHOOK_SIGNATURE_HEADER = 'x-sanity-webhook-signature'
+**Actual Sanity webhook signature format:**
+```
+t=1773590898651,v1=JVRM7HlAas1l5Y90JUxyfiB5rbpHbLi...
 ```
 
-**API Route (`app/api/webhook/sanity/route.ts`):**
+- `t=<timestamp>` - Unix timestamp in **milliseconds** (13 digits)
+- `v1=<signature>` - HMAC-SHA256 signature, **Base64-encoded**
+- **Payload to sign:** `timestamp.body` (concatenated with a dot)
+
+### Manual Implementation (Recommended for Next.js 15+)
+
+Due to type incompatibilities with `next-sanity/webhook` and Next.js 15+ App Router's standard `Request` type, manual implementation is recommended:
+
+**Webhook route (`app/api/webhook/route.ts`):**
 ```typescript
 import { revalidateTag } from 'next/cache'
-import { NextRequest, NextResponse } from 'next/server'
-import { verifyWebhookSignature } from '@/sanity/lib/webhook'
+import { NextResponse } from 'next/server'
+import crypto from 'crypto'
 
-interface SanityWebhookPayload {
-  _id: string
-  _type: 'product' | 'post' | 'postCategory' | 'category' | 'settings'
+export const runtime = 'nodejs'
+
+type WebhookPayload = {
+  _type: string
+  _id?: string
   slug?: { current: string }
-  operation: 'create' | 'update' | 'delete'
 }
 
-export async function POST(request: NextRequest) {
-  // Verify signature and parse body in one step
-  const { isValidSignature, body } = await verifyWebhookSignature<SanityWebhookPayload>(request)
-
-  if (!isValidSignature || !body) {
-    return NextResponse.json(
-      { error: 'Unauthorized', message: 'Invalid signature' },
-      { status: 401 }
-    )
-  }
-
-  // Determine tags to revalidate based on content type
-  const tags: string[] = []
-
-  switch (body._type) {
-    case 'product':
-      tags.push('products', 'featured')
-      if (body.slug?.current) tags.push(`product:${body.slug.current}`)
-      tags.push('categories') // Product changes affect categories
-      break
-    case 'post':
-      tags.push('posts')
-      if (body.slug?.current) tags.push(`post:${body.slug.current}`)
-      break
-    case 'postCategory':
-      tags.push('blogCategories', 'posts')
-      break
-    case 'category':
-      tags.push('categories', 'products', 'featured')
-      break
-  }
-
-  // Revalidate tags (Next.js 15 requires second argument)
-  for (const tag of tags) {
-    revalidateTag(tag, {}) // CacheLifeConfig required in Next.js 15
-  }
-
-  return NextResponse.json({ revalidated: true, tags })
+interface SignatureParts {
+  timestamp: string
+  signature: string
 }
 
-export const dynamic = 'force-dynamic'
+/**
+ * Parse Sanity's timestamp-based signature format
+ * Format: 't=<timestamp>,v1=<signature>'
+ */
+function parseSignature(signatureHeader: string): SignatureParts | null {
+  const parts = signatureHeader.split(',')
+  const result: Partial<SignatureParts> = {}
+
+  for (const part of parts) {
+    const [key, value] = part.split('=')
+    if (key === 't') {
+      result.timestamp = value
+    } else if (key === 'v1') {
+      result.signature = value
+    }
+  }
+
+  if (!result.timestamp || !result.signature) {
+    return null
+  }
+
+  return result as SignatureParts
+}
+
+/**
+ * Verify webhook signature using Sanity's timestamp-based format
+ * The signature is HMAC-SHA256 of 'timestamp.body' (concatenated)
+ */
+function verifySignature(
+  body: string,
+  signatureHeader: string,
+  secret: string
+): boolean {
+  const parts = parseSignature(signatureHeader)
+  if (!parts) {
+    return false
+  }
+
+  const { timestamp, signature: receivedSignature } = parts
+
+  // Sanity sends timestamps in milliseconds, convert to seconds for comparison
+  const now = Math.floor(Date.now() / 1000)
+  const timestampMs = parseInt(timestamp, 10)
+  const timestampSec = Math.floor(timestampMs / 1000)
+  const tolerance = 300 // 5 minutes in seconds
+
+  if (Math.abs(now - timestampSec) > tolerance) {
+    console.error('[Webhook] Signature timestamp too old or too far in future')
+    return false
+  }
+
+  // Create the payload to sign: timestamp.body (with dot)
+  const payload = `${timestamp}.${body}`
+
+  // Compute HMAC-SHA256
+  const hmac = crypto.createHmac('sha256', secret)
+  hmac.update(payload, 'utf8')
+  const digest = hmac.digest()
+
+  // Sanity uses Base64 encoding, not hex
+  const expectedSignature = digest.toString('base64')
+  const receivedBuffer = Buffer.from(receivedSignature, 'base64')
+  const expectedBuffer = digest
+
+  if (receivedBuffer.length !== expectedBuffer.length) {
+    return false
+  }
+
+  return crypto.timingSafeEqual(receivedBuffer, expectedBuffer)
+}
+
+export async function POST(req: Request) {
+  try {
+    const secret = process.env.SANITY_WEBHOOK_SECRET
+
+    if (!secret) {
+      console.error('[Webhook] Missing SANITY_WEBHOOK_SECRET environment variable')
+      return new Response('Server configuration error', { status: 500 })
+    }
+
+    // Get raw body for signature verification
+    const rawBody = await req.text()
+
+    // Get signature header - Sanity uses 'sanity-webhook-signature'
+    const signatureHeader = req.headers.get('sanity-webhook-signature')
+
+    if (!signatureHeader) {
+      console.error('[Webhook] Missing signature header')
+      return new Response('Missing signature', { status: 401 })
+    }
+
+    // Verify signature
+    const isValid = verifySignature(rawBody, signatureHeader, secret)
+
+    if (!isValid) {
+      console.error('[Webhook] Invalid signature')
+      return new Response('Invalid signature', { status: 401 })
+    }
+
+    // Parse body
+    let body: WebhookPayload
+    try {
+      body = JSON.parse(rawBody)
+    } catch {
+      return new Response('Invalid JSON body', { status: 400 })
+    }
+
+    if (!body?._type) {
+      return NextResponse.json({ revalidated: false, reason: 'No document type' })
+    }
+
+    const docType = body._type
+
+    // Map document types to cache tags
+    const tagMap: Record<string, string[]> = {
+      post: ['posts', 'blog'],
+      caseStudy: ['case-studies', 'caseStudies'],
+      video: ['videos'],
+      testimonial: ['testimonials'],
+      category: ['categories'],
+      author: ['authors', 'posts'],
+    }
+
+    const tagsToRevalidate = tagMap[docType] || []
+
+    // Revalidate each tag (Next.js 15 requires 2 arguments)
+    for (const tag of tagsToRevalidate) {
+      revalidateTag(tag, {})
+    }
+
+    console.log(`[Webhook] ✅ Revalidated tags for ${docType}:`, tagsToRevalidate)
+
+    return NextResponse.json({
+      revalidated: true,
+      tags: tagsToRevalidate,
+      docType,
+    })
+  } catch (error) {
+    console.error('[Webhook] Error:', error)
+    return new Response((error as Error).message, { status: 500 })
+  }
+}
 ```
+
+### Important Notes
+
+1. **Timestamp in milliseconds**: Sanity sends timestamps as 13-digit millisecond values
+2. **Base64 encoding**: Signatures are Base64-encoded (43-44 chars), not hex (64 chars)
+3. **Payload format**: The signature is computed from `timestamp.body` (with a dot separator)
+4. **Header name**: Use `sanity-webhook-signature` header (not `x-sanity-webhook-signature`)
+5. **Timing validation**: Rejects signatures older than 5 minutes to prevent replay attacks
 
 ### Webhook Signature & Secret Setup
 

@@ -6,6 +6,7 @@ import { apiVersion, dataset, projectId } from '../env'
  * - useCdn: false for ISR support
  * - stega: enabled in development for visual editing
  * - perspective: 'published' to avoid draft timeout issues
+ * - cache: 'force-cache' for Next.js 15 tag-based revalidation
  */
 export const client = createClient({
   projectId,
@@ -24,6 +25,8 @@ export const client = createClient({
   },
   // Add request tag for debugging
   requestTagPrefix: 'nextlevel-marketerz',
+  // Default caching for all fetches (can be overridden per-request)
+  cache: 'force-cache',
 })
 
 /**

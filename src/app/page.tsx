@@ -13,6 +13,9 @@ import { RankingCta } from "@/components/sections/RankingCta";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { client } from "@/sanity/lib/client";
 
+// ISR: Revalidate homepage when content tags change
+export const revalidate = 3600 // 1 hour fallback (tags can revalidate on-demand)
+
 export default async function HomePage() {
   // Fetch recent blog posts
   const postsQuery = `*[_type == "post" && status == "published"] | order(publishedAt desc)[0...3]{
@@ -63,10 +66,10 @@ export default async function HomePage() {
   }`
 
   const [posts, testimonials, videoTestimonials, caseStudies] = await Promise.all([
-    client.fetch(postsQuery, {}, { next: { tags: ["posts"] } }),
-    client.fetch(testimonialsQuery, {}, { next: { tags: ["testimonials"] } }),
-    client.fetch(videoTestimonialsQuery, {}, { next: { tags: ["videos"] } }),
-    client.fetch(caseStudiesQuery, {}, { next: { tags: ["case-studies"] } }),
+    client.fetch(postsQuery, {}, { cache: 'force-cache', next: { tags: ["posts"] } }),
+    client.fetch(testimonialsQuery, {}, { cache: 'force-cache', next: { tags: ["testimonials"] } }),
+    client.fetch(videoTestimonialsQuery, {}, { cache: 'force-cache', next: { tags: ["videos"] } }),
+    client.fetch(caseStudiesQuery, {}, { cache: 'force-cache', next: { tags: ["case-studies", "caseStudies"] } }),
   ])
 
   return (
