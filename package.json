@@ -10,7 +10,9 @@
     "analyze": "ANALYZE=true next build",
     "test:e2e": "playwright test",
     "seed:sanity": "node -r dotenv/config scripts/seed-sanity.js",
-    "seed:quick": "node scripts/quick-seed.js"
+    "seed:case-studies": "node -r dotenv/config scripts/seed-case-studies.js",
+    "seed:quick": "node scripts/quick-seed.js",
+    "webhook:setup": "node scripts/setup-webhook.js"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^16.1.6",

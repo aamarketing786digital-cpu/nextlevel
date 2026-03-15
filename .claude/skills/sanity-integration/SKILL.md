@@ -3,7 +3,7 @@ name: sanity-integration
 description: Build production Sanity CMS integrations with Next.js, SEO optimization, and MCP tools. Use when adding Sanity CMS for products, blogs, services, events, portfolios, or any content-managed features to websites. Handles schema design, API routes, SEO, image optimization, Live Content API, and reusable component patterns.
 allowed-tools: Read, Write, Glob, Grep, Edit, mcp__context7__*, mcp__tavily__*
 category: fullstack
-version: 1.4.0
+version: 1.5.0
 ---
 
 # Sanity CMS Integration
@@ -991,9 +991,11 @@ if (relatedProducts.length < 3) {
 | CDN serving stale content | `useCdn: true` with ISR | Set `useCdn: false` for ISR |
 | Type errors | Sanity types not matching | Create proper TypeScript interfaces |
 | Params not awaited | Forgetting `await params` | Next.js 15 requires async params |
-| Next.js build crash on references | Null or unpublished references `[0]` | Always use optional chaining (e.g., `cat.slug?.current`) when mapping GROQ populated arrays to avoid build prerender failures |
-| Sanity `_key` error on array items | Objects inside `array` schemas missing `name` | Provide `name` and `title` to the `type: "object"` inside the `of: []` schema definition |
-| Next.js `revalidateTag` TS Error | Experimental versions require `profile` args | Use `revalidatePath('/path', 'page')` instead of `revalidateTag` for broader stability across minor Next.js updates |
+| **Webhook 401 Invalid signature** | Using `@sanity/webhook` directly | Use `parseBody` from `next-sanity/webhook` |
+| **Cache not clearing** | Missing `cache: 'force-cache'` | Next.js 15 requires explicit cache mode |
+| **RevalidateTag type error** | Single argument in Next.js 15 | Use `revalidateTag(tag, {})` |
+| **Stale data after webhook** | Not setting `revalidate: false` with tags | Disable time-based when using tags |
+| **Body already read error** | Manual `request.json()` before verification | Let `parseBody` handle raw body |
 
 ---
 
@@ -1134,6 +1136,9 @@ To achieve B2 certification in this skill:
 - **Dynamic params**: Use `params: Promise<{ slug: string }>` type
 - **Static generation**: Use `dynamicParams = true` for partial static generation
 - **generateMetadata**: Also requires `await params`
+- **⚠️ `cache: 'force-cache'` required**: Next.js 15 no longer defaults to caching - you must explicitly set `cache: 'force-cache'`
+- **⚠️ `revalidate: false` with tags**: When using tag-based revalidation, set `revalidate: false` to disable time-based ISR
+- **⚠️ `revalidateTag(tag, {})`**: Now requires 2 arguments - second arg is CacheLifeConfig
 
 ---
 
@@ -1149,10 +1154,19 @@ To achieve B2 certification in this skill:
 
 ---
 
-**Version**: 1.4.0
-**Last Updated**: 2025-03-09
+**Version**: 1.5.0
+**Last Updated**: 2025-03-15
 **Proficiency Framework**: CEFR + Bloom's Taxonomy + DigComp
 **Progression**: A2 → A2 → B1 → B1 → B1 → B2 → B2 → B2 → B2
+
+## What's New (v1.5.0)
+
+- **CRITICAL FIX: Webhook integration using `next-sanity/webhook`** - Do NOT use `@sanity/webhook` directly for Next.js App Router
+- **NEW: Next.js 15 ISR patterns** - Updated with `cache: 'force-cache'` requirement
+- **NEW: Tag-based revalidation strategy** - Proper tag mapping for content relationships
+- **NEW: Webhook troubleshooting guide** - Common pitfalls and solutions
+- **NEW: `revalidateTag` Next.js 15 signature** - Requires 2 arguments
+- **NEW: `waitForConsistency` option** - Ensures queries don't get stale data after webhook revalidation
 
 ## What's New (v1.4.0)
 

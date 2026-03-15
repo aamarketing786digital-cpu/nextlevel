@@ -1,5 +1,81 @@
 # Next.js ISR & Caching Strategies
 
+## ⚠️ Next.js 15 Critical Changes
+
+Next.js 15 introduced breaking changes to caching. **You must update your code:**
+
+### 1. `cache: 'force-cache'` is Now Required
+
+```typescript
+// ❌ WRONG (Next.js 15) - cache not set, default may be 'no-store'
+await client.fetch(query, params, {
+  next: { revalidate: 60, tags: ['posts'] }
+})
+
+// ✅ CORRECT - Explicitly set cache mode
+await client.fetch(query, params, {
+  cache: 'force-cache', // Required in Next.js 15
+  next: { revalidate: 60, tags: ['posts'] }
+})
+```
+
+### 2. When Using Tags, Set `revalidate: false`
+
+```typescript
+// ✅ When using webhook-based tag revalidation
+await client.fetch(query, params, {
+  cache: 'force-cache',
+  next: {
+    revalidate: false, // Disable time-based revalidation
+    tags: ['products']  // Use webhook for on-demand updates
+  }
+})
+
+// ✅ When using time-based ISR (no tags)
+await client.fetch(query, params, {
+  cache: 'force-cache',
+  next: {
+    revalidate: 3600 // Revalidate every hour
+  }
+})
+```
+
+### 3. `revalidateTag` Now Requires 2 Arguments
+
+```typescript
+// ❌ WRONG (Next.js 15)
+revalidateTag('posts')
+
+// ✅ CORRECT - Second arg is CacheLifeConfig
+revalidateTag('posts', {})
+```
+
+### Recommended Helper Pattern
+
+```typescript
+// lib/sanity.ts
+export async function sanityFetch<T>(
+  query: string,
+  params?: Record<string, unknown>,
+  tags?: string[]
+): Promise<T> {
+  return client.fetch<T>(query, params || {}, {
+    cache: 'force-cache', // Required for Next.js 15
+    next: {
+      revalidate: tags && tags.length > 0 ? false : 3600,
+      tags,
+    },
+  })
+}
+
+// Usage
+const posts = await sanityFetch(
+  postQuery,
+  { limit: 10 },
+  ['posts'] // Triggers webhook revalidation
+)
+```
+
 ## Understanding Caching in Next.js 15
 
 ### Cache Hierarchy
@@ -317,58 +393,136 @@ export async function revalidateAllPosts() {
 
 ## Webhook Integration
 
-### Sanity GROQ Webhook
+### ⚠️ CRITICAL: Use `next-sanity/webhook` for Next.js App Router
 
+**Do NOT use `@sanity/webhook` directly** - it requires manual raw body handling which is error-prone in Next.js App Router. Instead, use `parseBody` from `next-sanity/webhook` which properly handles raw body reading and signature verification.
+
+### Recommended Implementation
+
+**Webhook helper (`sanity/lib/webhook.ts`):**
 ```typescript
-// app/api/revalidate/route.ts
-import { revalidateTag } from 'next/cache'
-import { verifySignature } from '@/sanity/lib/webhook'
+import { parseBody } from 'next-sanity/webhook'
+import type { NextRequest } from 'next/server'
 
-export async function POST(request: Request) {
+const secret = process.env.SANITY_WEBHOOK_SECRET || ''
+
+export async function verifyWebhookSignature<T = Record<string, unknown>>(
+  request: NextRequest,
+  waitForConsistency: boolean = true
+): Promise<{ isValidSignature: boolean | null; body: T | null }> {
+  if (!secret) {
+    console.error('SANITY_WEBHOOK_SECRET is not configured')
+    return { isValidSignature: false, body: null }
+  }
+
   try {
-    const body = await request.json()
-
-    // Verify webhook signature
-    const isValid = await verifySignature(body)
-
-    if (!isValid) {
-      return Response.json({ error: 'Invalid signature' }, { status: 401 })
-    }
-
-    // Extract info from webhook payload
-    const { slug, _type } = body
-
-    // Revalidate based on content type
-    if (_type === 'post') {
-      revalidateTag(`post:${slug}`)
-      revalidateTag('posts')
-    }
-
-    return Response.json({ revalidated: true })
+    // parseBody handles raw body reading and signature verification
+    // waitForConsistency ensures queries won't get stale data after revalidation
+    const result = await parseBody<T>(request, secret, waitForConsistency)
+    return result
   } catch (error) {
-    console.error('Revalidation error:', error)
-    return Response.json({ error: 'Revalidation failed' }, { status: 500 })
+    console.error('Error parsing webhook body:', error)
+    return { isValidSignature: false, body: null }
   }
 }
+
+export const WEBHOOK_SIGNATURE_HEADER = 'x-sanity-webhook-signature'
 ```
 
-### Webhook Signature Verification
-
+**API Route (`app/api/webhook/sanity/route.ts`):**
 ```typescript
-// sanity/lib/webhook.ts
-import { isValidSignature, getSignature } from '@sanity/webhook'
+import { revalidateTag } from 'next/cache'
+import { NextRequest, NextResponse } from 'next/server'
+import { verifyWebhookSignature } from '@/sanity/lib/webhook'
 
-const secret = process.env.SANITY_WEBHOOK_SECRET as string
-
-export async function verifySignature(body: any) {
-  const signature = getSignature(body, secret)
-  const header = request.headers.get('x-sanity-webhook-signature')
-
-  if (!header) return false
-
-  return isValidSignature(header, signature, secret)
+interface SanityWebhookPayload {
+  _id: string
+  _type: 'product' | 'post' | 'postCategory' | 'category' | 'settings'
+  slug?: { current: string }
+  operation: 'create' | 'update' | 'delete'
 }
+
+export async function POST(request: NextRequest) {
+  // Verify signature and parse body in one step
+  const { isValidSignature, body } = await verifyWebhookSignature<SanityWebhookPayload>(request)
+
+  if (!isValidSignature || !body) {
+    return NextResponse.json(
+      { error: 'Unauthorized', message: 'Invalid signature' },
+      { status: 401 }
+    )
+  }
+
+  // Determine tags to revalidate based on content type
+  const tags: string[] = []
+
+  switch (body._type) {
+    case 'product':
+      tags.push('products', 'featured')
+      if (body.slug?.current) tags.push(`product:${body.slug.current}`)
+      tags.push('categories') // Product changes affect categories
+      break
+    case 'post':
+      tags.push('posts')
+      if (body.slug?.current) tags.push(`post:${body.slug.current}`)
+      break
+    case 'postCategory':
+      tags.push('blogCategories', 'posts')
+      break
+    case 'category':
+      tags.push('categories', 'products', 'featured')
+      break
+  }
+
+  // Revalidate tags (Next.js 15 requires second argument)
+  for (const tag of tags) {
+    revalidateTag(tag, {}) // CacheLifeConfig required in Next.js 15
+  }
+
+  return NextResponse.json({ revalidated: true, tags })
+}
+
+export const dynamic = 'force-dynamic'
 ```
+
+### Sanity Dashboard Configuration
+
+Configure your webhook at [sanity.io/manage](https://www.sanity.io/manage):
+
+| Field | Value |
+|-------|-------|
+| **URL** | `https://your-domain.com/api/webhook/sanity` |
+| **Secret** | Generate and add to `.env.local` as `SANITY_WEBHOOK_SECRET` |
+| **Projection** | `{ "_type", "slug": slug.current }` |
+| **Filter** | `_type in ["product", "post", "category"]` |
+
+**Generate webhook secret:**
+```bash
+node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
+```
+
+### Common Webhook Pitfalls
+
+| Issue | Cause | Solution |
+|-------|--------|----------|
+| 401 Invalid signature | Using `@sanity/webhook` directly | Use `parseBody` from `next-sanity/webhook` |
+| Body already read | Calling `request.json()` before verification | `parseBody` handles raw body internally |
+| Stale data after update | Not waiting for Content Lake consistency | Set `waitForConsistency: true` |
+| Cache not clearing | Forgetting to revalidate dependent tags | Map content relationships (e.g., product → categories) |
+| CORS errors | Missing CORS headers | Add `Access-Control-Allow-*` headers |
+| Next.js 15 type error | `revalidateTag(tag)` with 1 arg | Use `revalidateTag(tag, {})` |
+
+### Tag Revalidation Strategy
+
+Design your tags based on **content relationships**, not just document types:
+
+| Content Type Change | Tags to Revalidate | Reason |
+|---------------------|-------------------|--------|
+| `product` | `products`, `featured`, `categories`, `product:{slug}` | Products appear in listings, featured section, and affect categories |
+| `post` | `posts`, `post:{slug}` | Blog posts and their detail pages |
+| `postCategory` | `blogCategories`, `posts` | Category changes affect blog listings |
+| `category` | `categories`, `products`, `featured` | Category changes affect product listings |
+| `settings` | All tags | Settings affect entire site |
 
 ## Best Practices
 
