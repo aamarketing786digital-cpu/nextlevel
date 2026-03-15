@@ -11,7 +11,8 @@
       "Bash(cd \"D:\\\\GIAIC\\\\Real World Projects\\\\Agency\" && npx tsc --noEmit 2>&1 | head -20)",
       "Bash(cd \"D:\\\\GIAIC\\\\Real World Projects\\\\Agency\" && npx tsc --noEmit 2>&1 | head -25)",
       "Bash(cd \"D:\\\\GIAIC\\\\Real World Projects\\\\Agency\" && npx tsc --noEmit 2>&1 | head -15)",
-      "Bash(cd \"D:\\\\GIAIC\\\\Real World Projects\\\\Agency\" && npx tsc --noEmit 2>&1)"
+      "Bash(cd \"D:\\\\GIAIC\\\\Real World Projects\\\\Agency\" && npx tsc --noEmit 2>&1)",
+      "mcp__tavily__tavily_extract"
     ]
   }
 }
