@@ -51,16 +51,24 @@ export async function POST(req: Request) {
     hmac.update(rawBody, 'utf8')
     const expectedSignature = `sha256=${hmac.digest('hex')}`
 
-    // Timing-safe comparison
-    const isValid = crypto.timingSafeEqual(
-      Buffer.from(signature),
-      Buffer.from(expectedSignature)
-    )
+    // Check lengths first (timingSafeEqual throws if lengths differ)
+    const signatureBuffer = Buffer.from(signature)
+    const expectedBuffer = Buffer.from(expectedSignature)
+
+    if (signatureBuffer.length !== expectedBuffer.length) {
+      console.error('[Webhook] Invalid signature (length mismatch)')
+      console.error('[Webhook] Received:', signature.substring(0, 40))
+      console.error('[Webhook] Expected:', expectedSignature.substring(0, 40))
+      return new Response('Invalid signature', { status: 401 })
+    }
+
+    // Timing-safe comparison (only if lengths match)
+    const isValid = crypto.timingSafeEqual(signatureBuffer, expectedBuffer)
 
     if (!isValid) {
       console.error('[Webhook] Invalid signature')
-      console.error('[Webhook] Received:', signature.substring(0, 30))
-      console.error('[Webhook] Expected:', expectedSignature.substring(0, 30))
+      console.error('[Webhook] Received:', signature.substring(0, 40))
+      console.error('[Webhook] Expected:', expectedSignature.substring(0, 40))
       return new Response('Invalid signature', { status: 401 })
     }
 
