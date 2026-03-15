@@ -76,21 +76,23 @@ function verifySignature(
 
   const { timestamp, signature: receivedSignature } = parts
 
-  // Check timestamp is recent (within 5 minutes) to prevent replay attacks
+  // Sanity sends timestamps in milliseconds, convert to seconds for comparison
   const now = Math.floor(Date.now() / 1000)
-  const timestampNum = parseInt(timestamp, 10)
-  const tolerance = 300 // 5 minutes
+  const timestampMs = parseInt(timestamp, 10)
+  const timestampSec = Math.floor(timestampMs / 1000)
+  const tolerance = 300 // 5 minutes in seconds
 
-  if (Math.abs(now - timestampNum) > tolerance) {
+  if (Math.abs(now - timestampSec) > tolerance) {
     console.error('[Webhook] Signature timestamp too old or too far in future:', {
-      timestamp: timestampNum,
+      timestamp: timestampSec,
+      timestampMs,
       now,
-      diff: now - timestampNum,
+      diff: now - timestampSec,
     })
     return false
   }
 
-  // Create the payload to sign: timestamp + '.' + body
+  // Create the payload to sign: use the original millisecond timestamp from Sanity
   const payload = `${timestamp}.${body}`
 
   // Compute HMAC-SHA256
