@@ -56,13 +56,12 @@ export default async function HomePage() {
   }`
 
   // Fetch case studies
-  const caseStudiesQuery = `*[_type == "caseStudy"] | order(publishedAt desc)[0...4]{
+  const caseStudiesQuery = `*[_type == "caseStudy"] | order(order asc)[0...4]{
     _id,
     title,
     "slug": slug.current,
-    "category": client.industry,
-    "image": heroImage.asset->url,
-    "description": tagline
+    "description": tagline,
+    "image": image.asset->url
   }`
 
   const [posts, testimonials, videoTestimonials, caseStudies] = await Promise.all([

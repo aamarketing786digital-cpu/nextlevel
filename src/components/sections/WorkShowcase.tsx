@@ -9,9 +9,8 @@ export interface CaseStudyType {
   _id: string;
   title: string;
   slug: string;
-  category: string;
-  image: string; // URL resolved from heroImage
-  description: string; // resolved from tagline
+  image: string; // URL from image.asset->url
+  description: string; // from description field
 }
 
 const FALLBACK_COLORS = [
