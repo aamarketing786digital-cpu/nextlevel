@@ -98,18 +98,34 @@ function verifySignature(
   // Compute HMAC-SHA256
   const hmac = crypto.createHmac('sha256', secret)
   hmac.update(payload, 'utf8')
-  const expectedSignature = hmac.digest('hex')
+  const digest = hmac.digest()
 
-  // Timing-safe comparison
-  const receivedBuffer = Buffer.from(receivedSignature, 'utf8')
-  const expectedBuffer = Buffer.from(expectedSignature, 'utf8')
+  // Sanity uses base64 encoding, not hex
+  // Try base64 first ( Sanity's default)
+  let expectedSignature: string
+  let receivedBuffer: Buffer
+  let expectedBuffer: Buffer
+
+  // Check if received signature looks like base64 (contains chars beyond hex)
+  if (/[^0-9a-fA-F]/.test(receivedSignature)) {
+    // Base64 encoded
+    expectedSignature = digest.toString('base64')
+    receivedBuffer = Buffer.from(receivedSignature, 'base64')
+    expectedBuffer = digest
+  } else {
+    // Hex encoded (fallback)
+    expectedSignature = digest.toString('hex')
+    receivedBuffer = Buffer.from(receivedSignature, 'utf8')
+    expectedBuffer = Buffer.from(expectedSignature, 'utf8')
+  }
 
   if (receivedBuffer.length !== expectedBuffer.length) {
     console.error('[Webhook] Signature length mismatch:', {
       received: receivedBuffer.length,
       expected: expectedBuffer.length,
-      receivedPreview: receivedSignature.substring(0, 20),
-      expectedPreview: expectedSignature.substring(0, 20),
+      receivedPreview: receivedSignature.substring(0, 30),
+      expectedPreview: expectedSignature.substring(0, 30),
+      encoding: /[^0-9a-fA-F]/.test(receivedSignature) ? 'base64' : 'hex',
     })
     return false
   }
