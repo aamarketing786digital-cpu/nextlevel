@@ -33,9 +33,23 @@ function FooterContent() {
                  <Link href="/" className="flex items-center space-x-2 mb-6">
                     <span className="font-display text-3xl font-bold text-white">Next Level Marketerz</span>
                  </Link>
-                 <p className="text-slate-400 text-lg leading-relaxed max-w-sm">
+                 <p className="text-slate-400 text-lg leading-relaxed max-w-sm mb-6">
                     Ascension to digital excellence. We craft experiences that define the future of interaction.
                  </p>
+                 <div className="flex items-center gap-4">
+                    {SOCIAL_LINKS.map((link) => (
+                        <a 
+                          key={link.platform} 
+                          href={link.url} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all text-sm font-bold uppercase"
+                          title={link.platform}
+                        >
+                           {link.platform.charAt(0)}
+                        </a>
+                    ))}
+                 </div>
             </div>
 
             {/* Links Columns */}
@@ -61,17 +75,19 @@ function FooterContent() {
                 </ul>
             </div>
 
-            <div className="col-span-1">
-                 <h4 className="font-bold text-white mb-6">Socials</h4>
-                  <ul className="space-y-4">
-                    {SOCIAL_LINKS.map((link) => (
-                        <li key={link.platform}>
-                             <a href={link.url} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-primary transition-colors capitals">{link.platform}</a>
+
+             <div className="col-span-1">
+                <h4 className="font-bold text-white mb-6">Industries</h4>
+                 <ul className="space-y-4">
+                    {FOOTER_LINKS.industries.map((link) => (
+                        <li key={link.href}>
+                             <Link href={link.href} className="text-slate-400 hover:text-primary transition-colors">{link.label}</Link>
                         </li>
                     ))}
                 </ul>
             </div>
-             <div className="col-span-1">
+
+            <div className="col-span-1">
                 <h4 className="font-bold text-white mb-6">Legal</h4>
                  <ul className="space-y-4">
                     {FOOTER_LINKS.legal.map((link) => (

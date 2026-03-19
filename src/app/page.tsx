@@ -11,6 +11,7 @@ import { VideoTestimonials } from "@/components/sections/VideoTestimonials";
 import { ExpandedServices } from "@/components/sections/ExpandedServices";
 import { RankingCta } from "@/components/sections/RankingCta";
 import { FaqSection } from "@/components/sections/FaqSection";
+import { PainPoints } from "@/components/sections/PainPoints";
 import { client } from "@/sanity/lib/client";
 
 // ISR: Revalidate homepage when content tags change
@@ -79,6 +80,8 @@ export default async function HomePage() {
         {/* Value Proposition - Bento Grid */}
         <ValueProp />
 
+        {/* Pain Points - UAE Business Owner Frustrations */}
+        <PainPoints />
 
         {/* Services Showcase - Horizontal Scroll (GSAP) */}
         <ServicesShowcase />

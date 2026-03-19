@@ -10,8 +10,21 @@ export function LayoutShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isStudio = pathname.startsWith("/studio");
 
-  if (isStudio) {
-    // Render only the children for /studio routes — no header, footer, preloader, or WhatsApp
+  // Landing page routes use their own minimal layout (LandingPageLayout)
+  const LANDING_PAGE_SLUGS = [
+    "/seo-for-restaurants-dubai",
+    "/seo-for-clinics-uae",
+    "/seo-for-real-estate-dubai",
+    "/restaurant-website-dubai",
+    "/clinic-website-design-uae",
+    "/ecommerce-website-dubai",
+  ];
+  const isLandingPage = LANDING_PAGE_SLUGS.some(
+    (slug) => pathname === slug || pathname.startsWith(slug + "/")
+  );
+
+  if (isStudio || isLandingPage) {
+    // Render only the children — no header, footer, preloader, or WhatsApp
     return <>{children}</>;
   }
 

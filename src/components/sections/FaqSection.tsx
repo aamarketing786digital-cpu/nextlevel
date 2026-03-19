@@ -25,6 +25,18 @@ const FAQ_ITEMS = [
   {
     question: "Can you guarantee reaching the #1 spot on Google?",
     answer: "No reputable agency can guarantee a #1 spot due to the constantly changing nature of search algorithms. However, our proven, data-driven strategies consistently place our clients on the first page, driving highly qualified organic traffic."
+  },
+  {
+    question: "I've tried SEO before with another agency and it didn't work. Why would this be different?",
+    answer: "Most agencies apply generic, one-size-fits-all SEO. We take a micro-niche approach — targeting the exact keywords your ideal customers in the UAE are searching for. We specialize in local Dubai and UAE search intent, and we focus on qualified leads, not vanity metrics."
+  },
+  {
+    question: "Is there a contract or lock-in period?",
+    answer: "No lock-in contracts. We offer month-to-month engagement for the first 3 months so you can see results before committing. 90% of our business comes from client referrals — we earn your trust through results, not paperwork."
+  },
+  {
+    question: "How much does it cost to get started?",
+    answer: "It starts with a free audit — we'll show you exactly what's broken and what it'll take to fix it. No pitch, no pressure, just clarity. After that, our packages are tailored to your business size and goals, with transparent pricing and no hidden fees."
   }
 ];
 

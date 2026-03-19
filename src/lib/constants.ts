@@ -41,6 +41,14 @@ export const FOOTER_LINKS = {
     { href: "/services/graphic-design", label: "Graphic Design" },
     { href: "/services/seo", label: "SEO Services" },
   ],
+  industries: [
+    { href: "/seo-for-restaurants-dubai", label: "SEO for Restaurants" },
+    { href: "/seo-for-clinics-uae", label: "SEO for Clinics" },
+    { href: "/seo-for-real-estate-dubai", label: "SEO for Real Estate" },
+    { href: "/restaurant-website-dubai", label: "Restaurant Websites" },
+    { href: "/clinic-website-design-uae", label: "Clinic Websites" },
+    { href: "/ecommerce-website-dubai", label: "E-Commerce Dubai" },
+  ],
   legal: [
     { href: "/privacy", label: "Privacy Policy" },
     { href: "/terms", label: "Terms of Service" },

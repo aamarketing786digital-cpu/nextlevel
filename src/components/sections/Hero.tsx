@@ -44,7 +44,7 @@ function AnimatedHeadline() {
     <div ref={containerRef} className="relative z-10 space-y-8 flex flex-col items-center">
         <div className="hero-badge-main inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-2">
           <Sparkles className="w-4 h-4 text-amber-400" />
-          <span className="text-sm font-medium tracking-wide text-amber-50 uppercase">The Tech-Luxury Standard</span>
+          <span className="text-sm font-medium tracking-wide text-amber-50 uppercase">Trusted by 50+ UAE Brands</span>
         </div>
 
         <h1 className="text-5xl sm:text-7xl md:text-8xl font-bold leading-[1.1] tracking-[-0.02em] max-w-5xl mb-2">
@@ -70,7 +70,7 @@ function AnimatedHeadline() {
         </h1>
 
         <p className="hero-sub-main text-lg md:text-2xl text-slate-400 max-w-2xl mx-auto font-light leading-relaxed pb-4">
-          Transform your digital presence with sophisticated strategies and unparalleled visual excellence.
+          Every day you're not on Google page 1, a competitor is taking your client. We fix that — with data-driven strategies that deliver real ROI.
         </p>
 
         {/* Premium Glassmorphic CTA */}
