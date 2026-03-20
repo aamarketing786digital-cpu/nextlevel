@@ -98,26 +98,28 @@ function AnimatedHeadline() {
 
 export function Hero() {
   const [show3D, setShow3D] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(true); // Default to mobile (no 3D)
 
   useEffect(() => {
-    const mobile = window.innerWidth < 768;
+    const mobile = window.innerWidth < 1024; // 1024px breakpoint for desktop 3D
     setIsMobile(mobile);
 
-    // Defer 3D scene load until after main content is interactive
-    const timer = setTimeout(() => {
-      if (typeof requestIdleCallback !== "undefined") {
-        requestIdleCallback(() => setShow3D(true));
-      } else {
-        setShow3D(true);
-      }
-    }, 2000);
+    // Only show 3D on desktop, and defer load
+    if (!mobile) {
+      const timer = setTimeout(() => {
+        if (typeof requestIdleCallback !== "undefined") {
+          requestIdleCallback(() => setShow3D(true));
+        } else {
+          setShow3D(true);
+        }
+      }, 3000); // Increased delay to 3s
 
-    return () => clearTimeout(timer);
+      return () => clearTimeout(timer);
+    }
   }, []);
 
-  const particleCount = isMobile ? 100 : 200;
-  const sceneScale = isMobile ? 0.6 : 1;
+  const particleCount = 200; // Desktop count
+  const sceneScale = 1;
 
   return (
     <section className="relative min-h-[85dvh] md:min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#06080e] section-dark text-slate-50 font-sans">
@@ -138,10 +140,16 @@ export function Hero() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-amber-900/15 rounded-full blur-[100px] md:blur-[150px] mix-blend-screen" />
       </div>
 
-      {/* Background 3D — deferred until after main content loads */}
+      {/* Background 3D — desktop only, deferred until after main content loads */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-          {show3D && (
-             <div className="w-full h-full opacity-60 mix-blend-screen">
+          {/* CSS-only animated gradient for all devices */}
+          <div className="absolute inset-0 opacity-30">
+            <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 via-transparent to-blue-500/10 animate-pulse" style={{ animationDuration: '8s' }} />
+          </div>
+
+          {/* 3D Scene - Desktop Only */}
+          {show3D && !isMobile && (
+             <div className="w-full h-full opacity-50 mix-blend-screen hidden lg:block">
                <Suspense fallback={null}>
                   <HeroScene count={particleCount} scale={sceneScale} />
                </Suspense>
