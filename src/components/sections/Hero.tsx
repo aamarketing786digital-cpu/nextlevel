@@ -20,7 +20,7 @@ function AnimatedHeadline() {
     animatedRef.current = true;
 
     // Dynamically import GSAP only when this component mounts
-    import("gsap").then(({ default: gsap }) => {
+    import("gsap").then(({ gsap }) => {
       if (!containerRef.current) return;
 
       const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
@@ -116,7 +116,7 @@ export function Hero() {
     return () => clearTimeout(timer);
   }, []);
 
-  const particleCount = isMobile ? 150 : 300;
+  const particleCount = isMobile ? 100 : 200;
   const sceneScale = isMobile ? 0.6 : 1;
 
   return (
