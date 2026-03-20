@@ -1,32 +1,10 @@
-"use client";
-
-import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Sparkles } from "lucide-react";
 
 function AnimatedHeadline() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    // Simple intersection observer for fade-in animation (no GSAP)
-    if (!containerRef.current) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 }
-    );
-    observer.observe(containerRef.current);
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <div ref={containerRef} className={`relative z-10 space-y-8 flex flex-col items-center transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+    <div className="relative z-10 space-y-8 flex flex-col items-center">
         <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-2">
           <Sparkles className="w-4 h-4 text-amber-400" />
           <span className="text-sm font-medium tracking-wide text-amber-50 uppercase">Trusted by 50+ UAE Brands</span>
@@ -72,17 +50,15 @@ export function Hero() {
       {/* Optimized Background - minimal CPU usage */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {/* Hero Background Image - optimized with Next.js Image */}
-        <div className="absolute inset-0 opacity-10">
-          <Image
-            src="/images/home-hero.png"
-            alt="Hero background"
-            fill
-            priority
-            sizes="100vw"
-            quality={50}
-            className="object-cover"
-          />
-        </div>
+        <Image
+          src="/images/home-hero.png"
+          alt="Hero background"
+          fill
+          priority
+          sizes="(max-width: 768px) 50vw, 100vw"
+          quality={40}
+          className="object-cover opacity-[0.08]"
+        />
         {/* Single subtle amber glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-amber-500/5 rounded-full blur-[120px]" />
         {/* Dark overlay for readability */}
