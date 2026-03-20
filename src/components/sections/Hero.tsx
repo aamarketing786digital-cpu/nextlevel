@@ -1,19 +1,11 @@
 "use client";
 
-import { Suspense, useRef } from "react";
+import { Suspense, useRef, useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import { useMounted } from "@/hooks/useMounted";
-import { useMobileDetection } from "@/hooks/useMobileDetection";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Sparkles } from "lucide-react";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import gsap from "gsap";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
+// Lazy-load GSAP-dependent modules — keeps them out of the initial bundle
 const HeroScene = dynamic(
   () => import("@/components/3d/HeroScene").then((mod) => mod.HeroScene),
   { ssr: false }
@@ -21,24 +13,30 @@ const HeroScene = dynamic(
 
 function AnimatedHeadline() {
   const containerRef = useRef<HTMLDivElement>(null);
-  
-  useGSAP(() => {
-    if (!containerRef.current) return;
-    
-    const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
-    
-    tl.from(".hero-badge-main", { y: 20, opacity: 0, duration: 1.2, ease: "power3.out" })
-      .to(".hero-char-main", {
-        y: 0,
-        opacity: 1,
-        stagger: 0.02,
-        duration: 1.5,
-        filter: "blur(0px)",
-      }, "-=0.8")
-      .from(".hero-sub-main", { y: 30, opacity: 0, duration: 1.2 }, "-=1.0")
-      .from(".hero-cta-main", { y: 20, opacity: 0, duration: 1.2 }, "-=1.0");
-      
-  }, { scope: containerRef });
+  const animatedRef = useRef(false);
+
+  useEffect(() => {
+    if (animatedRef.current || !containerRef.current) return;
+    animatedRef.current = true;
+
+    // Dynamically import GSAP only when this component mounts
+    import("gsap").then(({ default: gsap }) => {
+      if (!containerRef.current) return;
+
+      const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+      tl.from(".hero-badge-main", { y: 20, opacity: 0, duration: 1.2, ease: "power3.out" })
+        .to(".hero-char-main", {
+          y: 0,
+          opacity: 1,
+          stagger: 0.02,
+          duration: 1.5,
+          filter: "blur(0px)",
+        }, "-=0.8")
+        .from(".hero-sub-main", { y: 30, opacity: 0, duration: 1.2 }, "-=1.0")
+        .from(".hero-cta-main", { y: 20, opacity: 0, duration: 1.2 }, "-=1.0");
+    });
+  }, []);
 
   return (
     <div ref={containerRef} className="relative z-10 space-y-8 flex flex-col items-center">
@@ -52,7 +50,7 @@ function AnimatedHeadline() {
             <span 
               key={i} 
               className="hero-char-main inline-block whitespace-pre opacity-0 translate-y-[60px] pb-2 -mb-2"
-              style={{ filter: "blur(10px)", willChange: "transform, opacity, filter" }}
+              style={{ filter: "blur(10px)" }}
             >
               {char}
             </span>
@@ -62,7 +60,7 @@ function AnimatedHeadline() {
             <span 
               key={`g-${i}`} 
               className="hero-char-main inline-block whitespace-pre opacity-0 translate-y-[60px] text-amber-400/90 pb-2 -mb-2"
-              style={{ filter: "blur(10px)", willChange: "transform, opacity, filter" }}
+              style={{ filter: "blur(10px)" }}
             >
               {char}
             </span>
@@ -99,18 +97,32 @@ function AnimatedHeadline() {
 }
 
 export function Hero() {
-  const mounted = useMounted();
-  const isMobile = useMobileDetection();
-  
-  // Show 3D on all devices, but optimize count for mobile
-  const show3D = mounted;
-  const particleCount = isMobile ? 200 : 400; // Increased count based on new experimental design
+  const [show3D, setShow3D] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mobile = window.innerWidth < 768;
+    setIsMobile(mobile);
+
+    // Defer 3D scene load until after main content is interactive
+    const timer = setTimeout(() => {
+      if (typeof requestIdleCallback !== "undefined") {
+        requestIdleCallback(() => setShow3D(true));
+      } else {
+        setShow3D(true);
+      }
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const particleCount = isMobile ? 150 : 300;
   const sceneScale = isMobile ? 0.6 : 1;
 
   return (
     <section className="relative min-h-[85dvh] md:min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#06080e] section-dark text-slate-50 font-sans">
       
-      {/* Cinematic Deep Background */}
+      {/* Cinematic Deep Background - reduced blur sizes for mobile perf */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           {/* Noise Texture */}
           <div 
@@ -120,13 +132,13 @@ export function Hero() {
              }} 
           />
           
-          {/* Elegant Amber Glows */}
-          <div className="absolute top-[-10%] left-[-10%] w-[800px] h-[800px] bg-amber-600/10 rounded-full blur-[150px] mix-blend-screen" />
-          <div className="absolute bottom-[-10%] right-[-10%] w-[800px] h-[800px] bg-slate-400/10 rounded-full blur-[150px] mix-blend-screen" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-amber-900/15 rounded-full blur-[150px] mix-blend-screen" />
+          {/* Elegant Amber Glows - smaller for better mobile perf */}
+          <div className="absolute top-[-10%] left-[-10%] w-[400px] md:w-[800px] h-[400px] md:h-[800px] bg-amber-600/10 rounded-full blur-[100px] md:blur-[150px] mix-blend-screen" />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[400px] md:w-[800px] h-[400px] md:h-[800px] bg-slate-400/10 rounded-full blur-[100px] md:blur-[150px] mix-blend-screen" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-amber-900/15 rounded-full blur-[100px] md:blur-[150px] mix-blend-screen" />
       </div>
 
-      {/* Background 3D or Static */}
+      {/* Background 3D — deferred until after main content loads */}
       <div className="absolute inset-0 z-0 pointer-events-none">
           {show3D && (
              <div className="w-full h-full opacity-60 mix-blend-screen">

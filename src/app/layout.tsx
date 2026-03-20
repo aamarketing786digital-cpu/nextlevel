@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Outfit } from "next/font/google";
+import Script from "next/script";
 import { BodyWrapper } from "@/components/layout/BodyWrapper";
 import { LayoutShell } from "@/components/layout/LayoutShell";
 import "./globals.css";
@@ -21,6 +22,9 @@ export const metadata: Metadata = {
   description: "Ascension to digital excellence. AI-powered marketing, web development, and growth strategies for UAE and Middle East markets.",
   keywords: ["digital marketing", "AI chatbots", "web development", "UAE", "Middle East", "growth marketing"],
   authors: [{ name: "NextLevel Marketerz" }],
+  verification: {
+    google: "0FIV43hZ62LUJNuEkjQJEPdS4aTMkF6JLm4CN_qGv4k",
+  },
   openGraph: {
     title: "NextLevel Marketerz | The Future of Growth",
     description: "Ascension to digital excellence. AI-powered marketing, web development, and growth strategies.",
@@ -42,6 +46,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${outfit.variable}`}>
+      <head>
+        {/* Google Analytics GA4 */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-PRHW62LLFS"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-PRHW62LLFS');
+          `}
+        </Script>
+      </head>
       <BodyWrapper>
         <LayoutShell>{children}</LayoutShell>
       </BodyWrapper>

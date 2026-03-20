@@ -281,10 +281,10 @@ export const LANDING_PAGES: Record<string, LandingPageConfig> = {
         "Dubai property buyers search Google 50,000+ times a month. Is your listing showing up?",
       subHeadline:
         "SEO for real estate developers, brokers & agencies in Dubai. We put your properties in front of serious buyers who are actively searching right now.",
-      ctaText: "Get Your Free Real Estate SEO Audit",
+      ctaText: "Free Real Estate SEO Audit",
       ctaWhatsApp:
         "Hi, I'm in real estate in Dubai and I'm interested in SEO services. Can I book a free audit?",
-      accentColor: "emerald",
+      accentColor: "blue",
     },
     painPoints: {
       title: "Sound familiar?",

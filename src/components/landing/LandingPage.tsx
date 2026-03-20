@@ -272,7 +272,7 @@ export function LandingPage({ config }: { config: LandingPageConfig }) {
               <div className="flex flex-col sm:flex-row gap-4 mb-12">
                 <button
                   onClick={scrollToForm}
-                  className={`group inline-flex items-center justify-center gap-3 text-white font-bold px-8 py-4 rounded-full transition-all shadow-xl text-lg min-w-[240px] ${
+                  className={`group inline-flex items-center justify-center gap-3 text-white font-bold px-6 py-3.5 sm:px-8 sm:py-4 rounded-full transition-all shadow-xl text-base sm:text-lg ${
                     config.hero.accentColor === 'blue' ? 'bg-gradient-to-r from-blue-500 to-blue-600 shadow-blue-500/25 hover:shadow-blue-500/40' :
                     config.hero.accentColor === 'emerald' ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 shadow-emerald-500/25 hover:shadow-emerald-500/40' :
                     config.hero.accentColor === 'rose' ? 'bg-gradient-to-r from-rose-500 to-rose-600 shadow-rose-500/25 hover:shadow-rose-500/40' :
@@ -287,7 +287,7 @@ export function LandingPage({ config }: { config: LandingPageConfig }) {
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-full transition-all shadow-xl shadow-emerald-600/20 text-lg min-w-[200px]"
+                  className="inline-flex items-center justify-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3.5 sm:px-8 sm:py-4 rounded-full transition-all shadow-xl shadow-emerald-600/20 text-base sm:text-lg"
                 >
                   <MessageCircle className="w-5 h-5 flex-shrink-0" />
                   <span className="whitespace-nowrap">WhatsApp Us Now</span>

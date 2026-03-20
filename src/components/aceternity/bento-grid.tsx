@@ -65,9 +65,9 @@ export function BentoGridItem({
             <div className="text-primary">{icon}</div>
           </div>
         )}
-        <div className="mb-2 font-sans font-bold text-lg text-foreground group-hover/bento:text-primary transition-colors duration-300">
+        <h3 className="mb-2 font-sans font-bold text-lg text-foreground group-hover/bento:text-primary transition-colors duration-300">
           {title}
-        </div>
+        </h3>
         <div className="font-sans text-sm text-muted-foreground group-hover/bento:text-foreground/80 transition-colors duration-300">
           {description}
         </div>

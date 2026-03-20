@@ -44,6 +44,7 @@ function FooterContent() {
                           target="_blank" 
                           rel="noopener noreferrer" 
                           className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all text-sm font-bold uppercase"
+                          aria-label={`Follow us on ${link.platform}`}
                           title={link.platform}
                         >
                            {link.platform.charAt(0)}
@@ -54,7 +55,7 @@ function FooterContent() {
 
             {/* Links Columns */}
             <div className="col-span-1">
-                <h4 className="font-bold text-white mb-6">Company</h4>
+                <h2 className="font-bold text-white mb-6 text-base">Company</h2>
                 <ul className="space-y-4">
                     {FOOTER_LINKS.company.map((link) => (
                         <li key={link.href}>
@@ -65,7 +66,7 @@ function FooterContent() {
             </div>
             
              <div className="col-span-1">
-                <h4 className="font-bold text-white mb-6">Services</h4>
+                <h2 className="font-bold text-white mb-6 text-base">Services</h2>
                  <ul className="space-y-4">
                     {FOOTER_LINKS.services.map((link) => (
                         <li key={link.href}>
@@ -77,7 +78,7 @@ function FooterContent() {
 
 
              <div className="col-span-1">
-                <h4 className="font-bold text-white mb-6">Industries</h4>
+                <h2 className="font-bold text-white mb-6 text-base">Industries</h2>
                  <ul className="space-y-4">
                     {FOOTER_LINKS.industries.map((link) => (
                         <li key={link.href}>
@@ -88,7 +89,7 @@ function FooterContent() {
             </div>
 
             <div className="col-span-1">
-                <h4 className="font-bold text-white mb-6">Legal</h4>
+                <h2 className="font-bold text-white mb-6 text-base">Legal</h2>
                  <ul className="space-y-4">
                     {FOOTER_LINKS.legal.map((link) => (
                         <li key={link.href}>
@@ -100,12 +101,12 @@ function FooterContent() {
         </div>
 
         {/* Massive Text at Bottom */}
-        <div className="border-t border-white/5 pt-12 flex flex-col md:flex-row justify-between items-end">
+        <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-end">
             <div className="text-slate-500 text-sm mb-4 md:mb-0">
                 &copy; {new Date().getFullYear()} Next Level Marketerz. Dubai, UAE.
             </div>
              {/* Big Text */}
-            <div className="font-display font-bold text-[12vw] leading-none text-white/5 select-none pointer-events-none">
+            <div className="font-display font-bold text-[10vw] leading-none text-white/5 select-none pointer-events-none">
                 AGENCY
             </div>
         </div>

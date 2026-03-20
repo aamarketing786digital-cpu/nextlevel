@@ -1,0 +1,384 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.wrap { padding: 1.5rem 0; }
+h1 { font-size: 20px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+.sub { font-size: 13px; color: var(--color-text-secondary); margin-bottom: 1.5rem; }
+.tab-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1.25rem; }
+.tab { font-size: 12px; padding: 5px 14px; border-radius: 20px; border: 0.5px solid var(--color-border-secondary); cursor: pointer; color: var(--color-text-secondary); background: transparent; transition: all .15s; }
+.tab.active { background: var(--color-background-info); color: var(--color-text-info); border-color: transparent; }
+.panel { display: none; }
+.panel.active { display: block; }
+.section-label { font-size: 11px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; color: var(--color-text-tertiary); margin: 1.5rem 0 .75rem; }
+.section-label:first-child { margin-top: 0; }
+.card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: .75rem; }
+.badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 2px 9px; border-radius: 4px; margin-bottom: 8px; }
+.badge-blue { background: var(--color-background-info); color: var(--color-text-info); }
+.badge-green { background: var(--color-background-success); color: var(--color-text-success); }
+.badge-warn { background: var(--color-background-warning); color: var(--color-text-warning); }
+.badge-purple { background: #EEEDFE; color: #3C3489; }
+.kw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+.kw-item { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: .6rem .75rem; }
+.kw-text { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
+.kw-meta { display: flex; gap: 8px; margin-top: 3px; }
+.kw-vol { font-size: 11px; color: var(--color-text-secondary); }
+.kw-intent { font-size: 11px; padding: 1px 6px; border-radius: 3px; }
+.intent-buy { background: var(--color-background-success); color: var(--color-text-success); }
+.intent-info { background: var(--color-background-info); color: var(--color-text-info); }
+.intent-loc { background: var(--color-background-warning); color: var(--color-text-warning); }
+.hook-block { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: .875rem 1rem; margin-bottom: .65rem; border-left: 3px solid; }
+.hook-label { font-size: 11px; color: var(--color-text-tertiary); margin-bottom: 4px; }
+.hook-text { font-size: 14px; font-weight: 500; color: var(--color-text-primary); line-height: 1.45; margin-bottom: 5px; }
+.hook-why { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; }
+.ad-copy { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 1rem; margin-bottom: .75rem; }
+.ad-platform { font-size: 11px; font-weight: 500; letter-spacing: .05em; text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: 6px; }
+.ad-head { font-size: 14px; font-weight: 500; color: var(--color-text-info); margin-bottom: 4px; line-height: 1.4; }
+.ad-url { font-size: 12px; color: var(--color-text-success); margin-bottom: 6px; }
+.ad-desc { font-size: 13px; color: var(--color-text-secondary); line-height: 1.55; }
+.lp-section { margin-bottom: 1rem; }
+.lp-row { display: flex; gap: 10px; align-items: flex-start; padding: .6rem 0; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.lp-row:last-child { border-bottom: none; }
+.lp-num { width: 22px; height: 22px; border-radius: 50%; font-size: 11px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: var(--color-background-info); color: var(--color-text-info); }
+.lp-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px; }
+.lp-desc { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; }
+.niche-card { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: .875rem 1rem; margin-bottom: .65rem; }
+.niche-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.niche-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
+.niche-url { font-size: 11px; color: var(--color-text-info); font-family: var(--font-mono); }
+.niche-hook { font-size: 13px; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: 5px; }
+.niche-kw { font-size: 11px; color: var(--color-text-tertiary); }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+.stat-box { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: .75rem; text-align: center; }
+.stat-val { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
+.stat-label { font-size: 11px; color: var(--color-text-tertiary); margin-top: 2px; }
+.checklist-item { display: flex; gap: 8px; align-items: flex-start; padding: .5rem 0; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.checklist-item:last-child { border-bottom: none; }
+.check { width: 16px; height: 16px; border-radius: 3px; background: var(--color-background-success); color: var(--color-text-success); font-size: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.check-text { font-size: 13px; color: var(--color-text-primary); }
+.check-sub { font-size: 12px; color: var(--color-text-secondary); margin-top: 1px; }
+</style>
+
+<div class="wrap">
+  <h1>SEO + Web Development — UAE Ad Strategy</h1>
+  <p class="sub">Google Ads · Meta Ads · Niche Landing Pages · Full Copy</p>
+
+  <div class="tab-bar">
+    <button class="tab active" onclick="sw('keywords')">Keywords</button>
+    <button class="tab" onclick="sw('hooks')">Hooks & Copy</button>
+    <button class="tab" onclick="sw('google')">Google Ads</button>
+    <button class="tab" onclick="sw('meta')">Meta Ads</button>
+    <button class="tab" onclick="sw('lp')">Landing Pages</button>
+    <button class="tab" onclick="sw('seo-self')">SEO for NLM</button>
+  </div>
+
+  <!-- KEYWORDS -->
+  <div id="keywords" class="panel active">
+    <p class="section-label">SEO Service — Target keywords</p>
+    <div class="kw-grid">
+      <div class="kw-item"><div class="kw-text">SEO company Dubai</div><div class="kw-meta"><span class="kw-vol">High vol</span><span class="kw-intent intent-buy">Buy</span></div></div>
+      <div class="kw-item"><div class="kw-text">SEO agency UAE</div><div class="kw-meta"><span class="kw-vol">High vol</span><span class="kw-intent intent-buy">Buy</span></div></div>
+      <div class="kw-item"><div class="kw-text">best SEO services Dubai</div><div class="kw-meta"><span class="kw-vol">Med vol</span><span class="kw-intent intent-buy">Buy</span></div></div>
+      <div class="kw-item"><div class="kw-text">local SEO Dubai</div><div class="kw-meta"><span class="kw-vol">Med vol</span><span class="kw-intent intent-loc">Local</span></div></div>
+      <div class="kw-item"><div class="kw-text">Google ranking services UAE</div><div class="kw-meta"><span class="kw-vol">Med vol</span><span class="kw-intent intent-buy">Buy</span></div></div>
+      <div class="kw-item"><div class="kw-text">SEO for restaurants Dubai</div><div class="kw-meta"><span class="kw-vol">Low vol</span><span class="kw-intent intent-loc">Niche</span></div></div>
+      <div class="kw-item"><div class="kw-text">SEO for clinics UAE</div><div class="kw-meta"><span class="kw-vol">Low vol</span><span class="kw-intent intent-loc">Niche</span></div></div>
+      <div class="kw-item"><div class="kw-text">SEO for real estate Dubai</div><div class="kw-meta"><span class="kw-vol">Low vol</span><span class="kw-intent intent-loc">Niche</span></div></div>
+      <div class="kw-item"><div class="kw-text">increase website traffic Dubai</div><div class="kw-meta"><span class="kw-vol">Med vol</span><span class="kw-intent intent-info">Info</span></div></div>
+      <div class="kw-item"><div class="kw-text">rank on Google Dubai</div><div class="kw-meta"><span class="kw-vol">Med vol</span><span class="kw-intent intent-buy">Buy</span></div></div>
+      <div class="kw-item"><div class="kw-text">affordable SEO Dubai</div><div class="kw-meta"><span class="kw-vol">Med vol</span><span class="kw-intent intent-buy">Buy</span></div></div>
+      <div class="kw-item"><div class="kw-text">technical SEO audit UAE</div><div class="kw-meta"><span class="kw-vol">Low vol</span><span class="kw-intent intent-buy">Buy</span></div></div>
+    </div>
+
+    <p class="section-label">Web Development — Target keywords</p>
+    <div class="kw-grid">
+      <div class="kw-item"><div class="kw-text">web development company Dubai</div><div class="kw-meta"><span class="kw-vol">High vol</span><span class="kw-intent intent-buy">Buy</span></div></div>
+      <div class="kw-item"><div class="kw-text">website design Dubai</div><div class="kw-meta"><span class="kw-vol">High vol</span><span class="kw-intent intent-buy">Buy</span></div></div>
+      <div class="kw-item"><div class="kw-text">website development UAE</div><div class="kw-meta"><span class="kw-vol">High vol</span><span class="kw-intent intent-buy">Buy</span></div></div>
+      <div class="kw-item"><div class="kw-text">ecommerce website Dubai</div><div class="kw-meta"><span class="kw-vol">Med vol</span><span class="kw-intent intent-buy">Buy</span></div></div>
+      <div class="kw-item"><div class="kw-text">WordPress website Dubai</div><div class="kw-meta"><span class="kw-vol">Med vol</span><span class="kw-intent intent-buy">Buy</span></div></div>
+      <div class="kw-item"><div class="kw-text">custom website development UAE</div><div class="kw-meta"><span class="kw-vol">Med vol</span><span class="kw-intent intent-buy">Buy</span></div></div>
+      <div class="kw-item"><div class="kw-text">website redesign Dubai</div><div class="kw-meta"><span class="kw-vol">Med vol</span><span class="kw-intent intent-buy">Buy</span></div></div>
+      <div class="kw-item"><div class="kw-text">landing page design UAE</div><div class="kw-meta"><span class="kw-vol">Low vol</span><span class="kw-intent intent-buy">Buy</span></div></div>
+      <div class="kw-item"><div class="kw-text">responsive website design Dubai</div><div class="kw-meta"><span class="kw-vol">Low vol</span><span class="kw-intent intent-buy">Buy</span></div></div>
+      <div class="kw-item"><div class="kw-text">web design company Abu Dhabi</div><div class="kw-meta"><span class="kw-vol">Med vol</span><span class="kw-intent intent-buy">Buy</span></div></div>
+      <div class="kw-item"><div class="kw-text">website for restaurant Dubai</div><div class="kw-meta"><span class="kw-vol">Low vol</span><span class="kw-intent intent-loc">Niche</span></div></div>
+      <div class="kw-item"><div class="kw-text">clinic website design UAE</div><div class="kw-meta"><span class="kw-vol">Low vol</span><span class="kw-intent intent-loc">Niche</span></div></div>
+    </div>
+
+    <p class="section-label">Negative keywords to exclude (save budget)</p>
+    <div class="card" style="margin-bottom:0">
+      <div style="font-size:13px; color:var(--color-text-secondary); line-height:1.9;">
+        free website builder · free SEO tools · DIY website · Wix · Squarespace · SEO course · how to do SEO yourself · freelancer · cheap · jobs · internship · SEO meaning · what is SEO · tutorial · template download
+      </div>
+    </div>
+  </div>
+
+  <!-- HOOKS -->
+  <div id="hooks" class="panel">
+    <p class="section-label">SEO service hooks</p>
+
+    <div class="hook-block" style="border-color:var(--color-border-info);">
+      <div class="hook-label">META ADS · Cold video hook (0–3 sec) · Business owners</div>
+      <div class="hook-text">"Type your service + Dubai on Google right now. Did you show up? Your competitor did."</div>
+      <div class="hook-why">Triggers immediate action. They open their phone, search, don't find themselves, and now they're emotionally invested in your ad.</div>
+    </div>
+
+    <div class="hook-block" style="border-color:var(--color-border-success);">
+      <div class="hook-label">META ADS · Image ad headline · SME owners</div>
+      <div class="hook-text">"You've been on page 3 of Google for 2 years. That's AED 200,000 in lost business."</div>
+      <div class="hook-why">Quantifies the cost of inaction. Business owners respond to loss-framing more than gain-framing in the UAE market.</div>
+    </div>
+
+    <div class="hook-block" style="border-color:var(--color-border-warning);">
+      <div class="hook-label">GOOGLE ADS · RSA Headline</div>
+      <div class="hook-text">"Why is your competitor ranking #1 in Dubai — and you're not?"</div>
+      <div class="hook-why">Question format scores high CTR on search. Implies you have the answer. Creates a knowledge gap they need to close.</div>
+    </div>
+
+    <div class="hook-block" style="border-color:var(--color-border-tertiary);">
+      <div class="hook-label">META ADS · Retargeting · Website visitors who didn't convert</div>
+      <div class="hook-text">"Still thinking about SEO? Here's what 90 days with us looks like — real results, real Dubai clients."</div>
+      <div class="hook-why">Retargeting copy should acknowledge they've seen you before. "Still thinking" validates their hesitation, then overcomes it with proof.</div>
+    </div>
+
+    <p class="section-label">Web development hooks</p>
+
+    <div class="hook-block" style="border-color:var(--color-border-info);">
+      <div class="hook-label">META ADS · Reel hook · Business owners with old websites</div>
+      <div class="hook-text">"Your website is costing you clients every single day. Here's how to know if yours is the problem."</div>
+      <div class="hook-why">Pain-first opener. Immediately makes them question their current site. Follow with 3 signs of a broken website in the video body.</div>
+    </div>
+
+    <div class="hook-block" style="border-color:var(--color-border-success);">
+      <div class="hook-label">META ADS · Carousel card 1 · SMEs without a site</div>
+      <div class="hook-text">"In Dubai, if you're not online — you don't exist. We fix that in 21 days."</div>
+      <div class="hook-why">Urgency + speed. "21 days" is specific and credible. Speaks to the UAE entrepreneur mindset of fast execution.</div>
+    </div>
+
+    <div class="hook-block" style="border-color:var(--color-border-warning);">
+      <div class="hook-label">GOOGLE ADS · Headline · Search intent high</div>
+      <div class="hook-text">"Dubai Website That Loads Fast, Ranks on Google & Actually Converts"</div>
+      <div class="hook-why">Bundles three core desires in one line. Fast + ranks + converts = the trifecta every Dubai business owner wants from a website.</div>
+    </div>
+
+    <div class="hook-block" style="border-color:var(--color-border-danger);">
+      <div class="hook-label">META ADS · Story format · Targeting competitors' audiences</div>
+      <div class="hook-text">"We built this Dubai clinic's website in 3 weeks. They got 47 new patient inquiries in month one."</div>
+      <div class="hook-why">Niche-specific case result. Number is believable, not inflated. "3 weeks" makes it feel fast and achievable.</div>
+    </div>
+  </div>
+
+  <!-- GOOGLE ADS -->
+  <div id="google" class="panel">
+    <p class="section-label">Google RSA — SEO service campaign</p>
+
+    <div class="ad-copy">
+      <div class="ad-platform">Campaign: SEO-Dubai-Search · Ad Group: SEO Company</div>
+      <div class="ad-head">
+        H1: Rank #1 on Google in Dubai — Guaranteed Results<br>
+        H2: Top SEO Agency UAE | 90-Day Ranking Promise<br>
+        H3: Free SEO Audit — See Why You're Losing Rankings<br>
+        H4: SEO Company Dubai | Trusted by 50+ UAE Brands<br>
+        H5: Beat Your Competitors on Google This Month
+      </div>
+      <div class="ad-url">nextlevelmarketerz.com/seo-dubai</div>
+      <div class="ad-desc">
+        D1: Data-driven SEO that gets Dubai businesses to page 1. Free audit shows you exactly what's holding your rankings back. No fluff, no jargon — just results.<br><br>
+        D2: 90% of our UAE clients reach page 1 within 90 days. Transparent reporting, no lock-in contracts. Book your free 30-min strategy call today.
+      </div>
+    </div>
+
+    <div class="ad-copy">
+      <div class="ad-platform">Campaign: SEO-Dubai-Search · Ad Group: Local SEO</div>
+      <div class="ad-head">
+        H1: Local SEO Dubai — Get Found by Nearby Customers<br>
+        H2: Google Maps Ranking for UAE Businesses<br>
+        H3: Dominate Local Search in Your Area — Free Audit
+      </div>
+      <div class="ad-url">nextlevelmarketerz.com/local-seo-dubai</div>
+      <div class="ad-desc">
+        D1: Appear at the top of Google Maps and local search when customers look for your service in Dubai, Sharjah, or Abu Dhabi. Free local SEO audit — book now.<br><br>
+        D2: We help restaurants, clinics, salons, and retail businesses dominate local Google search. See results in 60 days or we work free until you do.
+      </div>
+    </div>
+
+    <p class="section-label">Google RSA — Web development campaign</p>
+
+    <div class="ad-copy">
+      <div class="ad-platform">Campaign: WebDev-Dubai-Search · Ad Group: Website Design & Development</div>
+      <div class="ad-head">
+        H1: Professional Website Design Dubai | Fast Delivery<br>
+        H2: Web Development UAE | Built to Rank on Google<br>
+        H3: Custom Websites That Convert Visitors to Clients<br>
+        H4: Get Your Dubai Website in 3–4 Weeks | Free Quote<br>
+        H5: Website Design Abu Dhabi & Dubai | 50+ Projects
+      </div>
+      <div class="ad-url">nextlevelmarketerz.com/web-development-dubai</div>
+      <div class="ad-desc">
+        D1: High-performance websites built for UAE businesses. SEO-ready from day one, mobile-first design, under 3-second load time. Get a free proposal in 24 hours.<br><br>
+        D2: We don't just build beautiful websites — we build websites that generate leads. Serving Dubai, Abu Dhabi & Sharjah. No hidden fees. Free consultation available.
+      </div>
+    </div>
+
+    <div class="ad-copy">
+      <div class="ad-platform">Campaign: WebDev-Dubai-Search · Ad Group: E-commerce websites</div>
+      <div class="ad-head">
+        H1: E-Commerce Website Development Dubai<br>
+        H2: Build Your Online Store in UAE | Expert Team<br>
+        H3: Shopify & Custom E-Commerce | UAE Specialists
+      </div>
+      <div class="ad-url">nextlevelmarketerz.com/ecommerce-website-dubai</div>
+      <div class="ad-desc">
+        D1: Launch your e-commerce store in the UAE with a website built to sell. Payment gateway integration, Arabic support, mobile-optimized. Free discovery call today.<br><br>
+        D2: From Shopify to fully custom builds — we develop online stores that turn browsers into buyers. UAE-based team. Transparent pricing. Request a free quote.
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:.75rem;">
+      <span class="badge badge-blue">Google Ads structure recommendation</span>
+      <div style="font-size:13px; color:var(--color-text-secondary); line-height:1.8; margin-top:6px;">
+        Run <strong style="color:var(--color-text-primary)">2 separate campaigns</strong> — one for SEO, one for Web Development. Each campaign → 3–4 tightly themed ad groups (e.g. "SEO Company", "Local SEO", "Technical SEO Audit" / "Website Design", "E-commerce", "Website Redesign"). Use <strong style="color:var(--color-text-primary)">Exact + Phrase match only</strong> for the first 30 days — no broad match until you understand which terms convert. Enable <strong style="color:var(--color-text-primary)">call extensions, sitelink extensions</strong> (link to case studies, free audit page, pricing) and <strong style="color:var(--color-text-primary)">location targeting: Dubai + Abu Dhabi + Sharjah</strong>.
+      </div>
+    </div>
+  </div>
+
+  <!-- META ADS -->
+  <div id="meta" class="panel">
+    <p class="section-label">Meta Ad — Full copy · SEO service · Video/Reel</p>
+
+    <div class="ad-copy">
+      <div class="ad-platform">Cold audience · Business owners UAE · 28–55 · Interests: small business, entrepreneurship, digital marketing</div>
+      <div class="ad-head">Primary text (above the visual):</div>
+      <div class="ad-desc">
+        If you searched your business on Google right now — would you find yourself on page 1?<br><br>
+        Most Dubai business owners answer that question and immediately feel the anxiety. They know they should be ranking. They know their competitors are showing up. But nobody's told them exactly why — or what it actually costs to fix.<br><br>
+        Here's the truth: every month you're not on page 1, a competitor is collecting the clients that should have been yours.<br><br>
+        We're NextLevel Marketerz — a Dubai-based SEO agency that gets UAE businesses to Google page 1 within 90 days. We've done it for clinics, restaurants, real estate developers, and e-commerce brands across the UAE.<br><br>
+        Right now we're offering a <strong style="color:var(--color-text-primary)">free SEO audit</strong> — we'll show you exactly where your rankings are broken and what it'll take to fix them. No pitch. No pressure. Just clarity.<br><br>
+        👇 Click below to book your free audit.
+      </div>
+      <div style="margin-top:8px;"><span class="badge badge-green">CTA Button: Learn More → nextlevelmarketerz.com/seo-audit-dubai</span></div>
+    </div>
+
+    <div class="ad-copy">
+      <div class="ad-platform">Meta carousel — Web development · Restaurant niche · Cold audience</div>
+      <div class="ad-head">Carousel headline (above cards): "Is your website sending customers to your competitor?"</div>
+      <div class="ad-desc">
+        <strong style="color:var(--color-text-primary)">Card 1 — Hook:</strong> "3 signs your Dubai restaurant website is losing you bookings every day" (bold text on clean background)<br><br>
+        <strong style="color:var(--color-text-primary)">Card 2 — Pain 1:</strong> "It takes more than 4 seconds to load. 53% of mobile users leave before it even opens." (stat visual)<br><br>
+        <strong style="color:var(--color-text-primary)">Card 3 — Pain 2:</strong> "There's no online reservation button. You're sending hungry people to Zomato instead." (relatable frustration)<br><br>
+        <strong style="color:var(--color-text-primary)">Card 4 — Pain 3:</strong> "Google can't find you. No SEO = no walk-in traffic from local search." (problem statement)<br><br>
+        <strong style="color:var(--color-text-primary)">Card 5 — Solution:</strong> "We rebuild restaurant websites in 3–4 weeks. Fast. SEO-ready. Built to take reservations 24/7." (NLM logo + CTA)<br><br>
+        <strong style="color:var(--color-text-primary)">Card 6 — Proof:</strong> "Dubai restaurant client: 200+ new online bookings in first month after relaunch." (case stat card)
+      </div>
+      <div style="margin-top:8px;"><span class="badge badge-blue">CTA Button: Get Free Quote → nextlevelmarketerz.com/restaurant-website-dubai</span></div>
+    </div>
+
+    <div class="card" style="margin-top:.75rem;">
+      <span class="badge badge-warn">Meta audience targeting — UAE</span>
+      <div style="font-size:13px; color:var(--color-text-secondary); line-height:1.85; margin-top:6px;">
+        <strong style="color:var(--color-text-primary)">For SEO ads:</strong> Business owners + decision makers · Age 28–55 · UAE · Interests: small business, digital marketing, entrepreneurship, online business · Behaviours: Small business owners, Facebook Page admins<br><br>
+        <strong style="color:var(--color-text-primary)">For Web Dev ads:</strong> Same base + layer on: Interests: web design, e-commerce, new business registration · Exclude: current web designers and developers (they won't buy)<br><br>
+        <strong style="color:var(--color-text-primary)">Retargeting:</strong> Website visitors (last 90 days) + Video viewers (50%+ watched) + Instagram profile visitors. Use testimonial/case study creative only — they've seen the pitch, now show proof.
+      </div>
+    </div>
+  </div>
+
+  <!-- LANDING PAGES -->
+  <div id="lp" class="panel">
+    <p class="section-label">Niche landing pages to create</p>
+
+    <div class="niche-card">
+      <div class="niche-head"><span class="niche-title">SEO for Restaurants — Dubai</span><span class="niche-url">/seo-for-restaurants-dubai</span></div>
+      <div class="niche-hook">Headline: "More Dubai diners find you on Google — or you don't pay." · Sub: "We rank restaurant websites in Dubai, Abu Dhabi & Sharjah on page 1 within 90 days."</div>
+      <div class="niche-kw">Target keywords: SEO for restaurants Dubai · restaurant Google ranking UAE · restaurant digital marketing Dubai</div>
+    </div>
+
+    <div class="niche-card">
+      <div class="niche-head"><span class="niche-title">SEO for Medical Clinics — UAE</span><span class="niche-url">/seo-for-clinics-uae</span></div>
+      <div class="niche-hook">Headline: "Patients in your area are searching for you right now. Are they finding you or your competitor?" · Sub: "DHA-aware SEO strategies for Dubai & Abu Dhabi clinics."</div>
+      <div class="niche-kw">Target keywords: SEO for clinics Dubai · medical clinic digital marketing UAE · clinic Google ranking</div>
+    </div>
+
+    <div class="niche-card">
+      <div class="niche-head"><span class="niche-title">SEO for Real Estate — Dubai</span><span class="niche-url">/seo-for-real-estate-dubai</span></div>
+      <div class="niche-hook">Headline: "Dubai property buyers search Google 50,000× a month. Is your listing showing up?" · Sub: "SEO for real estate developers, brokers & agencies in Dubai."</div>
+      <div class="niche-kw">Target keywords: real estate SEO Dubai · property website ranking UAE · real estate digital marketing Dubai</div>
+    </div>
+
+    <div class="niche-card">
+      <div class="niche-head"><span class="niche-title">Website Design for Restaurants</span><span class="niche-url">/restaurant-website-dubai</span></div>
+      <div class="niche-hook">Headline: "A restaurant website that takes bookings while you sleep — built in 3 weeks." · Sub: "Mobile-first, fast-loading, SEO-ready restaurant websites for UAE F&B brands."</div>
+      <div class="niche-kw">Target keywords: restaurant website design Dubai · F&B website UAE · online menu website Dubai</div>
+    </div>
+
+    <div class="niche-card">
+      <div class="niche-head"><span class="niche-title">Website Design for Clinics</span><span class="niche-url">/clinic-website-design-uae</span></div>
+      <div class="niche-hook">Headline: "A medical website that builds trust, ranks on Google & books patients 24/7." · Sub: "Professional clinic and hospital websites for UAE healthcare providers."</div>
+      <div class="niche-kw">Target keywords: clinic website design Dubai · medical website UAE · hospital website development</div>
+    </div>
+
+    <div class="niche-card">
+      <div class="niche-head"><span class="niche-title">E-commerce Website — UAE</span><span class="niche-url">/ecommerce-website-dubai</span></div>
+      <div class="niche-hook">Headline: "Launch your UAE online store in 4 weeks — built to sell from day one." · Sub: "Custom e-commerce development with Arabic support, UAE payment gateways & Google Shopping integration."</div>
+      <div class="niche-kw">Target keywords: ecommerce website Dubai · online store development UAE · Shopify development Dubai</div>
+    </div>
+
+    <p class="section-label">Landing page must-have structure (every page)</p>
+    <div class="card">
+      <div class="lp-row"><div class="lp-num">1</div><div><div class="lp-title">Hero — Hook headline + sub + single CTA</div><div class="lp-desc">Niche-specific headline. One CTA only: "Book Free Audit" or "Get Free Quote." No menu distractions. Mobile-first fold.</div></div></div>
+      <div class="lp-row"><div class="lp-num">2</div><div><div class="lp-title">Pain section — 3 problems they recognize</div><div class="lp-desc">Use their exact language. "Tired of paying for ads that don't work?" Mirror the pain you identified in the ad creative.</div></div></div>
+      <div class="lp-row"><div class="lp-num">3</div><div><div class="lp-title">Social proof — Niche-matched testimonial or stat</div><div class="lp-desc">If it's a clinic page, show a clinic result. Restaurant page = restaurant case stat. Generic proof doesn't convert.</div></div></div>
+      <div class="lp-row"><div class="lp-num">4</div><div><div class="lp-title">What you get — 3-step simple process</div><div class="lp-desc">"Step 1: Free audit call → Step 2: We build your strategy → Step 3: You see results." Removes confusion and fear.</div></div></div>
+      <div class="lp-row"><div class="lp-num">5</div><div><div class="lp-title">FAQ — Overcome the top 3 objections</div><div class="lp-desc">"How long does it take?" / "What if I've tried SEO before and it didn't work?" / "Is there a contract?" Answer these before they bounce.</div></div></div>
+      <div class="lp-row"><div class="lp-num">6</div><div><div class="lp-title">Final CTA — WhatsApp + form</div><div class="lp-desc">Give two options: fill a short form OR click WhatsApp. UAE users strongly prefer WhatsApp. Make it prominent.</div></div></div>
+    </div>
+  </div>
+
+  <!-- SEO FOR NLM ITSELF -->
+  <div id="seo-self" class="panel">
+    <p class="section-label">SEO strategy for nextlevelmarketerz.com itself</p>
+
+    <div class="two-col" style="margin-bottom:.75rem;">
+      <div class="stat-box"><div class="stat-val">6–12</div><div class="stat-label">months to rank competitive terms</div></div>
+      <div class="stat-box"><div class="stat-val">3–4</div><div class="stat-label">months for niche-specific pages</div></div>
+    </div>
+
+    <div class="card">
+      <span class="badge badge-blue">Priority 1 — Technical SEO fixes</span>
+      <div>
+        <div class="checklist-item"><div class="check">✓</div><div><div class="check-text">Core Web Vitals — ensure LCP under 2.5s, CLS near zero</div><div class="check-sub">Your site is Next.js — this should be achievable. Check with PageSpeed Insights now.</div></div></div>
+        <div class="checklist-item"><div class="check">✓</div><div><div class="check-text">Schema markup — add LocalBusiness + Service schema</div><div class="check-sub">Tells Google you're a Dubai-based agency offering specific services. Boosts local pack rankings.</div></div></div>
+        <div class="checklist-item"><div class="check">✓</div><div><div class="check-text">Google Business Profile — fully optimized</div><div class="check-sub">Category: Digital Marketing Agency. Add all services, UAE phone, photos, get 10+ reviews. Critical for local SEO.</div></div></div>
+        <div class="checklist-item"><div class="check">✓</div><div><div class="check-text">Create dedicated service pages for every niche</div><div class="check-sub">/seo-for-restaurants-dubai, /clinic-website-design-uae etc. Each page targets its own keyword cluster.</div></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="badge badge-green">Priority 2 — Content strategy</span>
+      <div>
+        <div class="checklist-item"><div class="check">✓</div><div><div class="check-text">Publish 2 SEO-optimized blog posts per week</div><div class="check-sub">Target: "how to rank on Google in Dubai", "best SEO agency UAE", "local SEO tips for restaurants Dubai" — informational intent builds authority fast.</div></div></div>
+        <div class="checklist-item"><div class="check">✓</div><div><div class="check-text">Create case study pages with real UAE results</div><div class="check-sub">Google loves case studies — they're unique, authoritative content. Format: Client → Problem → Strategy → Result. Include numbers.</div></div></div>
+        <div class="checklist-item"><div class="check">✓</div><div><div class="check-text">Build a "UAE Digital Marketing Guide" pillar page</div><div class="check-sub">Long-form (3,000+ words) covering SEO, ads, and web dev for UAE SMEs. Interlink all your service pages from it.</div></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="badge badge-warn">Priority 3 — Link building</span>
+      <div>
+        <div class="checklist-item"><div class="check">✓</div><div><div class="check-text">Get listed on UAE business directories</div><div class="check-sub">Yellow Pages UAE, Dubai Chamber, Gulf Business directory, Clutch.co — these are high-DA local backlinks.</div></div></div>
+        <div class="checklist-item"><div class="check">✓</div><div><div class="check-text">Guest post on UAE business & startup blogs</div><div class="check-sub">Target: Gulf Business, Entrepreneur Middle East, StartupME. One guest post per month minimum.</div></div></div>
+        <div class="checklist-item"><div class="check">✓</div><div><div class="check-text">PR links — you're already on ADGULLY & Campaign</div><div class="check-sub">Leverage existing media mentions. Publish newsworthy content (data reports, UAE marketing insights) to earn more.</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function sw(id) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>

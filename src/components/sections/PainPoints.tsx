@@ -2,33 +2,33 @@
 
 import { Container } from "@/components/layout/Container";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, TrendingDown, EyeOff, Globe, MessageSquare } from "lucide-react";
 import Link from "next/link";
 
 const PAIN_POINTS = [
   {
-    icon: "💸",
+    icon: TrendingDown,
     title: "Burning budget with no results",
     description:
       "Tried Google or Meta ads and spent AED 3,000–15,000 with nothing to show for it. Deep distrust of agencies who promise the world and deliver dashboards.",
     cta: "We fix that →",
   },
   {
-    icon: "👁️",
+    icon: EyeOff,
     title: "Invisible on Google",
     description:
       "You search your own service in Dubai and your competitor appears first. You don't understand why or how to fix it — and every day it stays that way, you lose clients.",
     cta: "We fix that →",
   },
   {
-    icon: "🌐",
+    icon: Globe,
     title: "Dead website that doesn't convert",
     description:
       "You paid someone to build a website. It looks okay but gets no traffic, no inquiries, and zero ROI. It's a digital brochure, not a sales machine.",
     cta: "We fix that →",
   },
   {
-    icon: "📱",
+    icon: MessageSquare,
     title: "Social media with zero leads",
     description:
       "You post regularly but get likes and zero DMs. Follower count means nothing to your revenue. You need customers, not vanity metrics.",
@@ -65,9 +65,19 @@ export function PainPoints() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
-              className="group relative bg-slate-50 border border-slate-100 rounded-2xl p-8 hover:shadow-xl hover:shadow-slate-200/40 hover:border-amber-200/60 transition-all duration-500"
+              className="group relative bg-slate-50 border border-slate-100 rounded-2xl p-8 hover:shadow-md hover:shadow-amber-900/5 hover:border-amber-300/50 hover:-translate-y-1 transition-all duration-300"
             >
-              <div className="text-4xl mb-5">{pain.icon}</div>
+              {/* Icon Badge with Gradient Background and Border */}
+              <div className="mb-5 relative">
+                {/* Badge container with gradient background */}
+                <div className="relative flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-200/60 shadow-sm group-hover:border-amber-300 group-hover:shadow-md transition-all duration-300">
+                  {/* Subtle inner highlight */}
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/40 to-transparent" />
+
+                  {/* Icon with color transition */}
+                  <pain.icon className="w-7 h-7 text-amber-500 group-hover:text-amber-600 group-hover:scale-110 transition-all duration-300" strokeWidth={1.5} />
+                </div>
+              </div>
               <h3 className="text-xl font-semibold text-slate-900 mb-3 group-hover:text-amber-600 transition-colors">
                 {pain.title}
               </h3>

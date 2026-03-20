@@ -3,7 +3,6 @@
 import { usePathname } from "next/navigation";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { Preloader } from "@/components/preloaders/Preloader";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 
 export function LayoutShell({ children }: { children: React.ReactNode }) {
@@ -37,7 +36,6 @@ export function LayoutShell({ children }: { children: React.ReactNode }) {
       >
         Skip to main content
       </a>
-      <Preloader />
       <Navbar />
       <div className="relative z-10 bg-background shadow-2xl rounded-b-xl md:rounded-b-[3rem] min-h-screen isolate">
         <main id="main-content" tabIndex={-1}>

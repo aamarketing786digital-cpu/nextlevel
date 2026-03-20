@@ -1,18 +1,21 @@
 import { Hero } from "@/components/sections/Hero";
 import { ValueProp } from "@/components/sections/ValueProp";
-import { Process } from "@/components/sections/Process"; // Import
-import { ServicesShowcase } from "@/components/sections/ServicesShowcase";
-import { WorkShowcase } from "@/components/sections/WorkShowcase";
-import { Testimonials } from "@/components/sections/Testimonials";
-import { BlogSection } from "@/components/sections/BlogSection";
-import { Newsletter } from "@/components/sections/Newsletter";
-import { PressLogos } from "@/components/sections/PressLogos";
-import { VideoTestimonials } from "@/components/sections/VideoTestimonials";
-import { ExpandedServices } from "@/components/sections/ExpandedServices";
-import { RankingCta } from "@/components/sections/RankingCta";
-import { FaqSection } from "@/components/sections/FaqSection";
 import { PainPoints } from "@/components/sections/PainPoints";
+import dynamic from "next/dynamic";
 import { client } from "@/sanity/lib/client";
+
+// Below-fold sections — dynamically imported to reduce initial JS bundle
+const ServicesShowcase = dynamic(() => import("@/components/sections/ServicesShowcase").then(m => m.ServicesShowcase));
+const Process = dynamic(() => import("@/components/sections/Process").then(m => m.Process));
+const ExpandedServices = dynamic(() => import("@/components/sections/ExpandedServices").then(m => m.ExpandedServices));
+const WorkShowcase = dynamic(() => import("@/components/sections/WorkShowcase").then(m => m.WorkShowcase));
+const Testimonials = dynamic(() => import("@/components/sections/Testimonials").then(m => m.Testimonials));
+const VideoTestimonials = dynamic(() => import("@/components/sections/VideoTestimonials").then(m => m.VideoTestimonials));
+const BlogSection = dynamic(() => import("@/components/sections/BlogSection").then(m => m.BlogSection));
+const PressLogos = dynamic(() => import("@/components/sections/PressLogos").then(m => m.PressLogos));
+const RankingCta = dynamic(() => import("@/components/sections/RankingCta").then(m => m.RankingCta));
+const FaqSection = dynamic(() => import("@/components/sections/FaqSection").then(m => m.FaqSection));
+const Newsletter = dynamic(() => import("@/components/sections/Newsletter").then(m => m.Newsletter));
 
 // ISR: Revalidate homepage when content tags change
 export const revalidate = 3600 // 1 hour fallback (tags can revalidate on-demand)
@@ -84,37 +87,59 @@ export default async function HomePage() {
         <PainPoints />
 
         {/* Services Showcase - Horizontal Scroll (GSAP) */}
-        <ServicesShowcase />
+        <div className="perf-defer">
+          <ServicesShowcase />
+        </div>
 
       {/* Comprehensive Services - All 55 Services Listed */}
-      <ExpandedServices />
+      <div className="perf-defer">
+        <ExpandedServices />
+      </div>
 
         {/* Process - Vertical Timeline (GSAP) */}
-        <Process />
+        <div className="perf-defer">
+          <Process />
+        </div>
 
         {/* Work Showcase - Curtain Reveal (GSAP) */}
-        <WorkShowcase caseStudies={caseStudies || []} />
+        <div className="perf-defer">
+          <WorkShowcase caseStudies={caseStudies || []} />
+        </div>
 
         {/* Text Testimonials - Infinite Marquee */}
-        <Testimonials testimonials={testimonials || []} />
+        <div className="perf-defer overflow-hidden">
+          <Testimonials testimonials={testimonials || []} />
+        </div>
 
         {/* Video Testimonials - Interactive Grid */}
-        <VideoTestimonials testimonials={videoTestimonials || []} />
+        <div className="perf-defer">
+          <VideoTestimonials testimonials={videoTestimonials || []} />
+        </div>
 
         {/* Press Logos - As Seen In Marquee */}
-        <PressLogos />
+        <div className="perf-defer overflow-hidden">
+          <PressLogos />
+        </div>
 
         {/* Blog Section - Latest Insights */}
-        <BlogSection posts={posts} title="Latest Insights" subtitle="Expert tips and strategies to help grow your business" />
+        <div className="perf-defer">
+          <BlogSection posts={posts} title="Latest Insights" subtitle="Expert tips and strategies to help grow your business" />
+        </div>
 
         {/* Custom Bento Call To Action: Ranking #1 */}
-        <RankingCta />
+        <div className="perf-defer">
+          <RankingCta />
+        </div>
 
         {/* Frequently Asked Questions */}
-        <FaqSection />
+        <div className="perf-defer">
+          <FaqSection />
+        </div>
 
         {/* Newsletter - Magnetic Input */}
-        <Newsletter />
+        <div className="perf-defer">
+          <Newsletter />
+        </div>
     </div>
   );
 }
