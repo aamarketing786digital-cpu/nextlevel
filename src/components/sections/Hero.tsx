@@ -49,15 +49,15 @@ export function Hero() {
     <section className="relative min-h-[85dvh] md:min-h-screen w-full flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 section-dark text-slate-50 font-sans">
       {/* Optimized Background - minimal CPU usage */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {/* Hero Background Image */}
+        {/* Hero Background Image - lazy load so text is LCP */}
         <Image
-          src="/images/home-hero.png"
-          alt="Hero background"
+          src="/images/home-hero.webp"
+          alt=""
           fill
-          priority
           sizes="(max-width: 768px) 50vw, 100vw"
           quality={50}
           className="object-cover opacity-20"
+          loading="lazy"
         />
         {/* Single subtle amber glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-amber-500/5 rounded-full blur-[120px]" />
