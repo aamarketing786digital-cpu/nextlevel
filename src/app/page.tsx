@@ -1,21 +1,70 @@
 import { Hero } from "@/components/sections/Hero";
-import { ValueProp } from "@/components/sections/ValueProp";
-import { PainPoints } from "@/components/sections/PainPoints";
 import dynamic from "next/dynamic";
 import { client } from "@/sanity/lib/client";
+import { Suspense } from "react";
 
-// Below-fold sections — dynamically imported to reduce initial JS bundle
-const ServicesShowcase = dynamic(() => import("@/components/sections/ServicesShowcase").then(m => m.ServicesShowcase));
-const Process = dynamic(() => import("@/components/sections/Process").then(m => m.Process));
-const ExpandedServices = dynamic(() => import("@/components/sections/ExpandedServices").then(m => m.ExpandedServices));
-const WorkShowcase = dynamic(() => import("@/components/sections/WorkShowcase").then(m => m.WorkShowcase));
-const Testimonials = dynamic(() => import("@/components/sections/Testimonials").then(m => m.Testimonials));
-const VideoTestimonials = dynamic(() => import("@/components/sections/VideoTestimonials").then(m => m.VideoTestimonials));
-const BlogSection = dynamic(() => import("@/components/sections/BlogSection").then(m => m.BlogSection));
-const PressLogos = dynamic(() => import("@/components/sections/PressLogos").then(m => m.PressLogos));
-const RankingCta = dynamic(() => import("@/components/sections/RankingCta").then(m => m.RankingCta));
-const FaqSection = dynamic(() => import("@/components/sections/FaqSection").then(m => m.FaqSection));
-const Newsletter = dynamic(() => import("@/components/sections/Newsletter").then(m => m.Newsletter));
+// Loading component
+function SectionLoader() {
+  return (
+    <div className="w-full h-96 flex items-center justify-center bg-slate-50">
+      <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+    </div>
+  );
+}
+
+// All sections below hero — dynamically imported to reduce initial JS bundle
+// Components with "use client" directive won't be SSR'd
+const ValueProp = dynamic(() => import("@/components/sections/ValueProp").then(m => m.ValueProp), {
+  loading: () => <SectionLoader />,
+});
+
+const PainPoints = dynamic(() => import("@/components/sections/PainPoints").then(m => m.PainPoints), {
+  loading: () => <SectionLoader />,
+});
+
+const ServicesShowcase = dynamic(() => import("@/components/sections/ServicesShowcase").then(m => m.ServicesShowcase), {
+  loading: () => <SectionLoader />,
+});
+
+const Process = dynamic(() => import("@/components/sections/Process").then(m => m.Process), {
+  loading: () => <SectionLoader />,
+});
+
+const ExpandedServices = dynamic(() => import("@/components/sections/ExpandedServices").then(m => m.ExpandedServices), {
+  loading: () => <SectionLoader />,
+});
+
+const WorkShowcase = dynamic(() => import("@/components/sections/WorkShowcase").then(m => m.WorkShowcase), {
+  loading: () => <SectionLoader />,
+});
+
+const Testimonials = dynamic(() => import("@/components/sections/Testimonials").then(m => m.Testimonials), {
+  loading: () => <SectionLoader />,
+});
+
+const VideoTestimonials = dynamic(() => import("@/components/sections/VideoTestimonials").then(m => m.VideoTestimonials), {
+  loading: () => <SectionLoader />,
+});
+
+const BlogSection = dynamic(() => import("@/components/sections/BlogSection").then(m => m.BlogSection), {
+  loading: () => <SectionLoader />,
+});
+
+const PressLogos = dynamic(() => import("@/components/sections/PressLogos").then(m => m.PressLogos), {
+  loading: () => <div className="w-full h-32 flex items-center justify-center bg-slate-50 animate-pulse" />,
+});
+
+const RankingCta = dynamic(() => import("@/components/sections/RankingCta").then(m => m.RankingCta), {
+  loading: () => <SectionLoader />,
+});
+
+const FaqSection = dynamic(() => import("@/components/sections/FaqSection").then(m => m.FaqSection), {
+  loading: () => <SectionLoader />,
+});
+
+const Newsletter = dynamic(() => import("@/components/sections/Newsletter").then(m => m.Newsletter), {
+  loading: () => <SectionLoader />,
+});
 
 // ISR: Revalidate homepage when content tags change
 export const revalidate = 3600 // 1 hour fallback (tags can revalidate on-demand)
@@ -81,65 +130,69 @@ export default async function HomePage() {
         <Hero />
 
         {/* Value Proposition - Bento Grid */}
-        <ValueProp />
+        <Suspense fallback={<SectionLoader />}>
+          <ValueProp />
+        </Suspense>
 
         {/* Pain Points - UAE Business Owner Frustrations */}
-        <PainPoints />
+        <Suspense fallback={<SectionLoader />}>
+          <PainPoints />
+        </Suspense>
 
         {/* Services Showcase - Horizontal Scroll (GSAP) */}
-        <div className="perf-defer">
+        <Suspense fallback={<SectionLoader />}>
           <ServicesShowcase />
-        </div>
+        </Suspense>
 
       {/* Comprehensive Services - All 55 Services Listed */}
-      <div className="perf-defer">
+      <Suspense fallback={<SectionLoader />}>
         <ExpandedServices />
-      </div>
+      </Suspense>
 
         {/* Process - Vertical Timeline (GSAP) */}
-        <div className="perf-defer">
+        <Suspense fallback={<SectionLoader />}>
           <Process />
-        </div>
+        </Suspense>
 
         {/* Work Showcase - Curtain Reveal (GSAP) */}
-        <div className="perf-defer">
+        <Suspense fallback={<SectionLoader />}>
           <WorkShowcase caseStudies={caseStudies || []} />
-        </div>
+        </Suspense>
 
         {/* Text Testimonials - Infinite Marquee */}
-        <div className="perf-defer overflow-hidden">
+        <Suspense fallback={<SectionLoader />}>
           <Testimonials testimonials={testimonials || []} />
-        </div>
+        </Suspense>
 
         {/* Video Testimonials - Interactive Grid */}
-        <div className="perf-defer">
+        <Suspense fallback={<SectionLoader />}>
           <VideoTestimonials testimonials={videoTestimonials || []} />
-        </div>
+        </Suspense>
 
         {/* Press Logos - As Seen In Marquee */}
-        <div className="perf-defer overflow-hidden">
+        <Suspense fallback={<div className="w-full h-32 flex items-center justify-center bg-slate-50 animate-pulse" />}>
           <PressLogos />
-        </div>
+        </Suspense>
 
         {/* Blog Section - Latest Insights */}
-        <div className="perf-defer">
+        <Suspense fallback={<SectionLoader />}>
           <BlogSection posts={posts} title="Latest Insights" subtitle="Expert tips and strategies to help grow your business" />
-        </div>
+        </Suspense>
 
         {/* Custom Bento Call To Action: Ranking #1 */}
-        <div className="perf-defer">
+        <Suspense fallback={<SectionLoader />}>
           <RankingCta />
-        </div>
+        </Suspense>
 
         {/* Frequently Asked Questions */}
-        <div className="perf-defer">
+        <Suspense fallback={<SectionLoader />}>
           <FaqSection />
-        </div>
+        </Suspense>
 
         {/* Newsletter - Magnetic Input */}
-        <div className="perf-defer">
+        <Suspense fallback={<SectionLoader />}>
           <Newsletter />
-        </div>
+        </Suspense>
     </div>
   );
 }

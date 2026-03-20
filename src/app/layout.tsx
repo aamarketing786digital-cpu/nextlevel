@@ -47,18 +47,24 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${outfit.variable}`}>
       <head>
-        {/* Google Analytics GA4 */}
+        {/* Preconnect to Google Analytics for faster connection */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
+
+        {/* Google Analytics GA4 - Deferred load for better performance */}
         <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-PRHW62LLFS"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-PRHW62LLFS');
+            gtag('config', 'G-PRHW62LLFS', {
+              page_title: document.title,
+              page_location: window.location.href,
+            });
           `}
         </Script>
       </head>
