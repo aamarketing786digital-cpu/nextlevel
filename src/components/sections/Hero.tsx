@@ -2,6 +2,7 @@
 
 import { Suspense, useRef, useState, useEffect } from "react";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Sparkles } from "lucide-react";
 
@@ -120,12 +121,20 @@ export function Hero() {
   return (
     <section className="relative min-h-[85dvh] md:min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#06080e] section-dark text-slate-50 font-sans">
       
-      {/* Cinematic Deep Background - reduced blur sizes for mobile perf */}
+      {/* Cinematic Deep Background - optimized with Next.js Image */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          {/* AI Generated Hero Background */}
-          <div 
-             className="absolute inset-0 bg-[url('/images/home-hero.png')] bg-cover bg-center opacity-20 mix-blend-screen" 
-          />
+          {/* AI Generated Hero Background - using Next.js Image for optimization */}
+          <div className="absolute inset-0 opacity-20 mix-blend-screen">
+            <Image
+              src="/images/home-hero.png"
+              alt="Hero background"
+              fill
+              priority
+              sizes="100vw"
+              quality={80}
+              className="object-cover"
+            />
+          </div>
 
           {/* Dark Overlay for Readability */}
           <div className="absolute inset-0 bg-slate-950/40" />
