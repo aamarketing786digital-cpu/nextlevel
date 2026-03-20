@@ -6,7 +6,7 @@ import { TEAM_MEMBERS } from "@/lib/constants";
 import { Container } from "@/components/layout/Container";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import gsap from "gsap";
+import { gsap } from "gsap";
 
 // Register ScrollTrigger
 if (typeof window !== "undefined") {

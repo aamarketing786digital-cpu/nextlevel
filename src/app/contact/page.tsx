@@ -14,7 +14,7 @@ export default function ContactPage() {
     <main className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="bg-slate-950 py-32 md:py-40 relative overflow-hidden border-b border-white/10">
-        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-20 pointer-events-none" />
+        <div className="absolute inset-0 bg-[url('/images/contact-hero.png')] bg-cover bg-center opacity-40 pointer-events-none" />
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
 
         <Container>

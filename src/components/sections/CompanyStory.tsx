@@ -6,7 +6,7 @@ import { Section } from "@/components/layout/Section";
 import { Sparkles, Target, Rocket, TrendingUp } from "lucide-react";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import gsap from "gsap";
+import { gsap } from "gsap";
 
 // Register ScrollTrigger
 if (typeof window !== "undefined") {

@@ -1041,7 +1041,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     title: "E-Commerce Transformation",
     client: "Luxury Fashion Brand",
     thumbnail: {
-      src: "/images/case-studies/fashion-ecommerce.jpg",
+      src: "/images/case-studies/fashion-ecommerce.png",
       alt: "Fashion e-commerce website",
       width: 800,
       height: 600,
@@ -1058,7 +1058,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     title: "AI Customer Support Revolution",
     client: "Telecom Company",
     thumbnail: {
-      src: "/images/case-studies/telecom-ai.jpg",
+      src: "/images/case-studies/telecom-ai.png",
       alt: "AI chatbot interface",
       width: 800,
       height: 600,
@@ -1075,7 +1075,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     title: "Brand Identity Launch",
     client: "FinTech Startup",
     thumbnail: {
-      src: "/images/case-studies/fintech-brand.jpg",
+      src: "/images/case-studies/fintech-brand.png",
       alt: "Brand identity design",
       width: 800,
       height: 600,
@@ -1091,7 +1091,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     title: "SEO Domination Strategy",
     client: "Real Estate Portal",
     thumbnail: {
-      src: "/images/case-studies/real-estate-seo.jpg",
+      src: "/images/case-studies/real-estate-seo.png",
       alt: "SEO analytics dashboard",
       width: 800,
       height: 600,
@@ -1112,7 +1112,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     role: "Founder & CEO",
     bio: "Visionary leader with 15+ years in digital marketing and technology. Previously led marketing at Fortune 500 companies across MENA region.",
     headshot: {
-      src: "/images/team/sarah.jpg",
+      src: "/images/team/sarah.png",
       alt: "Sarah Al-Hassan",
       width: 400,
       height: 400,
@@ -1129,7 +1129,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     role: "CTO",
     bio: "Full-stack architect and AI specialist. Former engineer at Google with expertise in scalable systems and machine learning integration.",
     headshot: {
-      src: "/images/team/ahmed.jpg",
+      src: "/images/team/ahmed.png",
       alt: "Ahmed Khalil",
       width: 400,
       height: 400,
@@ -1146,7 +1146,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     role: "Creative Director",
     bio: "Award-winning designer with portfolio spanning luxury brands, tech startups, and everything in between. Passionate about meaningful design.",
     headshot: {
-      src: "/images/team/layla.jpg",
+      src: "/images/team/layla.png",
       alt: "Layla Rahman",
       width: 400,
       height: 400,
@@ -1164,7 +1164,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     role: "Head of Growth",
     bio: "Data-driven marketer who has scaled startups from 0 to millions in revenue. Expert in performance marketing and conversion optimization.",
     headshot: {
-      src: "/images/team/omar.jpg",
+      src: "/images/team/omar.png",
       alt: "Omar Farooq",
       width: 400,
       height: 400,

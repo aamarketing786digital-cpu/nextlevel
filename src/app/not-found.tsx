@@ -5,7 +5,7 @@ import { useRef } from "react";
 import { Home, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+import { gsap } from "gsap";
 
 export default function NotFound() {
   const containerRef = useRef<HTMLDivElement>(null);

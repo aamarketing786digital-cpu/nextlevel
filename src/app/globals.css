@@ -96,8 +96,8 @@
     @apply border-border;
   }
   html {
-    font-size: 14px; 
-    scroll-behavior: smooth;
+    font-size: 14px;
+    /* scroll-behavior: smooth removed - conflicts with GSAP ScrollTrigger */
     -webkit-overflow-scrolling: touch;
   }
   @media (min-width: 1536px) {

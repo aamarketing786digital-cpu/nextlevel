@@ -9,7 +9,7 @@ import { Globe } from "@/components/ui/globe";
 import { NeuralNetwork } from "@/components/ui/neural-network";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import gsap from "gsap";
+import { gsap } from "gsap";
 
 // Register ScrollTrigger
 if (typeof window !== "undefined") {

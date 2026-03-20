@@ -16,7 +16,7 @@ export default function AboutPage() {
       {/* Hero Section */}
       <section className="bg-slate-950 py-32 md:py-40 relative overflow-hidden border-b border-white/10">
         {/* Decorative Elements */}
-        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-20 pointer-events-none" />
+        <div className="absolute inset-0 bg-[url('/images/about-hero.png')] bg-cover bg-center opacity-40 pointer-events-none" />
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
 

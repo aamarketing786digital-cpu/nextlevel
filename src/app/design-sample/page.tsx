@@ -3,7 +3,7 @@
 import { Suspense, useRef, useEffect, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Sparkles } from "lucide-react";
-import gsap from "gsap";
+import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import * as THREE from "three";
 import { Canvas, useFrame, invalidate } from "@react-three/fiber";

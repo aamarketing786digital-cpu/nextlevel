@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import gsap from "gsap";
+import { gsap } from "gsap";
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/layout/Container";
 import { Search, Zap, Rocket, BarChart3 } from "lucide-react";

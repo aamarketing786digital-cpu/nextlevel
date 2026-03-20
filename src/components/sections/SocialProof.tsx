@@ -6,7 +6,7 @@ import { InfiniteMovingCards } from "@/components/aceternity/infinite-moving-car
 import { CLIENT_LOGOS } from "@/lib/constants";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import gsap from "gsap";
+import { gsap } from "gsap";
 
 // Register ScrollTrigger
 if (typeof window !== "undefined") {

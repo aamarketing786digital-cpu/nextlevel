@@ -6,12 +6,11 @@ import { CASE_STUDIES } from "@/lib/constants";
 import { Container } from "@/components/layout/Container";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import gsap from "gsap";
+import { gsap } from "gsap";
 
-// Register ScrollTrigger with normalizeScroll for mobile smooth scrolling
+// Register ScrollTrigger
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
-  ScrollTrigger.normalizeScroll(true);
 }
 
 interface CaseStudiesProps {

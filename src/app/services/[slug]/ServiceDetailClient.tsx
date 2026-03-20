@@ -10,7 +10,7 @@ import { ArrowLeft, CheckCircle2, ArrowRight, Sparkles, TrendingUp, ChevronRight
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import gsap from "gsap";
+import { gsap } from "gsap";
 import { SERVICES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/button";
 import { Check, Mail, Phone } from "lucide-react";
-import gsap from "gsap";
+import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 

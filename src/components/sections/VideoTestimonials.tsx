@@ -111,7 +111,7 @@ export function VideoTestimonials({ testimonials = [] }: VideoTestimonialsProps)
               {/* Thumbnail Image Background */}
               <div 
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-60"
-                style={{ backgroundImage: `url(${video.thumbnailUrl || '/images/case-studies/placeholder.jpg'})` }}
+                style={{ backgroundImage: `url(${video.thumbnailUrl || '/images/case-studies/placeholder.png'})` }}
               />
               
               {/* Dark Gradient Overlay for Text */}

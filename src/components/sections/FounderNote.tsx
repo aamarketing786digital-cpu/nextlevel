@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { Container } from "@/components/layout/Container";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import gsap from "gsap";
+import { gsap } from "gsap";
 import Image from "next/image";
 
 // Register ScrollTrigger

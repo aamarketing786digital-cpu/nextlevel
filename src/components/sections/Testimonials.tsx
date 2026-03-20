@@ -5,7 +5,7 @@ import { Container } from "@/components/layout/Container";
 import { TestimonialMarquee } from "@/components/aceternity/testimonial-marquee";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import gsap from "gsap";
+import { gsap } from "gsap";
 
 // Register ScrollTrigger
 if (typeof window !== "undefined") {

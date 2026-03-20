@@ -5,7 +5,7 @@ import Link from "next/link";
 import { AlertTriangle, RefreshCw, Home, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+import { gsap } from "gsap";
 
 export default function Error({
   error,
