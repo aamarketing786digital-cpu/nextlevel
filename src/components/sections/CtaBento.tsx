@@ -229,16 +229,18 @@ export function CtaBento() {
             {/* Bottom Right - Image/Brand Card */}
             <motion.div
               style={{ y: y2 }}
-              className="col-span-1 row-span-1 rounded-3xl overflow-hidden relative group border border-border bg-gradient-to-br from-primary/5 to-primary/10"
+              className="col-span-1 row-span-1 rounded-3xl overflow-hidden relative group border border-border bg-slate-950"
             >
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-primary/5 to-transparent z-10" />
+              <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay pointer-events-none" />
               <div className="relative z-20 p-6 h-full flex flex-col justify-center text-center">
-                <div className="w-16 h-16 rounded-2xl bg-primary/20 flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-all">
+                <div className="w-16 h-16 rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center mb-4 mx-auto group-hover:scale-110 group-hover:border-primary/40 transition-all">
                   <Sparkles className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="text-xl font-display font-bold mb-2">
+                <h3 className="text-xl font-display font-bold mb-2 text-white">
                   Ready to Start?
                 </h3>
-                <p className="text-muted-foreground text-sm mb-4">
+                <p className="text-slate-400 text-sm mb-4">
                   Get your free strategy session today
                 </p>
                 <Button

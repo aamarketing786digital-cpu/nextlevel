@@ -464,7 +464,6 @@ export function ServiceDetailClient({ service }: ServiceDetailClientProps) {
                 } else {
                     // Generic asymmetric fallback rules (Total > 8)
                     const isLastOddItem = index === total - 1 && total % 2 !== 0;
-                    
                     const mod = index % 5;
                     if (mod === 0) { colSpan = "sm:col-span-2 lg:col-span-2"; rowSpan = "sm:row-span-2"; isLargeCard = true; }
                     else if (mod === 1 || mod === 2) { colSpan = "sm:col-span-2 lg:col-span-2"; rowSpan = "row-span-1"; }
@@ -472,28 +471,85 @@ export function ServiceDetailClient({ service }: ServiceDetailClientProps) {
                     else { colSpan = "sm:col-span-1 lg:col-span-1"; rowSpan = "row-span-1"; }
                 }
 
+                const isFullWidth = colSpan.includes("col-span-4");
+
                 return (
                   <div
                     key={index}
                     className={cn(
-                      "feature-card bg-white border border-slate-200 shadow-sm rounded-3xl lg:rounded-[2rem] p-6 lg:p-8 flex flex-col justify-end group overflow-hidden relative min-h-[180px] sm:min-h-0",
+                      "feature-card group relative overflow-hidden rounded-[2rem] border transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] flex flex-col p-6 lg:p-8 min-h-[240px] sm:min-h-0",
                       colSpan,
-                      rowSpan
+                      rowSpan,
+                      "hover:scale-[1.01] hover:z-20",
+                      // 30% Selective Coloring Logic
+                      (index === 0 || index === 5)
+                        ? (index === 0 ? "bg-slate-950 border-white/10 text-white shadow-[0_20px_50px_rgba(0,0,0,0.4)]" 
+                                      : "bg-gradient-to-br from-amber-400 to-amber-600 border-amber-400/50 text-slate-950 shadow-[0_25px_60px_rgba(245,158,11,0.2)]")
+                        : "bg-white border-slate-200 text-slate-900 shadow-[0_20px_50px_rgba(0,0,0,0.03)]"
                     )}
                   >
-                    {/* Hover Glow Effect */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-amber-500/0 to-amber-500/0 group-hover:from-amber-500/5 group-hover:to-transparent transition-all duration-700 pointer-events-none" />
+                    {/* Elite Shimmer Effect */}
+                    <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none" />
+                    
+                    {/* Sophisticated Background Index */}
+                    <div className={cn(
+                      "absolute top-6 right-8 font-display font-black text-6xl tracking-tighter opacity-[0.03] select-none pointer-events-none group-hover:opacity-[0.08] transition-all duration-700 group-hover:-translate-y-1",
+                      index === 0 ? "text-white" : "text-slate-950"
+                    )}>
+                      {(index + 1).toString().padStart(2, '0')}
+                    </div>
 
-                    <div className="relative z-10">
-                      <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center mb-6 group-hover:bg-amber-50 group-hover:border-amber-200 transition-all duration-500">
-                        <CheckCircle2 className="w-6 h-6 text-amber-500" />
+                    <div className={cn(
+                      "relative z-10 flex flex-col h-full",
+                      isFullWidth && "items-center text-center max-w-4xl mx-auto"
+                    )}>
+                      {/* Premium Status Badge */}
+                      <div className={cn("flex mb-6", isFullWidth && "justify-center")}>
+                        <div className={cn(
+                          "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[9px] font-bold uppercase tracking-[0.2em] transition-all duration-500 shadow-sm",
+                          (index === 0 || index === 5) && index === 0 ? "bg-white/5 text-primary border border-white/10" :
+                          (index === 0 || index === 5) && index !== 0 ? "bg-black/10 text-slate-950 border border-black/10" :
+                          "bg-slate-50 text-slate-500 border border-slate-200"
+                        )}>
+                          <div className={cn(
+                            "w-1.5 h-1.5 rounded-full animate-pulse",
+                            (index === 0 || index === 5) && index !== 0 ? "bg-slate-950" : "bg-primary"
+                          )} />
+                          {index % 4 === 0 ? "Performance" : index % 4 === 1 ? "Strategic" : index % 4 === 2 ? "Optimization" : "Scale"}
+                        </div>
                       </div>
-                      <p className={cn(
-                        "text-slate-800 font-medium leading-relaxed tracking-tight",
-                        isLargeCard ? "text-2xl" : "text-lg"
-                      )}>
-                        {feature}
-                      </p>
+
+                      <div className={cn("space-y-3 mt-auto", isFullWidth && "space-y-4")}>
+                        <h3 className={cn(
+                          "font-display font-bold leading-[1.15] tracking-tight transition-all duration-500 text-balance",
+                          isLargeCard ? "text-2xl lg:text-4xl" : "text-lg lg:text-2xl",
+                          isFullWidth && "text-3xl lg:text-5xl"
+                        )}>
+                          {feature}
+                        </h3>
+                        
+                        <p className={cn(
+                          "text-[13px] font-light leading-snug group-hover:opacity-100 transition-opacity duration-500",
+                          (index === 0 || index === 5) && index !== 0 ? "text-slate-950/70" : "text-slate-400/80",
+                          isFullWidth ? "max-w-2xl text-base" : "max-w-[260px]"
+                        )}>
+                          {index % 3 === 0 ? "Elite digital architectures for global scale." : 
+                           index % 3 === 1 ? "Data-driven intelligence for massive growth." : 
+                           "Fine-tuned for high-conversion experience."}
+                        </p>
+
+                        <div className={cn(
+                          "flex items-center gap-3 pt-3 group-hover:gap-4 transition-all duration-500",
+                          (index === 0 || index === 5) && index !== 0 ? "text-slate-950" : "text-primary",
+                          isFullWidth && "justify-center"
+                        )}>
+                          <div className={cn(
+                            "h-[2px] w-8 rounded-full transition-all duration-500 shadow-sm",
+                            (index === 0 || index === 5) && index !== 0 ? "bg-slate-950" : "bg-primary"
+                          )} />
+                          <Sparkles className="w-3.5 h-3.5" />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 );
