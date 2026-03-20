@@ -47,8 +47,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${outfit.variable}`}>
       <head>
-        {/* Preconnect to Google Analytics for faster connection */}
+        {/* Preconnect to critical origins */}
         <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
 
         {/* Google Analytics GA4 - Deferred load for better performance */}
         <Script

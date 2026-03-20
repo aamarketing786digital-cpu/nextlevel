@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useMemo, useEffect, useState } from "react";
-import { Canvas, useFrame, invalidate } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Float } from "@react-three/drei";
 import * as THREE from "three";
 import { useMobileDetection } from "@/hooks/useMobileDetection";
@@ -14,13 +14,21 @@ function NetworkSphere({ count = 300, radius = 5 }: { count?: number; radius?: n
   const isMobile = useMobileDetection();
   
   useEffect(() => {
+    let rafId: number | null = null;
     const handleMouseMove = (event: MouseEvent) => {
-      mouse.current.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouse.current.y = -(event.clientY / window.innerHeight) * 2 + 1;
-      invalidate();
+      // Throttle mouse updates using requestAnimationFrame
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(() => {
+        mouse.current.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.current.y = -(event.clientY / window.innerHeight) * 2 + 1;
+        rafId = null;
+      });
     };
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   const { points, lines } = useMemo(() => {
@@ -83,20 +91,20 @@ function NetworkSphere({ count = 300, radius = 5 }: { count?: number; radius?: n
 
   useFrame((state) => {
     if (!groupRef.current) return;
-    
+
     // Desktop: Faster/Reactive. Mobile: Slower/Majestic.
     const baseRotationSpeed = isMobile ? 0.0001 : 0.0005;
     const lerpFactor = isMobile ? 0.02 : 0.03;
     const mouseInfluence = isMobile ? 0.05 : 0.15;
 
-    groupRef.current.rotation.y += baseRotationSpeed; 
+    groupRef.current.rotation.y += baseRotationSpeed;
     groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, -mouse.current.y * mouseInfluence, lerpFactor);
     groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, groupRef.current.rotation.y - mouse.current.x * mouseInfluence, lerpFactor);
-    
+
     if (linesRef.current && linesRef.current.material) {
         (linesRef.current.material as THREE.LineBasicMaterial).opacity = 0.05 + Math.sin(state.clock.elapsedTime * 0.2) * 0.05;
     }
-    invalidate();
+    // Note: invalidate() removed - useFrame already triggers re-renders automatically
   });
 
   return (
