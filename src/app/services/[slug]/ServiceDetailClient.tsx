@@ -225,6 +225,8 @@ export function ServiceDetailClient({ service }: ServiceDetailClientProps) {
       <section ref={heroContainerRef} className="relative min-h-[85vh] flex items-center justify-center overflow-hidden section-dark">
         {/* Cinematic Parallax Orbs */}
         <div className="absolute inset-0 bg-[#020617]" />
+        {/* AI Generated Service Background */}
+        <div className="absolute inset-0 bg-[url('/images/services-hero.png')] bg-cover bg-center opacity-20 mix-blend-screen pointer-events-none" />
         <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay pointer-events-none" />
         <div className="hero-orb-1 absolute top-[-10%] right-[10%] w-[600px] h-[600px] bg-amber-500/15 rounded-full blur-[120px] pointer-events-none" />
         <div className="hero-orb-2 absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />

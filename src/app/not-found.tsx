@@ -58,7 +58,12 @@ export default function NotFound() {
     <div ref={containerRef} className="relative min-h-screen flex items-center justify-center bg-slate-950 overflow-hidden pt-24 md:pt-32">
       {/* Animated Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
-      <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay" />
+      <div 
+         className="absolute inset-0 opacity-10 mix-blend-overlay pointer-events-none" 
+         style={{ 
+             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www-w3-org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.7'/%3E%3C/svg%3E")`,
+         }} 
+      />
 
       {/* Floating Particles */}
       <div

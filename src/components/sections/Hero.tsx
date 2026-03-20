@@ -3,10 +3,9 @@
 import { Suspense, useRef, useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/button";
-import { ArrowDown, Sparkles, Box } from "lucide-react";
+import { ArrowDown, Sparkles } from "lucide-react";
 
-// Lazy-load GSAP-dependent modules — keeps them out of the initial bundle
-// Only load 3D scene when explicitly requested by user
+// Lazy-load 3D scene — keeps it out of the initial bundle
 const HeroScene = dynamic(
   () => import("@/components/3d/HeroScene").then((mod) => mod.HeroScene),
   { ssr: false }
@@ -69,7 +68,7 @@ function AnimatedHeadline() {
         </h1>
 
         <p className="hero-sub-main text-lg md:text-2xl text-slate-400 max-w-2xl mx-auto font-light leading-relaxed pb-4">
-          Every day you're not on Google page 1, a competitor is taking your client. We fix that — with data-driven strategies that deliver real ROI.
+          Every day you're not on Google page 1, a competitor is taking your client. We fix that, with data-driven strategies that deliver real ROI.
         </p>
 
         {/* Premium Glassmorphic CTA */}
@@ -99,41 +98,39 @@ function AnimatedHeadline() {
 
 export function Hero() {
   const [show3D, setShow3D] = useState(false);
-  const [userEnabled3D, setUserEnabled3D] = useState(false);
-  const [isMobile, setIsMobile] = useState(true); // Default to mobile (no 3D)
+  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
-    const mobile = window.innerWidth < 1024; // 1024px breakpoint for desktop 3D
+    const mobile = window.innerWidth < 1024;
     setIsMobile(mobile);
 
-    // Only show 3D on desktop AND only if user explicitly enables it
-    // This prevents the 3D scene from loading automatically and causing TBT issues
-    if (!mobile && userEnabled3D) {
+    // Only load 3D on desktop, after a long delay to avoid blocking main thread
+    if (!mobile) {
       const timer = setTimeout(() => {
-        if (typeof requestIdleCallback !== "undefined") {
-          requestIdleCallback(() => setShow3D(true));
-        } else {
-          setShow3D(true);
-        }
-      }, 100);
+        setShow3D(true);
+      }, 5000); // 5 second delay for desktop
 
       return () => clearTimeout(timer);
     }
-  }, [userEnabled3D]);
+  }, []);
 
-  const particleCount = 200; // Desktop count
+  const particleCount = 200;
   const sceneScale = 1;
-
-  const handleEnable3D = () => {
-    setUserEnabled3D(true);
-    setShow3D(true);
-  };
 
   return (
     <section className="relative min-h-[85dvh] md:min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#06080e] section-dark text-slate-50 font-sans">
       
       {/* Cinematic Deep Background - reduced blur sizes for mobile perf */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          {/* AI Generated Hero Background */}
+          <div 
+             className="absolute inset-0 bg-[url('/images/home-hero.png')] bg-cover bg-center opacity-20 mix-blend-screen" 
+          />
+
+          {/* Dark Overlay for Readability */}
+          <div className="absolute inset-0 bg-slate-950/40" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/20 via-transparent to-slate-950/60" />
+          
           {/* Noise Texture */}
           <div 
              className="absolute inset-0 opacity-[0.05] mix-blend-overlay" 
@@ -148,14 +145,14 @@ export function Hero() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-amber-900/15 rounded-full blur-[100px] md:blur-[150px] mix-blend-screen" />
       </div>
 
-      {/* Background 3D — desktop only, only when user enables it */}
+      {/* Background 3D — desktop only, delayed load */}
       <div className="absolute inset-0 z-0 pointer-events-none">
           {/* CSS-only animated gradient for all devices */}
           <div className="absolute inset-0 opacity-30">
             <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 via-transparent to-blue-500/10 animate-pulse" style={{ animationDuration: '8s' }} />
           </div>
 
-          {/* 3D Scene - Desktop Only, Only when user enables */}
+          {/* 3D Scene - Desktop Only, loads after 5s delay */}
           {show3D && !isMobile && (
              <div className="w-full h-full opacity-50 mix-blend-screen hidden lg:block">
                <Suspense fallback={null}>
@@ -164,18 +161,6 @@ export function Hero() {
              </div>
           )}
       </div>
-
-      {/* 3D Toggle Button - Desktop Only, Hidden when 3D is active */}
-      {!isMobile && !userEnabled3D && (
-        <button
-          onClick={handleEnable3D}
-          className="absolute bottom-8 right-8 z-20 hidden lg:flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-sm text-white text-sm transition-all hover:scale-105"
-          aria-label="Enable 3D animation"
-        >
-          <Box className="w-4 h-4" />
-          <span>Enable 3D</span>
-        </button>
-      )}
 
       <div className="relative z-10 container mx-auto px-4 py-12 md:py-20 text-center">
         <AnimatedHeadline />

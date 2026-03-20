@@ -68,7 +68,7 @@ export const LANDING_PAGES: Record<string, LandingPageConfig> = {
       "restaurant Google ranking UAE",
       "restaurant digital marketing Dubai",
     ],
-    heroImage: "/landing/hero-seo.png",
+    heroImage: "/images/services-hero.png",
     hero: {
       badge: "🍽️ Restaurant SEO Specialists",
       headline: "More Dubai diners find you on Google, or you don't pay.",
@@ -171,7 +171,7 @@ export const LANDING_PAGES: Record<string, LandingPageConfig> = {
       "medical SEO UAE",
       "healthcare digital marketing Dubai",
     ],
-    heroImage: "/landing/hero-clinic.png",
+    heroImage: "/images/services-hero.png",
     hero: {
       badge: "🩺 Medical SEO Specialists",
       headline: "Patients are searching for you. We make sure they find you.",
@@ -274,7 +274,7 @@ export const LANDING_PAGES: Record<string, LandingPageConfig> = {
       "property website ranking UAE",
       "real estate digital marketing Dubai",
     ],
-    heroImage: "/landing/hero-real-estate.png",
+    heroImage: "/images/services-hero.png",
     hero: {
       badge: "🏘️ Real Estate SEO Specialists",
       headline:
@@ -378,7 +378,7 @@ export const LANDING_PAGES: Record<string, LandingPageConfig> = {
       "F&B website UAE",
       "online menu website Dubai",
     ],
-    heroImage: "/landing/hero-restaurant-web.png",
+    heroImage: "/images/services-hero.png",
     hero: {
       badge: "🍽️ Restaurant Web Design",
       headline:
@@ -482,7 +482,7 @@ export const LANDING_PAGES: Record<string, LandingPageConfig> = {
       "medical website UAE",
       "hospital website development",
     ],
-    heroImage: "/landing/hero-clinic-web.png",
+    heroImage: "/images/services-hero.png",
     hero: {
       badge: "🏥 Medical Web Design",
       headline:
@@ -587,7 +587,7 @@ export const LANDING_PAGES: Record<string, LandingPageConfig> = {
       "online store development UAE",
       "Shopify development Dubai",
     ],
-    heroImage: "/landing/hero-ecommerce.png",
+    heroImage: "/images/services-hero.png",
     hero: {
       badge: "🛒 E-Commerce Experts UAE",
       headline:
