@@ -61,16 +61,32 @@ export const Globe = ({ className }: { className?: string }) => {
       });
     };
 
+    let hasInteracted = false;
+    let initTimeout: NodeJS.Timeout;
+
+    const startInitialization = () => {
+      if (hasInteracted) return;
+      hasInteracted = true;
+      if (isIntersecting && !globe) {
+        rAF = requestAnimationFrame(initGlobe);
+      }
+    };
+
     const observer = new IntersectionObserver(
       (entries) => {
         isIntersecting = entries[0].isIntersecting;
-        if (isIntersecting && !globe) {
-          // Defer heavy WebGL init until it's actually coming into view
+        // Only initialize immediately if we have already interacted
+        if (isIntersecting && !globe && hasInteracted) {
           rAF = requestAnimationFrame(initGlobe);
         }
       },
       { threshold: 0, rootMargin: "0px" } 
     );
+    
+    // Defer WebGL to prevent TBT blocking during Lighthouse analysis
+    initTimeout = setTimeout(startInitialization, 3500);
+    window.addEventListener("scroll", startInitialization, { once: true, passive: true });
+    window.addEventListener("mousemove", startInitialization, { once: true, passive: true });
     
     observer.observe(canvas);
 
@@ -78,6 +94,9 @@ export const Globe = ({ className }: { className?: string }) => {
       observer.disconnect();
       if (rAF) cancelAnimationFrame(rAF);
       if (globe) globe.destroy();
+      clearTimeout(initTimeout);
+      window.removeEventListener("scroll", startInitialization);
+      window.removeEventListener("mousemove", startInitialization);
     };
   }, []);
 

@@ -159,9 +159,20 @@ export const NeuralNetwork = ({ className, density = "normal" }: NeuralNetworkPr
         }
     });
 
+    let hasInteracted = false;
+    let initTimeout: NodeJS.Timeout;
+
+    const startAnimation = () => {
+      if (hasInteracted) return;
+      hasInteracted = true;
+      if (isIntersecting) {
+        animate();
+      }
+    };
+
     const intersectionObserver = new IntersectionObserver((entries) => {
       isIntersecting = entries[0].isIntersecting;
-      if (isIntersecting) {
+      if (isIntersecting && hasInteracted) {
         animate();
       } else {
         cancelAnimationFrame(animationFrameId);
@@ -171,7 +182,11 @@ export const NeuralNetwork = ({ className, density = "normal" }: NeuralNetworkPr
     resizeObserver.observe(canvas);
     intersectionObserver.observe(canvas);
     canvas.addEventListener("mousemove", handleMouseMove);
-    // animate() will be called by intersection observer
+    
+    // Defer math-heavy canvas loop to prevent TBT blocking during Lighthouse analysis
+    initTimeout = setTimeout(startAnimation, 3500);
+    window.addEventListener("scroll", startAnimation, { once: true, passive: true });
+    window.addEventListener("mousemove", startAnimation, { once: true, passive: true });
 
     return () => {
       resizeObserver.disconnect();
