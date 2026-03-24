@@ -6,7 +6,7 @@ import { useEffect, useState, useRef } from "react";
 import type { Service } from "@/types";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, CheckCircle2, ArrowRight, Sparkles, TrendingUp, ChevronRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Sparkles, TrendingUp, ChevronRight } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";

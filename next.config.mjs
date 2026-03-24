@@ -27,6 +27,8 @@ const nextConfig = {
       'gsap',
       '@gsap/react',
     ],
+    // Inline critical CSS to eliminate render-blocking requests (570ms savings)
+    inlineCss: true,
   },
 
   // Production optimizations
