@@ -189,6 +189,7 @@ export const NeuralNetwork = ({ className, density = "normal" }: NeuralNetworkPr
     window.addEventListener("mousemove", startAnimation, { once: true, passive: true });
 
     return () => {
+      clearTimeout(initTimeout);
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
       canvas.removeEventListener("mousemove", handleMouseMove);
