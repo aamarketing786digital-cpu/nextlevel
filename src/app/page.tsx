@@ -3,6 +3,8 @@ import dynamic from "next/dynamic";
 import { client } from "@/sanity/lib/client";
 import { Suspense } from "react";
 
+import { LazyViewportWrapper } from "@/components/layout/LazyViewportWrapper";
+
 // Loading component
 function SectionLoader() {
   return (
@@ -144,10 +146,12 @@ export default async function HomePage() {
           <ServicesShowcase />
         </Suspense>
 
-      {/* Comprehensive Services - All 55 Services Listed */}
-      <Suspense fallback={<SectionLoader />}>
-        <ExpandedServices />
-      </Suspense>
+      {/* Comprehensive Services - All 55 Services Listed (Heavy Framer Motion) */}
+      <LazyViewportWrapper minHeight="800px">
+        <Suspense fallback={<SectionLoader />}>
+          <ExpandedServices />
+        </Suspense>
+      </LazyViewportWrapper>
 
         {/* Process - Vertical Timeline (GSAP) */}
         <Suspense fallback={<SectionLoader />}>
@@ -165,9 +169,11 @@ export default async function HomePage() {
         </Suspense>
 
         {/* Video Testimonials - Interactive Grid */}
-        <Suspense fallback={<SectionLoader />}>
-          <VideoTestimonials testimonials={videoTestimonials || []} />
-        </Suspense>
+        <LazyViewportWrapper minHeight="500px">
+          <Suspense fallback={<SectionLoader />}>
+            <VideoTestimonials testimonials={videoTestimonials || []} />
+          </Suspense>
+        </LazyViewportWrapper>
 
         {/* Press Logos - As Seen In Marquee */}
         <Suspense fallback={<div className="w-full h-32 flex items-center justify-center bg-slate-50 animate-pulse" />}>

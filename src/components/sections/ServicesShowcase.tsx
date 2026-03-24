@@ -157,6 +157,12 @@ function DesktopServices() {
     const totalPanels = panels.length;
     
     const nav = document.getElementById("main-navbar");
+
+    // Pre-calculate to avoid forced reflow inside the ScrollTrigger config
+    let getEndScroll = () => {
+        const offsetW = containerRef.current ? containerRef.current.offsetWidth : window.innerWidth * 5;
+        return "+=" + (offsetW - window.innerWidth);
+    };
      
     const tl = gsap.timeline({
        scrollTrigger: {
@@ -171,30 +177,37 @@ function DesktopServices() {
              delay: 0.1,
              ease: "power1.inOut"
          },
-         end: () => "+=" + (containerRef.current!.offsetWidth - window.innerWidth),
+         end: getEndScroll,
          onUpdate: (self) => {
             const newIndex = Math.round(self.progress * (totalPanels - 1));
             
             if (newIndex !== activeIndexRef.current) {
-                const oldBtn = document.querySelector(`.nav-btn-${activeIndexRef.current}`);
-                const newBtn = document.querySelector(`.nav-btn-${newIndex}`);
- 
-                 if (oldBtn) {
-                     oldBtn.classList.remove("bg-slate-900", "text-white", "shadow-sm", "font-bold");
-                     oldBtn.classList.add("text-slate-500", "hover:text-slate-900", "hover:bg-slate-100");
-                 }
-                 
-                 if (newBtn) {
-                     newBtn.classList.remove("text-slate-500", "hover:text-slate-900", "hover:bg-slate-100");
-                     newBtn.classList.add("bg-slate-900", "text-white", "shadow-sm", "font-bold");
-                 }
-                 
-                 activeIndexRef.current = newIndex;
+                // Update styling efficiently without querying document inside scroll block whenever possible
+                const oldClass = `nav-btn-${activeIndexRef.current}`;
+                const newClass = `nav-btn-${newIndex}`;
                 
-                const indexDisplay = document.getElementById("service-index-display");
-                if(indexDisplay) {
-                    indexDisplay.innerText = `0${newIndex + 1} / 0${totalPanels}`;
-                }
+                // Fast path avoiding multiple classes manipulation
+                requestAnimationFrame(() => {
+                  const oldBtn = document.querySelector(`.${oldClass}`);
+                  const newBtn = document.querySelector(`.${newClass}`);
+                  const indexDisplay = document.getElementById("service-index-display");
+
+                  if (oldBtn) {
+                      oldBtn.classList.remove("bg-slate-900", "text-white", "shadow-sm", "font-bold");
+                      oldBtn.classList.add("text-slate-500", "hover:text-slate-900", "hover:bg-slate-100");
+                  }
+                  
+                  if (newBtn) {
+                      newBtn.classList.remove("text-slate-500", "hover:text-slate-900", "hover:bg-slate-100");
+                      newBtn.classList.add("bg-slate-900", "text-white", "shadow-sm", "font-bold");
+                  }
+                  
+                  if(indexDisplay) {
+                      indexDisplay.textContent = `0${newIndex + 1} / 0${totalPanels}`;
+                  }
+                });
+                 
+                activeIndexRef.current = newIndex;
             }
          },
          onEnter: () => { if(nav) gsap.to(nav, { y: -100, autoAlpha: 0, duration: 0.3, overwrite: true }) },
