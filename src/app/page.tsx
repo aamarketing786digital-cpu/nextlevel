@@ -137,14 +137,18 @@ export default async function HomePage() {
         </Suspense>
 
         {/* Pain Points - UAE Business Owner Frustrations */}
-        <Suspense fallback={<SectionLoader />}>
-          <PainPoints />
-        </Suspense>
+        <LazyViewportWrapper minHeight="400px">
+          <Suspense fallback={<SectionLoader />}>
+            <PainPoints />
+          </Suspense>
+        </LazyViewportWrapper>
 
         {/* Services Showcase - Horizontal Scroll (GSAP) */}
-        <Suspense fallback={<SectionLoader />}>
-          <ServicesShowcase />
-        </Suspense>
+        <LazyViewportWrapper minHeight="600px">
+          <Suspense fallback={<SectionLoader />}>
+             <ServicesShowcase />
+          </Suspense>
+        </LazyViewportWrapper>
 
       {/* Comprehensive Services - All 55 Services Listed (Heavy Framer Motion) */}
       <LazyViewportWrapper minHeight="800px">
@@ -154,19 +158,25 @@ export default async function HomePage() {
       </LazyViewportWrapper>
 
         {/* Process - Vertical Timeline (GSAP) */}
-        <Suspense fallback={<SectionLoader />}>
-          <Process />
-        </Suspense>
+        <LazyViewportWrapper minHeight="800px">
+          <Suspense fallback={<SectionLoader />}>
+            <Process />
+          </Suspense>
+        </LazyViewportWrapper>
 
         {/* Work Showcase - Curtain Reveal (GSAP) */}
-        <Suspense fallback={<SectionLoader />}>
-          <WorkShowcase caseStudies={caseStudies || []} />
-        </Suspense>
+        <LazyViewportWrapper minHeight="600px">
+          <Suspense fallback={<SectionLoader />}>
+            <WorkShowcase caseStudies={caseStudies || []} />
+          </Suspense>
+        </LazyViewportWrapper>
 
         {/* Text Testimonials - Infinite Marquee */}
-        <Suspense fallback={<SectionLoader />}>
-          <Testimonials testimonials={testimonials || []} />
-        </Suspense>
+        <LazyViewportWrapper minHeight="400px">
+          <Suspense fallback={<SectionLoader />}>
+            <Testimonials testimonials={testimonials || []} />
+          </Suspense>
+        </LazyViewportWrapper>
 
         {/* Video Testimonials - Interactive Grid */}
         <LazyViewportWrapper minHeight="500px">
@@ -176,29 +186,39 @@ export default async function HomePage() {
         </LazyViewportWrapper>
 
         {/* Press Logos - As Seen In Marquee */}
-        <Suspense fallback={<div className="w-full h-32 flex items-center justify-center bg-slate-50 animate-pulse" />}>
-          <PressLogos />
-        </Suspense>
+        <LazyViewportWrapper minHeight="128px">
+          <Suspense fallback={<div className="w-full h-32 flex items-center justify-center bg-slate-50 animate-pulse" />}>
+            <PressLogos />
+          </Suspense>
+        </LazyViewportWrapper>
 
         {/* Blog Section - Latest Insights */}
-        <Suspense fallback={<SectionLoader />}>
-          <BlogSection posts={posts} title="Latest Insights" subtitle="Expert tips and strategies to help grow your business" />
-        </Suspense>
+        <LazyViewportWrapper minHeight="500px">
+          <Suspense fallback={<SectionLoader />}>
+            <BlogSection posts={posts} title="Latest Insights" subtitle="Expert tips and strategies to help grow your business" />
+          </Suspense>
+        </LazyViewportWrapper>
 
         {/* Custom Bento Call To Action: Ranking #1 */}
-        <Suspense fallback={<SectionLoader />}>
-          <RankingCta />
-        </Suspense>
+        <LazyViewportWrapper minHeight="400px">
+          <Suspense fallback={<SectionLoader />}>
+            <RankingCta />
+          </Suspense>
+        </LazyViewportWrapper>
 
         {/* Frequently Asked Questions */}
-        <Suspense fallback={<SectionLoader />}>
-          <FaqSection />
-        </Suspense>
+        <LazyViewportWrapper minHeight="600px">
+          <Suspense fallback={<SectionLoader />}>
+            <FaqSection />
+          </Suspense>
+        </LazyViewportWrapper>
 
         {/* Newsletter - Magnetic Input */}
-        <Suspense fallback={<SectionLoader />}>
-          <Newsletter />
-        </Suspense>
+        <LazyViewportWrapper minHeight="300px">
+          <Suspense fallback={<SectionLoader />}>
+            <Newsletter />
+          </Suspense>
+        </LazyViewportWrapper>
     </div>
   );
 }

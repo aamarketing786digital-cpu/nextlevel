@@ -91,7 +91,7 @@ function MobileServices() {
     <section ref={sectionRef} className="py-16 bg-background md:hidden">
       <Container>
         <div className="text-center mb-10 px-4">
-          <span className="text-primary font-medium tracking-wide uppercase text-sm mb-3 block">Our Services</span>
+          <span className="text-amber-600 dark:text-amber-400 font-bold tracking-wide uppercase text-sm mb-3 block">Our Services</span>
           <h2 className="text-3xl font-display font-bold text-slate-900 mb-4">
             What We <span className="text-primary">Deliver</span>
           </h2>
