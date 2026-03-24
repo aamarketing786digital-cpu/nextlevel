@@ -5,14 +5,11 @@ import { BentoGrid, BentoGridItem } from "@/components/aceternity/bento-grid";
 import { Container } from "@/components/layout/Container";
 import { cn } from "@/lib/utils";
 import { Bot, Code, TrendingUp, Palette, Search, Zap, Target, Globe as LucideGlobe } from "lucide-react";
-import dynamic from "next/dynamic";
+import { Globe } from "@/components/ui/globe";
+import { NeuralNetwork } from "@/components/ui/neural-network";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap";
-
-// Dynamically import heavy canvas components to wipe out initial JS execution
-const Globe = dynamic(() => import("@/components/ui/globe").then(m => m.Globe), { ssr: false });
-const NeuralNetwork = dynamic(() => import("@/components/ui/neural-network").then(m => m.NeuralNetwork), { ssr: false });
 
 // Register ScrollTrigger
 if (typeof window !== "undefined") {

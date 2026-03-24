@@ -25,8 +25,11 @@ export function Footer() {
 
   return (
     <>
-        {/* Placeholder - Reserves space in the document flow without duplicating DOM */}
-        <div style={{ height: footerHeight }} className="w-full pointer-events-none" />
+        {/* Placeholder - Reserves space with CSS defaults to prevent 0.488 CLS on load */}
+        <div 
+          style={{ height: footerHeight || undefined }} 
+          className={`w-full pointer-events-none ${!footerHeight ? 'h-[1100px] sm:h-[900px] md:h-[500px] xl:h-[450px]' : ''}`}
+        />
 
         {/* Fixed Footer - The actual visible footer */}
         <div ref={footerRef} className="fixed bottom-0 left-0 w-full h-auto z-0" style={{ zIndex: 1 }}>
