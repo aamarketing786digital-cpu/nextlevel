@@ -19,19 +19,25 @@ export function WhyChooseUs() {
   useGSAP(() => {
     if (!sectionRef.current || !textRef.current) return;
 
-    // Animate the text block revealing
-    gsap.from(textRef.current.children, {
-      y: 40,
-      opacity: 0,
-      stagger: 0.2,
-      duration: 1,
-      ease: "power4.out",
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 75%",
-        toggleActions: "play none none none",
-      },
-    });
+    // Animate the text block - use fromTo to avoid DOM reads
+    const textChildren = Array.from(textRef.current.children);
+    if (textChildren.length > 0) {
+      gsap.fromTo(textChildren,
+        { y: 40, opacity: 0 }, // Explicit start state - no DOM read
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.2,
+          duration: 1,
+          ease: "power4.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    }
   }, []);
 
   return (

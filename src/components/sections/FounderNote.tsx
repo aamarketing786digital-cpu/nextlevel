@@ -50,18 +50,24 @@ export function FounderNote() {
         );
     });
     
-    // Fade in other elements
-    gsap.from(textRef.current.querySelectorAll(".fade-in"), {
-      opacity: 0,
-      y: 20,
-      stagger: 0.1,
-      duration: 1,
-      delay: 0.2, // Wait for curtain
-      scrollTrigger: {
-        trigger: textRef.current,
-        start: "top 70%",
-      },
-    });
+    // Fade in other elements - use fromTo to avoid DOM reads
+    const fadeElements = Array.from(textRef.current.querySelectorAll(".fade-in"));
+    if (fadeElements.length > 0) {
+      gsap.fromTo(fadeElements,
+        { opacity: 0, y: 20 }, // Explicit start state - no DOM read
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.1,
+          duration: 1,
+          delay: 0.2, // Wait for curtain
+          scrollTrigger: {
+            trigger: textRef.current,
+            start: "top 70%",
+          },
+        }
+      );
+    }
   }, []);
 
   return (

@@ -36,35 +36,44 @@ export function CaseStudies({ limit, featured }: CaseStudiesProps) {
   useGSAP(() => {
     if (!sectionRef.current || !headingRef.current || !gridRef.current) return;
 
-    // Animate heading
-    gsap.from(headingRef.current.children, {
-      y: 50,
-      opacity: 0,
-      stagger: 0.15,
-      duration: 0.8,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 80%",
-        toggleActions: "play none none none",
-      },
-    });
+    // Animate heading - use fromTo to avoid DOM reads
+    const headingChildren = Array.from(headingRef.current.children);
+    if (headingChildren.length > 0) {
+      gsap.fromTo(headingChildren,
+        { y: 50, opacity: 0 }, // Explicit start state - no DOM read
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.15,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    }
 
-    // Animate case study cards
-    const cards = gridRef.current.querySelectorAll(".case-study-card");
+    // Animate case study cards - use fromTo to avoid DOM reads
+    const cards = Array.from(gridRef.current.querySelectorAll(".case-study-card"));
     if (cards.length > 0) {
-      gsap.from(cards, {
-        y: 60,
-        opacity: 0,
-        stagger: 0.15,
-        duration: 0.7,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: gridRef.current,
-          start: "top 75%",
-          toggleActions: "play none none none",
-        },
-      });
+      gsap.fromTo(cards,
+        { y: 60, opacity: 0 }, // Explicit start state - no DOM read
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.15,
+          duration: 0.7,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: gridRef.current,
+            start: "top 75%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
     }
 
     // Cleanup function for ScrollTrigger

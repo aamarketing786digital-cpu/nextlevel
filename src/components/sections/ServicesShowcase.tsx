@@ -70,20 +70,23 @@ function MobileServices() {
 
   useGSAP(() => {
     if (!sectionRef.current || window.innerWidth >= 768) return;
-    
+
     const cards = gsap.utils.toArray<HTMLElement>(".mobile-service-card");
     cards.forEach((card) => {
-      gsap.from(card, {
-        y: 40,
-        opacity: 0,
-        duration: 0.6,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: card,
-          start: "top 85%",
-          toggleActions: "play none none none",
-        },
-      });
+      gsap.fromTo(card,
+        { y: 40, opacity: 0 }, // Explicit start state - no DOM read
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
     });
   }, { scope: sectionRef });
 

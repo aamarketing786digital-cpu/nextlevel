@@ -89,42 +89,42 @@ export function ValueProp() {
   useGSAP(() => {
     if (!headingRef.current || !gridRef.current) return;
 
-    // Animate heading
+    // Animate heading - use fromTo to avoid DOM reads (forced reflow)
     const headerElements = Array.from(headingRef.current.children);
-    gsap.fromTo(headerElements, 
-      { y: 50, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        stagger: 0.15,
-        duration: 0.8,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          toggleActions: "play none none none",
-        },
-      }
-    );
+    if (headerElements.length > 0) {
+      gsap.fromTo(headerElements,
+        { y: 50, opacity: 0 }, // Explicit start state - no DOM read
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.15,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    }
 
-    // Animate grid items with advanced stagger
+    // Animate grid items - use fromTo with explicit start state
     const gridItems = Array.from(gridRef.current.querySelectorAll(".bento-item"));
     if (gridItems.length > 0) {
-      gsap.fromTo(gridItems, 
-        { y: 100, scale: 0.8, opacity: 0 },
+      gsap.fromTo(gridItems,
+        { y: 100, scale: 0.8, opacity: 0 }, // Explicit start state - no DOM read
         {
           y: 0,
           scale: 1,
           opacity: 1,
           duration: 1,
           ease: "power4.out",
-          stagger: {
-               amount: 0.5,
-          },
+          stagger: 0.1, // Linear stagger avoids center-point calculation
           scrollTrigger: {
             trigger: gridRef.current,
-            start: "top 85%", 
-            toggleActions: "play none none none", 
+            start: "top 85%",
+            toggleActions: "play none none none",
           },
         }
       );

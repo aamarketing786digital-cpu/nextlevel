@@ -127,8 +127,11 @@ Before proceeding, ask:
 - [ ] Use WebP format (30-50% smaller than PNG)
 - [ ] Mobile-first: optimize for Mobile, enhance for Desktop
 - [ ] Desktop-only heavy assets (images, 3D) using `hidden md:block`
-- [ ] Lazy-load below-fold sections with `next/dynamic`
+- [ ] Lazy-load below-fold sections with `next/dynamic` (Caution: Avoid for high-priority visible components)
 - [ ] Defer third-party scripts with `strategy="afterInteractive"`
+- [ ] Use `suppressHydrationWarning` on root `<html>`/`<body>` for browser extension compatibility
+- [ ] Use `gsap.fromTo()` instead of `gsap.from()` to explicitly define initial states without DOM reads
+- [ ] Use absolute CSS fallback heights for dynamic `ResizeObserver` sticky components (CLS fix)
 
 ### Must Avoid
 - [ ] `animate-[spin_2s_linear_infinite]` - constant CPU usage
@@ -232,28 +235,74 @@ useEffect(() => {
 
 ```typescript
 // ❌ Wrong (Causes Reflow)
-ScrollTrigger.create({
-  end: () => "+=" + (containerRef.current.offsetWidth - window.innerWidth),
-  onUpdate: (self) => {
-    document.querySelector('.active-btn').classList.remove('active');
-  }
+gsap.from(".items", { 
+  opacity: 0, 
+  stagger: { amount: 0.5, from: "center" } // Forces layout read to find center
 });
 
-// ✅ Right
-let getEndScroll = () => {
-    const offsetW = containerRef.current ? containerRef.current.offsetWidth : window.innerWidth;
-    return "+=" + (offsetW - window.innerWidth);
+// ✅ Right (Zero DOM measurement)
+gsap.fromTo(".items", 
+  { opacity: 0, y: 50 }, // Explicit start
+  { 
+    opacity: 1, 
+    y: 0, 
+    stagger: 0.1, // Linear stagger avoids center-point measurement
+    scrollTrigger: { /* ... */ } 
+  }
+);
+```
+
+### Canvas/WebGL Interaction Throttling (30s CPU fix)
+
+**Problem:** Heavy math engines (Globe, Neural Network, Particles) flood the 4x throttled Lighthouse CPU with 60fps calculations during the critical TBT measurement window.
+
+**Solution:** Defer `requestAnimationFrame` initialization until the user scrolls, moves the mouse, or a 3.5s timeout occurs.
+
+```typescript
+// Inside useEffect for Canvas/WebGL
+let hasInteracted = false;
+let initTimeout: NodeJS.Timeout;
+
+const startEngine = () => {
+  if (hasInteracted) return;
+  hasInteracted = true;
+  // Initialize WebGL context and rAF loop here
 };
 
-ScrollTrigger.create({
-  end: getEndScroll,
-  onUpdate: (self) => {
-    // Wrap DOM writes in rAF to prevent layout thrashing
-    requestAnimationFrame(() => {
-        // Safe DOM updates
-    });
-  }
-});
+// 1. Silent background timeout (Lighthouse TBT period)
+initTimeout = setTimeout(startEngine, 3500);
+
+// 2. Immediate start on user intent
+window.addEventListener("scroll", startEngine, { once: true, passive: true });
+window.addEventListener("mousemove", startEngine, { once: true, passive: true });
+
+// 3. Cleanup
+return () => {
+  clearTimeout(initTimeout);
+  window.removeEventListener("scroll", startEngine);
+  window.removeEventListener("mousemove", startEngine);
+};
+```
+
+### Sticky Component CLS (0.5+ CLS fix)
+
+**Problem:** Components that calculate height via `ResizeObserver` (like Sticky Footers) hydrate from `0px` to `Npx`, shifting the entire document.
+
+**Solution:** Assign responsive Tailwind/CSS fallback heights (`h-[800px] md:h-[400px]`) to the placeholder, then override with the measured height once hydrated.
+
+```typescript
+// ✅ Right: SSR-safe placeholder height
+const [height, setHeight] = useState(0);
+
+return (
+  <>
+    <div 
+      style={{ height: height || undefined }} 
+      className={`w-full ${!height ? 'h-[900px] md:h-[500px]' : ''}`} 
+    />
+    <footer ref={ref} className="fixed bottom-0">...</footer>
+  </>
+);
 ```
 
 ### Heavy Component Hydration (TBT/JS Execution fix)

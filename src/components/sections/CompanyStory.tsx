@@ -21,34 +21,45 @@ export function CompanyStory() {
   useGSAP(() => {
     if (!sectionRef.current || !headingRef.current || !storyItemsRef.current) return;
 
-    // Animate heading
-    gsap.from(headingRef.current.children, {
-      y: 50,
-      opacity: 0,
-      stagger: 0.15,
-      duration: 0.8,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 80%",
-        toggleActions: "play none none none",
-      },
-    });
+    // Animate heading - use fromTo to avoid DOM reads
+    const headingChildren = Array.from(headingRef.current.children);
+    if (headingChildren.length > 0) {
+      gsap.fromTo(headingChildren,
+        { y: 50, opacity: 0 }, // Explicit start state - no DOM read
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.15,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    }
 
-    // Animate story items
-    const items = storyItemsRef.current.children;
-    gsap.from(items, {
-      x: -50,
-      opacity: 0,
-      stagger: 0.2,
-      duration: 0.8,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: storyItemsRef.current,
-        start: "top 75%",
-        toggleActions: "play none none none",
-      },
-    });
+    // Animate story items - use fromTo to avoid DOM reads
+    const items = Array.from(storyItemsRef.current.children);
+    if (items.length > 0) {
+      gsap.fromTo(items,
+        { x: -50, opacity: 0 }, // Explicit start state - no DOM read
+        {
+          x: 0,
+          opacity: 1,
+          stagger: 0.2,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: storyItemsRef.current,
+            start: "top 75%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    }
   }, []);
 
   return (

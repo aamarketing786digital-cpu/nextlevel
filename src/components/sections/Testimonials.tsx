@@ -31,35 +31,41 @@ export function Testimonials({ testimonials = [] }: TestimonialsProps) {
   useGSAP(() => {
     if (!sectionRef.current) return;
 
-    // Initial reveal animation with ScrollTrigger (Fade In Elements)
-    gsap.from(sectionRef.current.querySelectorAll(".testimonial-element"), {
-      y: 50,
-      opacity: 0,
-      stagger: 0.15,
-      duration: 0.8,
-      delay: 0.2,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 80%",
-        toggleActions: "play none none none",
-      },
-    });
+    // Initial reveal animation with ScrollTrigger - use fromTo to avoid DOM reads
+    const testimonialElements = Array.from(sectionRef.current.querySelectorAll(".testimonial-element"));
+    if (testimonialElements.length > 0) {
+      gsap.fromTo(testimonialElements,
+        { y: 50, opacity: 0 }, // Explicit start state - no DOM read
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.15,
+          duration: 0.8,
+          delay: 0.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    }
 
-    // Text Reveal (Curtain Effect)
+    // Text Reveal (Curtain Effect) - already using fromTo, good!
     const splitText = sectionRef.current.querySelectorAll(".reveal-text");
     splitText.forEach((el) => {
-        gsap.fromTo(el, 
+        gsap.fromTo(el,
             { y: "100%" },
-            { 
-                y: "0%", 
-                duration: 1, 
-                ease: "power3.out", 
+            {
+                y: "0%",
+                duration: 1,
+                ease: "power3.out",
                 scrollTrigger: {
                     trigger: el,
                     start: "top 85%",
                     toggleActions: "play none none none"
-                } 
+                }
             }
         );
     });

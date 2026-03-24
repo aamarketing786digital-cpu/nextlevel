@@ -42,36 +42,45 @@ export function Values() {
   useGSAP(() => {
     if (!sectionRef.current || !headingRef.current || !gridRef.current) return;
 
-    // Animate heading
-    gsap.from(headingRef.current.children, {
-      y: 50,
-      opacity: 0,
-      stagger: 0.15,
-      duration: 0.8,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 80%",
-        toggleActions: "play none none none",
-      },
-    });
+    // Animate heading - use fromTo to avoid DOM reads
+    const headingChildren = Array.from(headingRef.current.children);
+    if (headingChildren.length > 0) {
+      gsap.fromTo(headingChildren,
+        { y: 50, opacity: 0 }, // Explicit start state - no DOM read
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.15,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    }
 
-    // Animate value cards with staggered reveal
-    const cards = gridRef.current.querySelectorAll(".value-card");
+    // Animate value cards - use fromTo to avoid DOM reads
+    const cards = Array.from(gridRef.current.querySelectorAll(".value-card"));
     if (cards.length > 0) {
-      gsap.from(cards, {
-        y: 60,
-        opacity: 0,
-        scale: 0.9,
-        stagger: 0.15,
-        duration: 0.6,
-        ease: "back.out(1.7)",
-        scrollTrigger: {
-          trigger: gridRef.current,
-          start: "top 75%",
-          toggleActions: "play none none none",
-        },
-      });
+      gsap.fromTo(cards,
+        { y: 60, opacity: 0, scale: 0.9 }, // Explicit start state - no DOM read
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          stagger: 0.15,
+          duration: 0.6,
+          ease: "back.out(1.7)",
+          scrollTrigger: {
+            trigger: gridRef.current,
+            start: "top 75%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
     }
   }, []);
 
