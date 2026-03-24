@@ -132,11 +132,11 @@ export function RankingCta() {
                   {/* Floating Contact Pill */}
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                     <div className="pointer-events-auto flex items-center justify-center gap-3 bg-white/40 backdrop-blur-xl border border-white/40 shadow-xl rounded-full py-2 px-3 transition-transform duration-500 hover:scale-110 cursor-pointer">
-                      <a href="mailto:info@nextlevel.com" className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-lg text-blue-500 hover:bg-blue-50 transition-colors">
-                        <Mail className="w-5 h-5" />
+                      <a href="mailto:info@nextlevel.com" aria-label="Email Us" className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-lg text-blue-500 hover:bg-blue-50 transition-colors">
+                        <Mail className="w-5 h-5" aria-hidden="true" />
                       </a>
-                      <a href="tel:+971563377016" className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-lg text-green-500 hover:bg-green-50 transition-colors">
-                        <Phone className="w-5 h-5" />
+                      <a href="tel:+971563377016" aria-label="Call Us" className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-lg text-green-500 hover:bg-green-50 transition-colors">
+                        <Phone className="w-5 h-5" aria-hidden="true" />
                       </a>
                     </div>
                   </div>

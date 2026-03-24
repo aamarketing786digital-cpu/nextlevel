@@ -66,22 +66,24 @@ export function VideoTestimonials({ testimonials = [] }: VideoTestimonialsProps)
             <button 
               onClick={() => scroll('left')}
               disabled={!canScrollLeft}
+              aria-label="Scroll testimonials left"
               className={cn(
                 "w-10 h-10 rounded-full border border-white/20 flex items-center justify-center transition-all",
                 canScrollLeft ? "text-white hover:bg-white/10" : "text-white/30 cursor-not-allowed"
               )}
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ChevronLeft className="w-5 h-5" aria-hidden="true" />
             </button>
             <button 
               onClick={() => scroll('right')}
               disabled={!canScrollRight}
+              aria-label="Scroll testimonials right"
               className={cn(
                 "w-10 h-10 rounded-full border border-white/20 flex items-center justify-center transition-all",
                 canScrollRight ? "text-white hover:bg-white/10" : "text-white/30 cursor-not-allowed"
               )}
             >
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="w-5 h-5" aria-hidden="true" />
             </button>
           </div>
         </div>

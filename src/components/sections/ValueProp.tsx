@@ -90,7 +90,8 @@ export function ValueProp() {
     if (!headingRef.current || !gridRef.current) return;
 
     // Animate heading
-    gsap.from(headingRef.current.children, {
+    const headerElements = Array.from(headingRef.current.children);
+    gsap.from(headerElements, {
       y: 50,
       opacity: 0,
       stagger: 0.15,
@@ -104,7 +105,7 @@ export function ValueProp() {
     });
 
     // Animate grid items with advanced stagger
-    const gridItems = gridRef.current.querySelectorAll(".bento-item");
+    const gridItems = Array.from(gridRef.current.querySelectorAll(".bento-item"));
     if (gridItems.length > 0) {
       gsap.from(gridItems, {
         y: 100,

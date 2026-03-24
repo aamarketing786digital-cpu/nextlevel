@@ -69,7 +69,7 @@ function MobileServices() {
   const sectionRef = useRef<HTMLElement>(null);
 
   useGSAP(() => {
-    if (!sectionRef.current) return;
+    if (!sectionRef.current || window.innerWidth >= 768) return;
     
     const cards = gsap.utils.toArray<HTMLElement>(".mobile-service-card");
     cards.forEach((card) => {
@@ -151,7 +151,7 @@ function DesktopServices() {
   const activeIndexRef = useRef(0);
 
   useGSAP(() => {
-    if (!triggerRef.current || !containerRef.current) return;
+    if (!triggerRef.current || !containerRef.current || window.innerWidth < 768) return;
 
     const panels = gsap.utils.toArray<HTMLElement>(".service-panel");
     const totalPanels = panels.length;

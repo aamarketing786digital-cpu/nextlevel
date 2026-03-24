@@ -1,22 +1,38 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { FOOTER_LINKS, SOCIAL_LINKS } from "@/lib/constants";
 import { Container } from "./Container";
 
 export function Footer() {
+  const footerRef = useRef<HTMLDivElement>(null);
+  const [footerHeight, setFooterHeight] = useState(0);
+
+  useEffect(() => {
+    if (!footerRef.current) return;
+    
+    // Check height initially
+    setFooterHeight(footerRef.current.offsetHeight);
+
+    const observer = new ResizeObserver((entries) => {
+      setFooterHeight(entries[0].borderBoxSize[0]?.blockSize || entries[0].contentRect.height);
+    });
+    
+    observer.observe(footerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="relative h-full w-full">
-        {/* Placeholder - Reserves space in the document flow */}
-        <div className="relative z-0 opacity-0 pointer-events-none select-none">
-            <FooterContent />
-        </div>
+    <>
+        {/* Placeholder - Reserves space in the document flow without duplicating DOM */}
+        <div style={{ height: footerHeight }} className="w-full pointer-events-none" />
 
         {/* Fixed Footer - The actual visible footer */}
-        <div className="fixed bottom-0 left-0 w-full h-auto z-0" style={{ zIndex: 1 }}>
+        <div ref={footerRef} className="fixed bottom-0 left-0 w-full h-auto z-0" style={{ zIndex: 1 }}>
             <FooterContent />
         </div>
-    </div>
+    </>
   );
 }
 

@@ -24,5 +24,5 @@ export function BodyWrapper({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  return <body className="font-body antialiased">{children}</body>;
+  return <body className="font-body antialiased" suppressHydrationWarning>{children}</body>;
 }
