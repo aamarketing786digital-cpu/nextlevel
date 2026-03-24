@@ -69,7 +69,7 @@ export const Globe = ({ className }: { className?: string }) => {
           rAF = requestAnimationFrame(initGlobe);
         }
       },
-      { threshold: 0, rootMargin: "400px" } 
+      { threshold: 0, rootMargin: "0px" } 
     );
     
     observer.observe(canvas);

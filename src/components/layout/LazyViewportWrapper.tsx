@@ -33,7 +33,7 @@ export function LazyViewportWrapper({
           observer.disconnect();
         }
       },
-      { rootMargin: "600px" } // Start rendering 600px before it enters the viewport
+      { rootMargin: "100px" } // Render 100px before it enters the viewport
     );
     
     observer.observe(ref.current);

@@ -224,6 +224,72 @@ useEffect(() => {
 </div>
 ```
 
+### GSAP Forced Reflows (Layout Thrashing)
+
+**Problem:** `ScrollTrigger` calculations or `onUpdate` loops querying DOM properties (like `offsetWidth`) causing severe main-thread blocking (TBT > 1000ms).
+
+**Solution:** Pre-calculate layout dimensions outside of GSAP config and batch DOM reads/writes using `requestAnimationFrame`.
+
+```typescript
+// ❌ Wrong (Causes Reflow)
+ScrollTrigger.create({
+  end: () => "+=" + (containerRef.current.offsetWidth - window.innerWidth),
+  onUpdate: (self) => {
+    document.querySelector('.active-btn').classList.remove('active');
+  }
+});
+
+// ✅ Right
+let getEndScroll = () => {
+    const offsetW = containerRef.current ? containerRef.current.offsetWidth : window.innerWidth;
+    return "+=" + (offsetW - window.innerWidth);
+};
+
+ScrollTrigger.create({
+  end: getEndScroll,
+  onUpdate: (self) => {
+    // Wrap DOM writes in rAF to prevent layout thrashing
+    requestAnimationFrame(() => {
+        // Safe DOM updates
+    });
+  }
+});
+```
+
+### Heavy Component Hydration (TBT/JS Execution fix)
+
+**Problem:** Complex components (Framer Motion arrays, WebGL/Three.js) evaluating immediately on mount, causing massive (3s+) JS Execution Time and TBT.
+
+**Solution:** Create a `LazyViewportWrapper` utilizing `IntersectionObserver` to completely starve the hydration queue until the component approaches the viewport.
+
+```typescript
+// ❌ Wrong: dynamic() alone still executes JS scripts immediately on load if unconditionally rendered
+const HeavySection = dynamic(() => import("./HeavySection"));
+
+// ✅ Right: Wrap in IntersectionObserver
+export function LazyViewportWrapper({ children, minHeight = "400px" }: { children: ReactNode, minHeight?: string }) {
+  const [shouldRender, setShouldRender] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setShouldRender(true); },
+      { rootMargin: "600px" } // Render 600px before appearing
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  if (shouldRender) return <>{children}</>;
+  return <div ref={ref} style={{ minHeight, width: "100%" }} aria-hidden="true" />;
+}
+
+// Usage in layout
+<LazyViewportWrapper minHeight="800px">
+  <HeavySection />
+</LazyViewportWrapper>
+```
+
 ---
 
 ## Output Checklist
@@ -241,6 +307,8 @@ Before delivering, verify:
 - [ ] No GSAP on hero sections
 - [ ] Desktop-only heavy assets
 - [ ] Dynamic imports for below-fold sections
+- [ ] Lazy Hydration via Viewport wrappers for heavy interactive sections
+- [ ] Safe GSAP integrations without synchronous layout measurements (forced reflows)
 
 ### Performance Targets
 - [ ] Mobile LCP < 2.5s

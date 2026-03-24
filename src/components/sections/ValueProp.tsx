@@ -115,7 +115,6 @@ export function ValueProp() {
         ease: "power4.out",
         stagger: {
              amount: 0.5,
-             grid: "auto",
              from: "center"
         },
         scrollTrigger: {
