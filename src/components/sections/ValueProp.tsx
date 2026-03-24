@@ -94,38 +94,43 @@ export function ValueProp() {
 
     // Animate heading
     const headerElements = Array.from(headingRef.current.children);
-    gsap.from(headerElements, {
-      y: 50,
-      opacity: 0,
-      stagger: 0.15,
-      duration: 0.8,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 80%",
-        toggleActions: "play none none none",
-      },
-    });
+    gsap.fromTo(headerElements, 
+      { y: 50, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        stagger: 0.15,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
 
     // Animate grid items with advanced stagger
     const gridItems = Array.from(gridRef.current.querySelectorAll(".bento-item"));
     if (gridItems.length > 0) {
-      gsap.from(gridItems, {
-        y: 100,
-        scale: 0.8,
-        opacity: 0,
-        duration: 1,
-        ease: "power4.out",
-        stagger: {
-             amount: 0.5,
-             from: "center"
-        },
-        scrollTrigger: {
-          trigger: gridRef.current,
-          start: "top 85%", 
-          toggleActions: "play none none none", 
-        },
-      });
+      gsap.fromTo(gridItems, 
+        { y: 100, scale: 0.8, opacity: 0 },
+        {
+          y: 0,
+          scale: 1,
+          opacity: 1,
+          duration: 1,
+          ease: "power4.out",
+          stagger: {
+               amount: 0.5,
+          },
+          scrollTrigger: {
+            trigger: gridRef.current,
+            start: "top 85%", 
+            toggleActions: "play none none none", 
+          },
+        }
+      );
     }
   }, []);
 
