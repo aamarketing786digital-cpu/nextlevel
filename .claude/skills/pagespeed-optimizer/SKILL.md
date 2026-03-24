@@ -1,10 +1,11 @@
 ---
 name: pagespeed-optimizer
 description: |
-  Optimize web applications to achieve 90+ PageSpeed scores on Mobile and Desktop.
-  This skill should be used when users ask to improve PageSpeed Insights scores, fix
-  performance issues, optimize Core Web Vitals (LCP, TBT, CLS, FCP, Speed Index),
-  or eliminate render-blocking resources.
+  Achieve 90+ PageSpeed scores through systematic optimization of Next.js applications.
+  Use when improving PageSpeed Insights scores, fixing Core Web Vitals issues (LCP, TBT, CLS, FCP),
+  eliminating render-blocking resources, or optimizing JavaScript execution time.
+  Focuses on Mobile optimization (primary bottleneck) with Desktop enhancements.
+  Includes Turbopack polyfill removal, GSAP forced reflow fixes, and deferred WebGL initialization.
 allowed-tools: Read, Edit, Write, Bash, Glob, Grep
 ---
 
@@ -105,11 +106,13 @@ Before proceeding, ask:
 
 **Apply fixes in order of impact:**
 
-1. **Render-blocking CSS** → Enable `inlineCss: true`
-2. **Legacy polyfills** → Configure modern browserslist
-3. **Image optimization** → WebP, proper sizes, quality reduction
-4. **Code splitting** → Dynamic imports for below-fold sections
-5. **Animation removal** → Remove GSAP from hero, infinite animations
+1. **Legacy JavaScript Polyfills** → Turbopack resolveAlias (13-14 KiB savings)
+2. **Render-blocking CSS** → Enable `inlineCss: true` (570ms potential savings)
+3. **GSAP forced reflows** → Replace `gsap.from()` with `gsap.fromTo()` (100-200ms savings)
+4. **Three.js/WebGL** → Defer initialization with interaction listeners (1000ms+ savings)
+5. **Image optimization** → WebP, proper sizes, quality reduction
+6. **Code splitting** → Dynamic imports for below-fold sections
+7. **Animation removal** → Remove GSAP from hero, infinite animations
 
 ### Phase 3: Verify and Iterate
 
@@ -157,11 +160,28 @@ experimental: {
 }
 ```
 
-### Legacy JavaScript Polyfills (13.4 KiB potential savings)
+### Legacy JavaScript Polyfills (13-14 KiB savings)
 
-**Problem:** Polyfills for modern features (Array.at, flat, etc.)
+**Problem:** Next.js includes polyfills for modern JS features (Array.at, flat, flatMap, Object.hasOwn, String.trimEnd/Start) even with browserslist configuration. This wastes 13-14 KiB on modern browsers.
 
-**Solution:** Configure modern browser targets in package.json
+**Solution:** Turbopack `resolveAlias` to replace polyfills with empty file (Turbopack-only).
+
+```typescript
+// next.config.mjs - Add turbopack configuration
+const nextConfig = {
+  turbopack: {
+    resolveAlias: {
+      '../build/polyfills/polyfill-module': './src/lib/empty-polyfill.js',
+      'next/dist/build/polyfills/polyfill-module': './src/lib/empty-polyfill.js',
+    },
+  },
+}
+
+// src/lib/empty-polyfill.js - Create this empty file
+export {}
+```
+
+**Fallback (Webpack):** Configure modern browserslist in package.json:
 
 ```json
 {
@@ -170,6 +190,8 @@ experimental: {
   }
 }
 ```
+
+**Verification:** After build, PageSpeed "Legacy JavaScript" insight should show 0 KiB.
 
 ### Hero Image LCP Issues (2-4s delay on Mobile)
 
@@ -348,6 +370,7 @@ Before delivering, verify:
 ### Configuration
 - [ ] `experimental.inlineCss: true` in next.config.mjs
 - [ ] Modern browserslist in package.json
+- [ ] Turbopack resolveAlias for legacy polyfills (if using Turbopack)
 - [ ] Images using Next.js `<Image>` component
 - [ ] WebP format for all images
 

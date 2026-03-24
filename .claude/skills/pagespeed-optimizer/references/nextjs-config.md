@@ -174,6 +174,14 @@ const nextConfig = {
     inlineCss: true,  // Critical for 90+ scores
   },
 
+  // Turbopack polyfill removal (13-14 KiB savings)
+  turbopack: {
+    resolveAlias: {
+      '../build/polyfills/polyfill-module': './src/lib/empty-polyfill.js',
+      'next/dist/build/polyfills/polyfill-module': './src/lib/empty-polyfill.js',
+    },
+  },
+
   // Production optimizations
   productionBrowserSourceMaps: false,
 
@@ -244,6 +252,34 @@ Next.js 16 uses Turbopack by default. Some config options may differ:
 // - swcMinify (always enabled)
 // - webpack middleware
 ```
+
+### Turbopack Polyfill Removal (13-14 KiB savings)
+
+**Problem:** Next.js includes legacy polyfills for modern JS features even with browserslist configuration.
+
+**Solution:** Use Turbopack's `resolveAlias` to replace polyfills with an empty file.
+
+```typescript
+// next.config.mjs
+const nextConfig = {
+  turbopack: {
+    resolveAlias: {
+      '../build/polyfills/polyfill-module': './src/lib/empty-polyfill.js',
+      'next/dist/build/polyfills/polyfill-module': './src/lib/empty-polyfill.js',
+    },
+  },
+}
+
+// src/lib/empty-polyfill.js
+export {}
+```
+
+**Impact:**
+- Removes 13-14 KiB of polyfills
+- PageSpeed "Legacy JavaScript" insight shows 0 KiB
+- Faster parsing and execution on modern browsers
+
+**Source:** [GitHub Discussion: CWV Avoid sending legacy JS to modern browsers](https://github.com/vercel/next.js/discussions/64330)
 
 ### Current Limitations
 

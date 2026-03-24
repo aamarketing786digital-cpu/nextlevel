@@ -31,6 +31,15 @@ const nextConfig = {
     inlineCss: true,
   },
 
+  // Turbopack polyfill removal (13-14 KiB savings)
+  // Replaces Next.js legacy polyfills with empty file for modern browsers
+  turbopack: {
+    resolveAlias: {
+      '../build/polyfills/polyfill-module': './src/lib/empty-polyfill.js',
+      'next/dist/build/polyfills/polyfill-module': './src/lib/empty-polyfill.js',
+    },
+  },
+
   // Production optimizations
   productionBrowserSourceMaps: false,
 

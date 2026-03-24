@@ -22,10 +22,10 @@ experimental: {
 
 ---
 
-## Legacy JavaScript Polyfills (13.4 KiB potential savings)
+## Legacy JavaScript Polyfills (13-14 KiB potential savings)
 
 ### Issue
-Polyfills for modern features already supported by browsers:
+Next.js includes polyfills for modern features already supported by browsers:
 - `Array.prototype.at`
 - `Array.prototype.flat`
 - `Array.prototype.flatMap`
@@ -33,9 +33,28 @@ Polyfills for modern features already supported by browsers:
 - `Object.hasOwn`
 - `String.prototype.trimEnd/Start`
 
+This wastes 13-14 KiB on modern browsers even with browserslist configuration.
+
 ### Solution
 
-Configure modern browser targets in `package.json`:
+**Turbopack (Recommended):** Replace polyfills with empty file via resolveAlias
+
+```typescript
+// next.config.mjs
+const nextConfig = {
+  turbopack: {
+    resolveAlias: {
+      '../build/polyfills/polyfill-module': './src/lib/empty-polyfill.js',
+      'next/dist/build/polyfills/polyfill-module': './src/lib/empty-polyfill.js',
+    },
+  },
+}
+
+// src/lib/empty-polyfill.js - Create this empty file
+export {}
+```
+
+**Webpack (Fallback):** Configure modern browser targets in `package.json`:
 
 ```json
 {
@@ -46,7 +65,7 @@ Configure modern browser targets in `package.json`:
 }
 ```
 
-**Result:** Next.js skips polyfills for features natively supported.
+**Result:** PageSpeed "Legacy JavaScript" insight shows 0 KiB.
 
 ---
 
@@ -207,8 +226,10 @@ export default function RootLayout({ children }) {
 
 | Issue | Impact | Fix | Time Saved |
 |-------|--------|-----|------------|
+| Legacy polyfills | 13-14 KiB | Turbopack resolveAlias | ~13 KiB |
 | Render-blocking CSS | 570ms | `inlineCss: true` | ~400ms FCP |
-| Legacy polyfills | 13.4 KiB | Modern browserslist | ~200ms parse |
+| GSAP forced reflows | 100-200ms | `gsap.fromTo()` | ~150ms TBT |
+| Three.js/WebGL blocking | 1000ms+ | Deferred init | ~1000ms TBT |
 | Hero image mobile | 2-4s LCP | Desktop-only | ~2s LCP |
 | Infinite animations | +200ms TBT | Remove/use CSS | ~200ms TBT |
 | GSAP on hero | +1.5s CPU | Use CSS fade | ~1.5s JS |
