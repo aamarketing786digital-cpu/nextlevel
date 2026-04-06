@@ -108,7 +108,7 @@ export function VideoTestimonials({ testimonials = [] }: VideoTestimonialsProps)
                   }
                 }
               }}
-              className="group relative rounded-3xl overflow-hidden bg-slate-900 border border-white/10 flex-shrink-0 w-[85vw] md:w-[calc(50%-12px)] aspect-[16/9] flex flex-col cursor-pointer transition-transform duration-500 hover:border-primary/50 snap-start"
+              className="group relative rounded-3xl overflow-hidden bg-teal-900 border border-white/10 flex-shrink-0 w-[85vw] md:w-[calc(50%-12px)] aspect-[16/9] flex flex-col cursor-pointer transition-transform duration-500 hover:border-primary/50 snap-start"
             >
               {/* Thumbnail Image Background */}
               <div 

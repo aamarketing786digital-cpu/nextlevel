@@ -55,9 +55,9 @@ export default function Error({
   }, [error]);
 
   return (
-    <div ref={containerRef} className="relative min-h-screen flex items-center justify-center bg-slate-950 overflow-hidden pt-24 md:pt-32">
+    <div ref={containerRef} className="relative min-h-screen flex items-center justify-center bg-teal-950 overflow-hidden pt-24 md:pt-32">
       {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
+      <div className="absolute inset-0 bg-gradient-to-br from-teal-950 via-teal-900 to-teal-950" />
       <div 
          className="absolute inset-0 opacity-10 mix-blend-overlay pointer-events-none" 
          style={{ 
@@ -88,7 +88,7 @@ export default function Error({
 
         {/* Error Code (in development) */}
         {process.env.NODE_ENV === "development" && (
-          <div className="error-code bg-slate-900/50 border border-red-500/30 rounded-xl p-4 mb-8 text-left">
+          <div className="error-code bg-teal-900/50 border border-red-500/30 rounded-xl p-4 mb-8 text-left">
             <p className="text-red-400 text-sm font-mono break-all">
               {error.message}
             </p>
@@ -105,7 +105,7 @@ export default function Error({
           <Button
             onClick={reset}
             size="lg"
-            className="error-btn rounded-full bg-amber-500 hover:bg-amber-400 text-slate-950 hover:shadow-[0_0_30px_rgba(251,191,36,0.3)] transition-all duration-300 text-lg px-8 h-14 font-medium"
+            className="error-btn rounded-full bg-orange-500 hover:bg-orange-400 text-slate-950 hover:shadow-[0_0_30px_rgba(242,151,39,0.3)] transition-all duration-300 text-lg px-8 h-14 font-medium"
           >
             <RefreshCw className="w-5 h-5 mr-2" />
             Try Again
@@ -138,13 +138,13 @@ export default function Error({
         <div className="mt-12 pt-8 border-t border-white/10">
           <p className="text-slate-500 mb-4">While you wait, check out:</p>
           <div className="flex flex-wrap justify-center gap-6 text-sm">
-            <Link href="/services" className="text-amber-400/80 hover:text-amber-400 transition-colors">
+            <Link href="/services" className="text-orange-400/80 hover:text-orange-400 transition-colors">
               Our Services
             </Link>
-            <Link href="/work" className="text-amber-400/80 hover:text-amber-400 transition-colors">
+            <Link href="/work" className="text-orange-400/80 hover:text-orange-400 transition-colors">
               Portfolio
             </Link>
-            <Link href="/about" className="text-amber-400/80 hover:text-amber-400 transition-colors">
+            <Link href="/about" className="text-orange-400/80 hover:text-orange-400 transition-colors">
               About Us
             </Link>
           </div>

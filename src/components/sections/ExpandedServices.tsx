@@ -107,7 +107,7 @@ export function ExpandedServices() {
   const visibleServices = isOpen ? allServiceTitles : getFilteredServices();
 
   return (
-    <section className="section-dark bg-slate-950 py-24 md:py-32 relative overflow-hidden border-t border-white/10">
+    <section className="section-dark bg-teal-950 py-24 md:py-32 relative overflow-hidden border-t border-white/10">
       {/* Background Effects */}
       <div 
          className="absolute inset-0 opacity-[0.02] mix-blend-overlay pointer-events-none" 
@@ -116,14 +116,14 @@ export function ExpandedServices() {
          }} 
       />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/10 rounded-full blur-[150px]" />
-      <div className="absolute bottom-0 right-0 w-[600px] h-[300px] bg-amber-500/5 rounded-full blur-[120px]" />
+      <div className="absolute bottom-0 right-0 w-[600px] h-[300px] bg-orange-500/5 rounded-full blur-[120px]" />
 
       <Container className="relative z-10">
         <div className="max-w-5xl mx-auto">
           {/* Header */}
           <div className="text-center mb-16">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500/20 to-primary/10 border border-amber-500/20 mb-6">
-              <Sparkles className="w-8 h-8 text-amber-400" />
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500/20 to-primary/10 border border-orange-500/20 mb-6">
+              <Sparkles className="w-8 h-8 text-orange-400" />
             </div>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-6">
               Our Comprehensive Services
@@ -140,7 +140,7 @@ export function ExpandedServices() {
               className={cn(
                 "px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300",
                 selectedCategory === null
-                  ? "bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/20"
+                  ? "bg-orange-500 text-slate-950 shadow-lg shadow-orange-500/20"
                   : "bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white border border-white/10"
               )}
             >
@@ -153,7 +153,7 @@ export function ExpandedServices() {
                 className={cn(
                   "px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap",
                   selectedCategory === category
-                    ? "bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/20"
+                    ? "bg-orange-500 text-slate-950 shadow-lg shadow-orange-500/20"
                     : "bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white border border-white/10"
                 )}
               >
@@ -182,14 +182,14 @@ export function ExpandedServices() {
                   >
                     <Link
                       href={`/services/${service.slug}`}
-                      className="group flex items-center justify-between p-5 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-amber-500/30 transition-all duration-300"
+                      className="group flex items-center justify-between p-5 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-orange-500/30 transition-all duration-300"
                     >
                       <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500/20 to-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                          <Sparkles className="w-5 h-5 text-amber-400" />
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500/20 to-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                          <Sparkles className="w-5 h-5 text-orange-400" />
                         </div>
                         <div>
-                          <h3 className="text-white font-medium text-lg group-hover:text-amber-400 transition-colors">
+                          <h3 className="text-white font-medium text-lg group-hover:text-orange-400 transition-colors">
                             {service.title}
                           </h3>
                           <p className="text-slate-500 text-sm mt-0.5 line-clamp-1">
@@ -197,7 +197,7 @@ export function ExpandedServices() {
                           </p>
                         </div>
                       </div>
-                      <ChevronRight className="w-5 h-5 text-slate-600 group-hover:text-amber-400 group-hover:translate-x-1 transition-all" />
+                      <ChevronRight className="w-5 h-5 text-slate-600 group-hover:text-orange-400 group-hover:translate-x-1 transition-all" />
                     </Link>
                   </motion.div>
                 );
@@ -215,7 +215,7 @@ export function ExpandedServices() {
                   "rounded-full text-base font-medium px-10 h-14 transition-all duration-300",
                   isOpen
                     ? "bg-white/10 text-white hover:bg-white/20 border border-white/20"
-                    : "bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-lg shadow-amber-500/20 hover:shadow-xl hover:shadow-amber-500/30"
+                    : "bg-orange-500 hover:bg-orange-400 text-slate-950 shadow-lg shadow-orange-500/20 hover:shadow-xl hover:shadow-orange-500/30"
                 )}
               >
                 {isOpen ? (

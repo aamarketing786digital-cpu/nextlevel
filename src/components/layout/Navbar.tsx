@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
+import Image from "next/image";
 import { NAVIGATION_LINKS, getServiceUrl } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import {
@@ -46,15 +47,17 @@ export function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <span className="font-display text-2xl font-bold text-gradient-gold">
-              NL
-            </span>
-            <span className={cn(
-               "hidden font-display text-xl font-bold sm:inline-block transition-colors duration-300",
-               isScrolled ? "text-slate-900" : "text-white"
-            )}>
-              NextLevel Marketerz
-            </span>
+            <div className="relative h-16 w-56 md:h-20 md:w-72 overflow-hidden flex items-center">
+               <div className="absolute top-1/2 left-0 -translate-y-1/2 w-56 h-56 md:w-72 md:h-72">
+                   <Image 
+                      src="/Nextlevel-Logo.png" 
+                      alt="NextLevel Marketerz Logo" 
+                      fill 
+                      className="object-contain object-left transition-all duration-300"
+                      priority
+                   />
+               </div>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -251,11 +254,20 @@ export function Navbar() {
                 <Menu size={24} />
               </button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-slate-950 border-white/10 p-0 border-l">
+            <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-teal-950 border-white/10 p-0 border-l">
                 <div className="flex flex-col h-full relative"> 
                     <SheetTitle className="sr-only">Mobile Menu</SheetTitle>
                     <div className="flex items-center justify-between p-6 border-b border-white/10">
-                        <span className="font-display text-xl font-bold text-white">Menu</span>
+                        <div className="relative h-20 w-64 overflow-hidden">
+                           <div className="absolute top-1/2 left-0 -translate-y-1/2 w-64 h-64">
+                                <Image 
+                                    src="/Nextlevel-Logo.png" 
+                                    alt="NextLevel Logo" 
+                                    fill 
+                                    className="object-contain object-left"
+                                />
+                            </div>
+                        </div>
                         <SheetClose className="text-white hover:text-primary transition-colors focus:outline-none">
                              <X size={24} />
                              <span className="sr-only">Close</span>

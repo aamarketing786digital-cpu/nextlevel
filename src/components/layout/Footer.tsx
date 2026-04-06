@@ -2,8 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { FOOTER_LINKS, SOCIAL_LINKS } from "@/lib/constants";
 import { Container } from "./Container";
+
+import { Twitter, Linkedin, Github, Dribbble } from "lucide-react";
 
 export function Footer() {
   const footerRef = useRef<HTMLDivElement>(null);
@@ -39,9 +42,19 @@ export function Footer() {
   );
 }
 
+const getSocialIcon = (platform: string) => {
+  switch (platform.toLowerCase()) {
+    case "twitter": return <Twitter size={18} />;
+    case "linkedin": return <Linkedin size={18} />;
+    case "github": return <Github size={18} />;
+    case "dribbble": return <Dribbble size={18} />;
+    default: return <span>{platform.charAt(0)}</span>;
+  }
+};
+
 function FooterContent() {
   return (
-    <footer className="border-t border-white/10 bg-slate-950 pt-48 md:pt-24 pb-2 md:pb-12 relative overflow-hidden h-full">
+    <footer className="border-t border-white/10 bg-teal-950 pt-48 md:pt-24 pb-2 md:pb-12 relative overflow-hidden h-full">
         {/* Background Gradients */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
 
@@ -50,7 +63,16 @@ function FooterContent() {
             {/* Brand Column */}
             <div className="col-span-2 lg:col-span-2">
                  <Link href="/" className="flex items-center space-x-2 mb-6">
-                    <span className="font-display text-3xl font-bold text-white">Next Level Marketerz</span>
+                    <div className="relative h-20 w-64 md:h-24 md:w-80 overflow-hidden">
+                        <div className="absolute top-1/2 left-0 -translate-x-8 -translate-y-1/2 w-64 h-64 md:w-80 md:h-80">
+                            <Image 
+                                src="/Nextlevel-Logo.png" 
+                                alt="NextLevel Logo" 
+                                fill 
+                                className="object-contain object-left"
+                            />
+                        </div>
+                    </div>
                  </Link>
                  <p className="text-slate-400 text-lg leading-relaxed max-w-sm mb-6">
                     Ascension to digital excellence. We craft experiences that define the future of interaction.
@@ -62,11 +84,11 @@ function FooterContent() {
                           href={link.url} 
                           target="_blank" 
                           rel="noopener noreferrer" 
-                          className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all text-sm font-bold uppercase"
+                          className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all"
                           aria-label={`Follow us on ${link.platform}`}
                           title={link.platform}
                         >
-                           {link.platform.charAt(0)}
+                           {getSocialIcon(link.platform)}
                         </a>
                     ))}
                  </div>

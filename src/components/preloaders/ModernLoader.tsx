@@ -23,7 +23,7 @@ interface ModernLoaderProps {
  * 3. Spot (circle) expands from center revealing content
  *
  * Design tokens:
- * - Primary: amber-500 (#f59e0b)
+ * - Primary: orange-500 (#f59e0b)
  * - Background: White
  * - Duration: ~2s total
  */
@@ -112,8 +112,8 @@ export function ModernLoader({ onComplete }: ModernLoaderProps) {
       className="fixed inset-0 z-[9999] flex items-center justify-center bg-white"
     >
       {/* Gradient Orbs for atmosphere */}
-      <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[120px] animate-pulse" />
-      <div className="absolute bottom-[-20%] right-[-10%] w-[400px] h-[400px] bg-amber-600/5 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: "0.5s" }} />
+      <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-orange-500/5 rounded-full blur-[120px] animate-pulse" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[400px] h-[400px] bg-orange-600/5 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: "0.5s" }} />
 
       {/* Noise Texture */}
       <div
@@ -127,13 +127,13 @@ export function ModernLoader({ onComplete }: ModernLoaderProps) {
       <div className="relative z-20 text-center">
         <div ref={logoRef} className="mb-4">
           <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight">
-            <span className="bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 bg-clip-text text-transparent">
               NextLevel
             </span>
           </h1>
         </div>
         <div ref={taglineRef} className="mt-2">
-          <p className="text-sm md:text-base text-amber-700/70 tracking-[0.3em] uppercase font-semibold">
+          <p className="text-sm md:text-base text-orange-700/70 tracking-[0.3em] uppercase font-semibold">
             Marketerz
           </p>
         </div>
@@ -142,7 +142,7 @@ export function ModernLoader({ onComplete }: ModernLoaderProps) {
       {/* Spot/Circle Reveal Layer - Behind logo */}
       <div
         ref={spotRef}
-        className="absolute inset-0 z-10 bg-gradient-to-br from-amber-50 to-white"
+        className="absolute inset-0 z-10 bg-gradient-to-br from-orange-50 to-white"
         style={{ clipPath: "circle(0% at 50% 50%)" }}
       />
     </div>
@@ -178,9 +178,9 @@ export function InlineLoader({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
 
   return (
     <div ref={containerRef} className="flex items-center justify-center gap-2">
-      <div ref={dot1} className={`rounded-full bg-amber-500 ${sizeClasses[size]}`} />
-      <div ref={dot2} className={`rounded-full bg-amber-500 ${sizeClasses[size]}`} />
-      <div ref={dot3} className={`rounded-full bg-amber-500 ${sizeClasses[size]}`} />
+      <div ref={dot1} className={`rounded-full bg-orange-500 ${sizeClasses[size]}`} />
+      <div ref={dot2} className={`rounded-full bg-orange-500 ${sizeClasses[size]}`} />
+      <div ref={dot3} className={`rounded-full bg-orange-500 ${sizeClasses[size]}`} />
     </div>
   );
 }
@@ -192,7 +192,7 @@ export function InlineLoader({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
 export function SpinnerLoader({ size = 24, className = "" }: { size?: number; className?: string }) {
   return (
     <div
-      className={`inline-block animate-spin rounded-full border-2 border-solid border-amber-500/20 border-t-amber-500 ${className}`}
+      className={`inline-block animate-spin rounded-full border-2 border-solid border-orange-500/20 border-t-orange-500 ${className}`}
       style={{ width: size, height: size }}
     />
   );
@@ -218,7 +218,7 @@ export function SkeletonLoader({
 
   return (
     <div
-      className={`animate-pulse bg-amber-100/50 ${variantClasses[variant]} ${className}`}
+      className={`animate-pulse bg-orange-100/50 ${variantClasses[variant]} ${className}`}
     />
   );
 }
@@ -253,7 +253,7 @@ export function PageTransitionLoader({ onComplete, delay = 0 }: { onComplete: ()
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-[9999] bg-gradient-to-b from-white to-amber-50 pointer-events-none"
+      className="fixed inset-0 z-[9999] bg-gradient-to-b from-white to-orange-50 pointer-events-none"
       style={{ transform: "scaleY(0)", transformOrigin: "bottom" }}
     />
   );

@@ -12,7 +12,7 @@ export interface LandingPageConfig {
     subHeadline: string;
     ctaText: string;
     ctaWhatsApp: string;
-    accentColor?: "amber" | "blue" | "emerald" | "rose" | "indigo" | "orange";
+    accentColor?: "orange" | "blue" | "emerald" | "rose" | "indigo" | "orange";
   };
   // Pain Points
   painPoints: {
@@ -597,7 +597,7 @@ export const LANDING_PAGES: Record<string, LandingPageConfig> = {
       ctaText: "Get a Free E-Commerce Website Quote",
       ctaWhatsApp:
         "Hi, I need an e-commerce website for my Dubai business. Can I get a free quote?",
-      accentColor: "amber",
+      accentColor: "orange",
     },
     painPoints: {
       title: "Is your online store underperforming?",

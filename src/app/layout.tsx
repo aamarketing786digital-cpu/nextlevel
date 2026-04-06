@@ -37,6 +37,11 @@ export const metadata: Metadata = {
     title: "NextLevel Marketerz | The Future of Growth",
     description: "Ascension to digital excellence. AI-powered marketing, web development, and growth strategies.",
   },
+  icons: {
+    icon: "/FavIcon.png",
+    shortcut: "/FavIcon.png",
+    apple: "/FavIcon.png",
+  },
 };
 
 export default function RootLayout({

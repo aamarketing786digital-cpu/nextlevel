@@ -18,14 +18,14 @@ const steps = [
     title: "Discovery & Strategy",
     description: "We dive deep into your business goals, target audience, and market landscape to craft a data-driven roadmap.",
     icon: <Search className="w-6 h-6 text-slate-900" />,
-    color: "bg-amber-400", // Using Tech-Luxury Amber
+    color: "bg-orange-400", // Using Tech-Luxury orange
   },
   {
     id: 2,
     title: "Design & User Experience",
     description: "Our design team translates strategy into stunning, intuitive interfaces that captivate users and drive engagement.",
     icon: <Zap className="w-6 h-6 text-slate-900" />,
-    color: "bg-amber-300",
+    color: "bg-orange-300",
   },
   {
     id: 3,
@@ -39,7 +39,7 @@ const steps = [
     title: "Launch & Optimization",
     description: "We deploy your project with precision and continuously monitor performance to optimize for maximum ROI.",
     icon: <BarChart3 className="w-6 h-6 text-slate-100" />,
-    color: "bg-slate-900",
+    color: "bg-teal-900",
   },
 ];
 
@@ -115,7 +115,7 @@ export function Process() {
           {/* Vertical Line Foreground (Animated Color) */}
           <div 
             ref={lineRef}
-            className="absolute left-4 md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-amber-400 to-amber-600 origin-top -translate-x-1/2 will-change-transform rounded-full shadow-[0_0_10px_rgba(251,191,36,0.5)]" 
+            className="absolute left-4 md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-orange-400 to-orange-600 origin-top -translate-x-1/2 will-change-transform rounded-full shadow-[0_0_10px_rgba(242,151,39,0.5)]" 
           />
 
           <div className="space-y-12 md:space-y-32">
@@ -128,20 +128,20 @@ export function Process() {
                 )}
               >
                 {/* Timeline Dot */}
-                <div className="absolute left-4 md:left-1/2 -translate-x-1/2 top-6 md:top-auto w-6 h-6 md:w-8 md:h-8 rounded-full border-4 border-white bg-slate-100 z-10 flex items-center justify-center transition-all duration-500 group-hover:border-amber-400 group-hover:bg-white group-hover:scale-110 shadow-sm">
-                   <div className="w-1.5 h-1.5 md:w-2.5 md:h-2.5 rounded-full bg-amber-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute left-4 md:left-1/2 -translate-x-1/2 top-6 md:top-auto w-6 h-6 md:w-8 md:h-8 rounded-full border-4 border-white bg-slate-100 z-10 flex items-center justify-center transition-all duration-500 group-hover:border-orange-400 group-hover:bg-white group-hover:scale-110 shadow-sm">
+                   <div className="w-1.5 h-1.5 md:w-2.5 md:h-2.5 rounded-full bg-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
                 {/* Content Card */}
                 <div className={cn(
-                    "ml-12 w-[calc(100%-3.5rem)] md:ml-0 md:w-[45%] p-6 md:p-10 rounded-2xl md:rounded-[2rem] glass-card border border-slate-200/60 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 group-hover:border-amber-200/50",
+                    "ml-12 w-[calc(100%-3.5rem)] md:ml-0 md:w-[45%] p-6 md:p-10 rounded-2xl md:rounded-[2rem] glass-card border border-slate-200/60 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 group-hover:border-orange-200/50",
                     index % 2 === 0 ? "md:mr-auto" : "md:ml-auto"
                 )}>
                     <div className="flex items-center gap-4 md:gap-6 mb-4 md:mb-6">
                         <div className={cn("p-3 md:p-4 rounded-xl md:rounded-2xl shadow-sm transition-transform duration-500 group-hover:scale-110", step.color)}>
                             {step.icon}
                         </div>
-                        <span className="text-3xl md:text-5xl font-display font-bold text-slate-100 absolute top-4 right-6 md:top-6 md:right-8 pointer-events-none transition-colors duration-500 group-hover:text-amber-50">
+                        <span className="text-3xl md:text-5xl font-display font-bold text-slate-100 absolute top-4 right-6 md:top-6 md:right-8 pointer-events-none transition-colors duration-500 group-hover:text-orange-50">
                             0{step.id}
                         </span>
                     </div>

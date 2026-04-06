@@ -50,7 +50,7 @@ export function Newsletter() {
   return (
     <section className="py-32 section-dark bg-background relative overflow-hidden border-t border-white/5">
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 to-slate-900 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-teal-950 to-teal-900 pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="container relative z-10 max-w-3xl mx-auto text-center px-6 md:px-0">

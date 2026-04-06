@@ -59,7 +59,7 @@ export function BlogCard({ post, index = 0 }: BlogCardProps) {
             {/* Featured Badge */}
             {post.featured && (
               <div className="absolute top-4 right-4">
-                <span className="px-3 py-1 rounded-full text-xs font-semibold bg-amber-500 text-white flex items-center gap-1">
+                <span className="px-3 py-1 rounded-full text-xs font-semibold bg-orange-500 text-white flex items-center gap-1">
                   ⭐ Featured
                 </span>
               </div>

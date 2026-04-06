@@ -219,7 +219,7 @@ export function ServiceDetailClient({ service }: ServiceDetailClientProps) {
   }
 
   return (
-    <main className="min-h-screen bg-slate-950 font-sans selection:bg-primary/30 selection:text-primary">
+    <main className="min-h-screen bg-teal-950 font-sans selection:bg-primary/30 selection:text-primary">
       
       {/* 1. Epicenter: Hero Section (God-Tier Dark) */}
       <section ref={heroContainerRef} className="relative min-h-[85vh] flex items-center justify-center overflow-hidden section-dark">
@@ -228,7 +228,7 @@ export function ServiceDetailClient({ service }: ServiceDetailClientProps) {
         {/* AI Generated Service Background */}
         <div className="absolute inset-0 bg-[url('/images/services-hero.png')] bg-cover bg-center opacity-20 mix-blend-screen pointer-events-none" />
         <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay pointer-events-none" />
-        <div className="hero-orb-1 absolute top-[-10%] right-[10%] w-[600px] h-[600px] bg-amber-500/15 rounded-full blur-[120px] pointer-events-none" />
+        <div className="hero-orb-1 absolute top-[-10%] right-[10%] w-[600px] h-[600px] bg-orange-500/15 rounded-full blur-[120px] pointer-events-none" />
         <div className="hero-orb-2 absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
 
         <Container className="relative z-10 pt-32 pb-20">
@@ -242,8 +242,8 @@ export function ServiceDetailClient({ service }: ServiceDetailClientProps) {
               Back to Services
             </Link>
 
-            <div className="service-hero-badge inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-amber-500/20 to-primary/5 border border-amber-500/20 backdrop-blur-xl mb-8 shadow-[0_0_30px_rgba(251,191,36,0.15)]">
-              <Sparkles className="w-10 h-10 text-amber-400" />
+            <div className="service-hero-badge inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-orange-500/20 to-primary/5 border border-orange-500/20 backdrop-blur-xl mb-8 shadow-[0_0_30px_rgba(242,151,39,0.15)]">
+              <Sparkles className="w-10 h-10 text-orange-400" />
             </div>
 
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-medium text-white mb-8 leading-[1.1] tracking-tight">
@@ -263,7 +263,7 @@ export function ServiceDetailClient({ service }: ServiceDetailClientProps) {
               <Button
                 asChild
                 size="lg"
-                className="rounded-full bg-amber-500 hover:bg-amber-400 text-slate-950 transition-all duration-300 text-base sm:text-lg px-6 h-12 sm:h-14 font-medium"
+                className="rounded-full bg-orange-500 hover:bg-orange-400 text-slate-950 transition-all duration-300 text-base sm:text-lg px-6 h-12 sm:h-14 font-medium"
               >
                 <Link href="/contact" className="w-full sm:w-auto justify-center">
                   Start Project <ArrowRight className="ml-2 h-5 w-5 shrink-0" />
@@ -283,7 +283,7 @@ export function ServiceDetailClient({ service }: ServiceDetailClientProps) {
 
         {/* Cinematic Scroll Indicator */}
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-50">
-          <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-amber-400 to-transparent" />
+          <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-orange-400 to-transparent" />
         </div>
       </section>
 
@@ -299,8 +299,8 @@ export function ServiceDetailClient({ service }: ServiceDetailClientProps) {
                     key={index}
                     className="service-stat-card glass-card rounded-3xl p-10 text-center flex flex-col items-center justify-center group"
                   >
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500/10 to-transparent border border-amber-500/20 mb-6 group-hover:scale-110 transition-transform duration-500">
-                      <TrendingUp className="w-8 h-8 text-amber-500" />
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500/10 to-transparent border border-orange-500/20 mb-6 group-hover:scale-110 transition-transform duration-500">
+                      <TrendingUp className="w-8 h-8 text-orange-500" />
                     </div>
                     <div className="text-5xl md:text-6xl font-display font-medium text-slate-950 mb-4 tracking-tight">
                       {parsed.isNumber ? (
@@ -330,7 +330,7 @@ export function ServiceDetailClient({ service }: ServiceDetailClientProps) {
           <Container>
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-24">
-                <span className="text-amber-600 font-medium tracking-widest uppercase text-sm mb-4 block">The Pipeline</span>
+                <span className="text-orange-600 font-medium tracking-widest uppercase text-sm mb-4 block">The Pipeline</span>
                 <h2 className="text-4xl md:text-6xl font-display font-medium text-slate-900 mb-6">
                   Our Proven Process
                 </h2>
@@ -345,7 +345,7 @@ export function ServiceDetailClient({ service }: ServiceDetailClientProps) {
                 {/* Fill Line */}
                 <div 
                   ref={lineRef}
-                  className="absolute left-8 md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-amber-400 via-amber-500 to-amber-600 origin-top -translate-x-[1px] shadow-[0_0_15px_rgba(251,191,36,0.3)]" 
+                  className="absolute left-8 md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-orange-400 via-orange-500 to-orange-600 origin-top -translate-x-[1px] shadow-[0_0_15px_rgba(242,151,39,0.3)]" 
                 />
 
                 <div className="space-y-24">
@@ -359,12 +359,12 @@ export function ServiceDetailClient({ service }: ServiceDetailClientProps) {
                     >
                       {/* Node */}
                       <div className="absolute left-8 md:left-1/2 -translate-x-[15px] md:-translate-x-1/2 w-8 h-8 rounded-full border-[4px] border-white bg-slate-100 flex items-center justify-center z-10 shadow-md">
-                        <div className="w-2 h-2 rounded-full bg-amber-500" />
+                        <div className="w-2 h-2 rounded-full bg-orange-500" />
                       </div>
 
                       {/* Content */}
                       <div className={cn("ml-20 md:ml-0 md:w-[45%]", index % 2 === 0 ? "md:pr-12" : "md:pl-12")}>
-                        <div className="bg-white border border-slate-200 shadow-sm rounded-3xl p-8 hover:border-amber-500/30 hover:shadow-md transition-all duration-500">
+                        <div className="bg-white border border-slate-200 shadow-sm rounded-3xl p-8 hover:border-orange-500/30 hover:shadow-md transition-all duration-500">
                           <span className="text-slate-100 font-display font-bold text-6xl absolute top-4 right-6 pointer-events-none">
                             0{index + 1}
                           </span>
@@ -388,7 +388,7 @@ export function ServiceDetailClient({ service }: ServiceDetailClientProps) {
       {/* 4. Features Section (Premium Bento Grid - Light Theme) */}
       <section ref={featureContainerRef} className="features-section py-32 bg-white relative overflow-hidden">
         {/* Subtle radial gradient background */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-amber-500/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-orange-500/5 rounded-full blur-[120px] pointer-events-none" />
 
         <Container className="relative z-10">
           <div className="max-w-7xl mx-auto">
@@ -483,8 +483,8 @@ export function ServiceDetailClient({ service }: ServiceDetailClientProps) {
                       "hover:scale-[1.01] hover:z-20",
                       // 30% Selective Coloring Logic
                       (index === 0 || index === 5)
-                        ? (index === 0 ? "bg-slate-950 border-white/10 text-white shadow-[0_20px_50px_rgba(0,0,0,0.4)]" 
-                                      : "bg-gradient-to-br from-amber-400 to-amber-600 border-amber-400/50 text-slate-950 shadow-[0_25px_60px_rgba(245,158,11,0.2)]")
+                        ? (index === 0 ? "bg-teal-950 border-white/10 text-white shadow-[0_20px_50px_rgba(0,0,0,0.4)]" 
+                                      : "bg-gradient-to-br from-orange-400 to-orange-600 border-orange-400/50 text-slate-950 shadow-[0_25px_60px_rgba(242,151,39,0.2)]")
                         : "bg-white border-slate-200 text-slate-900 shadow-[0_20px_50px_rgba(0,0,0,0.03)]"
                     )}
                   >
@@ -513,7 +513,7 @@ export function ServiceDetailClient({ service }: ServiceDetailClientProps) {
                         )}>
                           <div className={cn(
                             "w-1.5 h-1.5 rounded-full animate-pulse",
-                            (index === 0 || index === 5) && index !== 0 ? "bg-slate-950" : "bg-primary"
+                            (index === 0 || index === 5) && index !== 0 ? "bg-teal-950" : "bg-primary"
                           )} />
                           {index % 4 === 0 ? "Performance" : index % 4 === 1 ? "Strategic" : index % 4 === 2 ? "Optimization" : "Scale"}
                         </div>
@@ -545,7 +545,7 @@ export function ServiceDetailClient({ service }: ServiceDetailClientProps) {
                         )}>
                           <div className={cn(
                             "h-[2px] w-8 rounded-full transition-all duration-500 shadow-sm",
-                            (index === 0 || index === 5) && index !== 0 ? "bg-slate-950" : "bg-primary"
+                            (index === 0 || index === 5) && index !== 0 ? "bg-teal-950" : "bg-primary"
                           )} />
                           <Sparkles className="w-3.5 h-3.5" />
                         </div>
@@ -576,9 +576,9 @@ export function ServiceDetailClient({ service }: ServiceDetailClientProps) {
                 <AccordionItem
                   key={index}
                   value={`item-${index}`}
-                  className="bg-slate-50 border border-slate-200 shadow-sm hover:shadow-md rounded-2xl px-8 data-[state=open]:border-amber-500 data-[state=open]:bg-white transition-all duration-300"
+                  className="bg-slate-50 border border-slate-200 shadow-sm hover:shadow-md rounded-2xl px-8 data-[state=open]:border-orange-500 data-[state=open]:bg-white transition-all duration-300"
                 >
-                  <AccordionTrigger className="text-left text-xl font-medium text-slate-900 hover:no-underline py-6 [&[data-state=open]]:text-amber-600">
+                  <AccordionTrigger className="text-left text-xl font-medium text-slate-900 hover:no-underline py-6 [&[data-state=open]]:text-orange-600">
                     {faq.question}
                   </AccordionTrigger>
                   <AccordionContent className="text-lg text-slate-600 font-light pb-8 leading-relaxed">
@@ -605,7 +605,7 @@ export function ServiceDetailClient({ service }: ServiceDetailClientProps) {
                     Discover complementary services to accelerate your growth.
                   </p>
                 </div>
-                <Link href="/services" className="text-amber-600 hover:text-amber-700 flex items-center gap-2 font-medium transition-colors">
+                <Link href="/services" className="text-orange-600 hover:text-orange-700 flex items-center gap-2 font-medium transition-colors">
                   View All Services <ArrowRight className="w-5 h-5" />
                 </Link>
               </div>
@@ -617,16 +617,16 @@ export function ServiceDetailClient({ service }: ServiceDetailClientProps) {
                     href={`/services/${related.slug}`}
                     className="group bg-white border border-slate-200 shadow-sm rounded-3xl p-8 hover:-translate-y-2 hover:shadow-xl transition-all duration-500"
                   >
-                    <div className="w-16 h-16 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center mb-8 group-hover:bg-amber-50 group-hover:border-amber-200 transition-all duration-500">
-                      <Sparkles className="w-8 h-8 text-slate-400 group-hover:text-amber-500 transition-colors" />
+                    <div className="w-16 h-16 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center mb-8 group-hover:bg-orange-50 group-hover:border-orange-200 transition-all duration-500">
+                      <Sparkles className="w-8 h-8 text-slate-400 group-hover:text-orange-500 transition-colors" />
                     </div>
-                    <h3 className="text-2xl font-display font-medium text-slate-900 mb-4 group-hover:text-amber-600 transition-colors">
+                    <h3 className="text-2xl font-display font-medium text-slate-900 mb-4 group-hover:text-orange-600 transition-colors">
                       {related.title}
                     </h3>
                     <p className="text-slate-600 font-light leading-relaxed mb-8">
                       {related.shortDescription}
                     </p>
-                    <div className="flex items-center text-amber-500 font-medium">
+                    <div className="flex items-center text-orange-500 font-medium">
                       Learn More
                       <ChevronRight className="w-5 h-5 ml-1 group-hover:translate-x-2 transition-transform" />
                     </div>
@@ -641,7 +641,7 @@ export function ServiceDetailClient({ service }: ServiceDetailClientProps) {
       {/* 8. Final CTA Line (Light Theme) */}
       <section className="py-32 bg-white border-t border-slate-200 relative overflow-hidden">
         {/* Decorative corner light burst */}
-        <div className="absolute -bottom-1/2 -right-1/4 w-[800px] h-[800px] bg-amber-500/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute -bottom-1/2 -right-1/4 w-[800px] h-[800px] bg-orange-500/10 rounded-full blur-[120px] pointer-events-none" />
         
         <Container className="relative z-10">
           <div className="max-w-5xl mx-auto text-center">
@@ -651,7 +651,7 @@ export function ServiceDetailClient({ service }: ServiceDetailClientProps) {
             <Button
               asChild
               size="lg"
-              className="rounded-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-medium text-lg px-12 h-16 shadow-[0_0_40px_rgba(251,191,36,0.3)] hover:shadow-[0_0_40px_rgba(251,191,36,0.5)] transition-all duration-500 hover:scale-105"
+              className="rounded-full bg-orange-500 hover:bg-orange-400 text-slate-950 font-medium text-lg px-12 h-16 shadow-[0_0_40px_rgba(242,151,39,0.3)] hover:shadow-[0_0_40px_rgba(242,151,39,0.5)] transition-all duration-500 hover:scale-105"
             >
               <Link href="/contact">
                 Start Your Project

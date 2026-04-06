@@ -57,7 +57,35 @@ const config: Config = {
   			'surface-glass': 'hsl(var(--surface-glass))',
   			'surface-elevated': 'hsl(var(--surface-elevated))',
   			'electric-blue': 'hsl(var(--electric-blue))',
-  			'cyan-glow': 'hsl(var(--cyan-glow))'
+  			'cyan-glow': 'hsl(var(--cyan-glow))',
+  			/* Brand Teal - overrides default Tailwind teal to match #14505A */
+  			teal: {
+  				50: '#f1fafa',
+  				100: '#d9f1f2',
+  				200: '#b7e4e6',
+  				300: '#87ced4',
+  				400: '#50aeb9',
+  				500: '#14505A', // Base brand teal
+  				600: '#11464f',
+  				700: '#0e3a41',
+  				800: '#0b2d33',
+  				900: '#082126',
+  				950: '#051518',
+  			},
+  			/* Brand Orange - overrides default Tailwind orange to match #F9961C */
+  			orange: {
+  				50: '#fff5eb',
+  				100: '#ffe8cc',
+  				200: '#ffd099',
+  				300: '#ffb266',
+  				400: '#fa9d33',
+  				500: '#F9961C', // Base brand orange
+  				600: '#d97f14',
+  				700: '#b3630f',
+  				800: '#8c480b',
+  				900: '#663106',
+  				950: '#401b00',
+  			}
   		},
   		borderRadius: {
   			lg: 'var(--radius-lg)',
@@ -71,9 +99,9 @@ const config: Config = {
   		backgroundImage: {
   			'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
   			'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-  			'gradient-gold': 'linear-gradient(135deg, hsl(43 77% 55%) 0%, hsl(43 82% 62%) 50%, hsl(43 77% 55%) 100%)',
-  			'gradient-blue': 'linear-gradient(to right, hsl(222 47% 40%), hsl(217 91% 60%))',
-  			'gradient-dark': 'linear-gradient(135deg, hsl(222 47% 11%) 0%, hsl(220 50% 20%) 100%)'
+  			'gradient-gold': 'linear-gradient(135deg, hsl(33 95% 54%) 0%, hsl(33 95% 62%) 50%, hsl(33 95% 54%) 100%)',
+  			'gradient-blue': 'linear-gradient(to right, hsl(188 65% 21%), hsl(188 55% 35%))',
+  			'gradient-dark': 'linear-gradient(135deg, hsl(188 65% 6%) 0%, hsl(188 50% 15%) 100%)'
   		},
   		animation: {
   			'float': 'float 6s ease-in-out infinite',
@@ -94,11 +122,11 @@ const config: Config = {
   			'pulse-glow': {
   				'0%, 100%': {
   					opacity: '1',
-  					boxShadow: '0 0 20px hsl(43 77% 55% / 0.3)'
+  					boxShadow: '0 0 20px hsl(33 95% 54% / 0.3)'
   				},
   				'50%': {
   					opacity: '0.8',
-  					boxShadow: '0 0 40px hsl(43 77% 55% / 0.5)'
+  					boxShadow: '0 0 40px hsl(33 95% 54% / 0.5)'
   				}
   			},
   			'accordion-down': {

@@ -16,7 +16,7 @@ export interface CaseStudyType {
 const FALLBACK_COLORS = [
   "bg-emerald-950",
   "bg-indigo-950",
-  "bg-slate-950",
+  "bg-teal-950",
   "bg-blue-950"
 ];
 

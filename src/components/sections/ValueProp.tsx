@@ -134,7 +134,7 @@ export function ValueProp() {
   return (
     <section
       ref={sectionRef}
-      className="py-20 md:py-28 bg-white dark:bg-slate-950 relative overflow-hidden" id="value-prop"
+      className="py-20 md:py-28 bg-white dark:bg-teal-950 relative overflow-hidden" id="value-prop"
     >
       {/* Subtle background interaction */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent pointer-events-none opacity-50" />

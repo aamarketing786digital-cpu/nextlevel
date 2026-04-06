@@ -80,24 +80,24 @@ export function RankingCta() {
 
             <ul className="space-y-6 mb-10">
               <li className="flex items-start gap-4">
-                <div className="w-6 h-6 rounded-full bg-amber-100 flex items-center justify-center shrink-0 mt-0.5">
-                  <Check className="w-3.5 h-3.5 text-amber-500 stroke-[3]" />
+                <div className="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center shrink-0 mt-0.5">
+                  <Check className="w-3.5 h-3.5 text-orange-500 stroke-[3]" />
                 </div>
                 <span className="text-slate-600 font-light leading-relaxed">
                   How NextLevel accelerates your marketing growth.
                 </span>
               </li>
               <li className="flex items-start gap-4">
-                <div className="w-6 h-6 rounded-full bg-amber-100 flex items-center justify-center shrink-0 mt-0.5">
-                  <Check className="w-3.5 h-3.5 text-amber-500 stroke-[3]" />
+                <div className="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center shrink-0 mt-0.5">
+                  <Check className="w-3.5 h-3.5 text-orange-500 stroke-[3]" />
                 </div>
                 <span className="text-slate-600 font-light leading-relaxed">
                   Marketing strategies that are faster, cheaper, and scalable.
                 </span>
               </li>
               <li className="flex items-start gap-4">
-                <div className="w-6 h-6 rounded-full bg-amber-100 flex items-center justify-center shrink-0 mt-0.5">
-                  <Check className="w-3.5 h-3.5 text-amber-500 stroke-[3]" />
+                <div className="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center shrink-0 mt-0.5">
+                  <Check className="w-3.5 h-3.5 text-orange-500 stroke-[3]" />
                 </div>
                 <span className="text-slate-600 font-light leading-relaxed">
                   Why we outshine agencies, freelancers, and in-house teams.
@@ -107,7 +107,7 @@ export function RankingCta() {
 
             <Button
               asChild
-              className="bg-amber-500 hover:bg-amber-400 text-white font-medium text-lg px-10 h-14 rounded-full shadow-[0_8px_30px_rgba(251,191,36,0.3)] hover:shadow-[0_8px_30px_rgba(251,191,36,0.5)] transition-all duration-300 hover:-translate-y-1"
+              className="bg-orange-500 hover:bg-orange-400 text-white font-medium text-lg px-10 h-14 rounded-full shadow-[0_8px_30px_rgba(242,151,39,0.3)] hover:shadow-[0_8px_30px_rgba(242,151,39,0.5)] transition-all duration-300 hover:-translate-y-1"
             >
               <Link href="/contact">Get In Touch</Link>
             </Button>
@@ -120,7 +120,7 @@ export function RankingCta() {
               {/* Left Column of Bento */}
               <div className="flex-1 min-w-0 flex flex-col gap-4 md:gap-6">
                 {/* Card 1: Top Left - Texture & Glass Pill (Square-ish) */}
-                <div className="relative rounded-[2rem] overflow-hidden group shadow-sm bg-amber-100 aspect-square">
+                <div className="relative rounded-[2rem] overflow-hidden group shadow-sm bg-orange-100 aspect-square">
                   <Image
                     src="https://images.unsplash.com/photo-1596496050827-8299e0220de1?q=80&w=800&auto=format&fit=crop"
                     alt="Idea sticky note"
@@ -144,9 +144,9 @@ export function RankingCta() {
 
                 {/* Card 3: Bottom Left - Email Us (Tall) */}
                 <Link href="mailto:info@nextlevel.com" className="rounded-[2rem] bg-[#020617] p-8 flex flex-col justify-between group overflow-hidden relative shadow-2xl aspect-[4/5]">
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <h3 className="text-3xl text-white font-light relative z-10 group-hover:text-amber-400 transition-colors duration-300">Email Us!</h3>
-                  <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white backdrop-blur-md self-start relative z-10 group-hover:bg-amber-500/20 group-hover:border-amber-500/30 group-hover:scale-110 transition-all duration-500 cursor-pointer">
+                  <div className="absolute inset-0 bg-gradient-to-t from-teal-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <h3 className="text-3xl text-white font-light relative z-10 group-hover:text-orange-400 transition-colors duration-300">Email Us!</h3>
+                  <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white backdrop-blur-md self-start relative z-10 group-hover:bg-orange-500/20 group-hover:border-orange-500/30 group-hover:scale-110 transition-all duration-500 cursor-pointer">
                     <Mail className="w-6 h-6" />
                   </div>
                 </Link>
@@ -155,8 +155,8 @@ export function RankingCta() {
               {/* Right Column of Bento */}
               <div className="flex-1 min-w-0 flex flex-col gap-4 md:gap-6 sm:mt-8 lg:mt-0">
                 {/* Card 2: Top Right - Call Us Now (Tall) */}
-                <Link href="tel:+971563377016" className="rounded-[2rem] bg-white border border-slate-100 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] p-8 flex flex-col justify-start group hover:border-amber-200 transition-colors duration-500 aspect-[4/5]">
-                  <p className="text-2xl text-slate-400 font-light mb-6 group-hover:text-amber-600 transition-colors duration-300">Call Us Now!</p>
+                <Link href="tel:+971563377016" className="rounded-[2rem] bg-white border border-slate-100 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] p-8 flex flex-col justify-start group hover:border-orange-200 transition-colors duration-500 aspect-[4/5]">
+                  <p className="text-2xl text-slate-400 font-light mb-6 group-hover:text-orange-600 transition-colors duration-300">Call Us Now!</p>
                   <div className="text-3xl lg:text-4xl xl:text-4xl font-display font-medium text-slate-800 leading-[1.1] tracking-tight">
                     +971 <br />
                     56 337 7016
@@ -171,7 +171,7 @@ export function RankingCta() {
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                   <div className="absolute inset-0 bg-gradient-to-tr from-amber-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                   <div className="absolute inset-0 bg-gradient-to-tr from-orange-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
               </div>
 

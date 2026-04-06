@@ -72,7 +72,7 @@ export default async function BlogPage({
   return (
     <main className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="bg-slate-950 py-32 md:py-40 relative overflow-hidden border-b border-white/10">
+      <section className="bg-teal-950 py-32 md:py-40 relative overflow-hidden border-b border-white/10">
         {/* Decorative Elements */}
         <div className="absolute inset-0 bg-[url('/images/blog-hero.png')] bg-cover bg-center opacity-30 pointer-events-none" />
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />

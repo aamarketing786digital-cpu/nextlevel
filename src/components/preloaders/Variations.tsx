@@ -307,8 +307,8 @@ export function PreloaderFluid({ onComplete }: PreloaderProps) {
       className="fixed inset-0 z-[9999] flex items-center justify-center bg-white"
     >
       {/* Gradient Orbs for atmosphere */}
-      <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[120px] animate-pulse" />
-      <div className="absolute bottom-[-20%] right-[-10%] w-[400px] h-[400px] bg-amber-600/5 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: "0.5s" }} />
+      <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-orange-500/5 rounded-full blur-[120px] animate-pulse" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[400px] h-[400px] bg-orange-600/5 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: "0.5s" }} />
 
       {/* Brand Logo/Name */}
       <div ref={logoRef} className="absolute z-20 text-center opacity-0 flex flex-col items-center justify-center">
@@ -323,7 +323,7 @@ export function PreloaderFluid({ onComplete }: PreloaderProps) {
       {/* Expanding dot — hidden via CSS until GSAP reveals it */}
       <div
         ref={dotRef}
-        className="w-4 h-4 rounded-full bg-gradient-to-br from-amber-500 to-amber-600 relative z-10 opacity-0 scale-0"
+        className="w-4 h-4 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 relative z-10 opacity-0 scale-0"
       />
     </div>
   );

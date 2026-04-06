@@ -39,7 +39,7 @@ export function LandingPageLayout({ children }: { children: React.ReactNode }) {
       {/* Content with top padding for fixed header */}
       <main className="pt-16">{children}</main>
 
-      <footer className="bg-slate-950 py-12 border-t border-white/5">
+      <footer className="bg-teal-950 py-12 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 text-center">
           <p className="text-slate-500 text-sm">
             © {new Date().getFullYear()} NextLevel Marketerz. All rights

@@ -13,7 +13,7 @@ export default function TeamPage() {
   return (
     <main className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="bg-slate-950 py-32 md:py-40 relative overflow-hidden border-b border-white/10">
+      <section className="bg-teal-950 py-32 md:py-40 relative overflow-hidden border-b border-white/10">
         {/* Decorative Elements */}
         <div className="absolute inset-0 bg-[url('/images/about-hero.png')] bg-cover bg-center opacity-40 pointer-events-none" />
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
@@ -47,14 +47,14 @@ export default function TeamPage() {
       </section>
 
       {/* Team Members Section */}
-      <div className="bg-slate-950">
+      <div className="bg-teal-950">
         <TeamSection />
       </div>
 
       {/* CTA Section */}
       <section className="py-24 bg-black border-t border-white/5">
         <Container>
-          <div className="bg-gradient-to-br from-slate-900 to-black rounded-[2.5rem] p-12 md:p-20 border border-white/10 text-center relative overflow-hidden">
+          <div className="bg-gradient-to-br from-teal-900 to-black rounded-[2.5rem] p-12 md:p-20 border border-white/10 text-center relative overflow-hidden">
              <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-primary/5 rounded-full blur-[100px]" />
              <div className="relative z-10">
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-medium text-white mb-6">

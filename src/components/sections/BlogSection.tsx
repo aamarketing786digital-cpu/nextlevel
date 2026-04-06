@@ -69,7 +69,7 @@ export function BlogSection({
                     )}
                     {post.featured && (
                       <div className="absolute top-3 left-3">
-                        <span className="px-2 py-1 rounded-full text-xs font-semibold bg-amber-500 text-white">
+                        <span className="px-2 py-1 rounded-full text-xs font-semibold bg-orange-500 text-white">
                           ⭐ Featured
                         </span>
                       </div>

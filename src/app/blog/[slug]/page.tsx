@@ -189,12 +189,12 @@ export default async function BlogPostPage({
 
       <main className="min-h-screen bg-background">
         {/* Hero Section */}
-        <section className="bg-slate-950 py-20 md:py-28 relative overflow-hidden border-b border-white/10">
+        <section className="bg-teal-950 py-20 md:py-28 relative overflow-hidden border-b border-white/10">
           {/* AI Generated Hero Background */}
           <div className="absolute inset-0 bg-[url('/images/blog-hero.png')] bg-cover bg-center opacity-30 pointer-events-none" />
           
           {/* Dark Overlay for Readability */}
-          <div className="absolute inset-0 bg-slate-950/40 pointer-events-none" />
+          <div className="absolute inset-0 bg-teal-950/40 pointer-events-none" />
           
           {/* Decorative Elements */}
           <div 

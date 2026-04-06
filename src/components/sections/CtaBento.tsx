@@ -229,7 +229,7 @@ export function CtaBento() {
             {/* Bottom Right - Image/Brand Card */}
             <motion.div
               style={{ y: y2 }}
-              className="col-span-1 row-span-1 rounded-3xl overflow-hidden relative group border border-border bg-slate-950"
+              className="col-span-1 row-span-1 rounded-3xl overflow-hidden relative group border border-border bg-teal-950"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-primary/5 to-transparent z-10" />
               <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay pointer-events-none" />

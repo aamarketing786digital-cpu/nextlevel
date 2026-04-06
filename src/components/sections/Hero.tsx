@@ -6,13 +6,13 @@ function AnimatedHeadline() {
   return (
     <div className="relative z-10 space-y-8 flex flex-col items-center">
         <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-2">
-          <Sparkles className="w-4 h-4 text-amber-400" />
-          <span className="text-sm font-medium tracking-wide text-amber-50 uppercase">Trusted by 50+ UAE Brands</span>
+          <Sparkles className="w-4 h-4 text-orange-400" />
+          <span className="text-sm font-medium tracking-wide text-orange-50 uppercase">Trusted by 50+ UAE Brands</span>
         </div>
 
         <h1 className="text-5xl sm:text-7xl md:text-8xl font-bold leading-[1.1] tracking-[-0.02em] max-w-5xl mb-2">
           <span className="block">Next Level</span>
-          <span className="block text-amber-400/90">Digital Growth</span>
+          <span className="block text-orange-400/90">Digital Growth</span>
         </h1>
 
         <p className="text-lg md:text-2xl text-slate-400 max-w-2xl mx-auto font-light leading-relaxed pb-4">
@@ -24,7 +24,7 @@ function AnimatedHeadline() {
           <Button
             size="lg"
             asChild
-            className="rounded-full bg-amber-500 hover:bg-amber-400 text-slate-950 hover:shadow-[0_0_30px_rgba(251,191,36,0.3)] transition-all duration-300 text-lg px-8 h-14 font-medium"
+            className="rounded-full bg-orange-500 hover:bg-orange-400 text-slate-950 hover:shadow-[0_0_30px_rgba(242,151,39,0.3)] transition-all duration-300 text-lg px-8 h-14 font-medium"
           >
             <a href="/contact">
               Start Your Journey
@@ -46,7 +46,7 @@ function AnimatedHeadline() {
 
 export function Hero() {
   return (
-    <section className="relative min-h-[85dvh] md:min-h-screen w-full flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 section-dark text-slate-50 font-sans">
+    <section className="relative min-h-[85dvh] md:min-h-screen w-full flex items-center justify-center overflow-hidden bg-gradient-to-br from-teal-950 via-teal-900 to-teal-950 section-dark text-slate-50 font-sans">
       {/* Optimized Background - minimal CPU usage */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {/* Hero Background Image - desktop only for better mobile performance */}
@@ -61,10 +61,10 @@ export function Hero() {
             loading="lazy"
           />
         </div>
-        {/* Single subtle amber glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-amber-500/5 rounded-full blur-[120px]" />
+        {/* Single subtle orange glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-[120px]" />
         {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-slate-950/40" />
+        <div className="absolute inset-0 bg-teal-950/40" />
       </div>
 
       <div className="relative z-10 container mx-auto px-4 py-12 md:py-20 text-center">

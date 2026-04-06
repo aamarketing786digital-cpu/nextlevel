@@ -13,7 +13,7 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="bg-slate-950 py-32 md:py-40 relative overflow-hidden border-b border-white/10">
+      <section className="bg-teal-950 py-32 md:py-40 relative overflow-hidden border-b border-white/10">
         <div className="absolute inset-0 bg-[url('/images/contact-hero.png')] bg-cover bg-center opacity-40 pointer-events-none" />
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
 
@@ -82,7 +82,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1 text-slate-900">Location</h3>
-                    <p className="text-slate-600">AlSUAIDI Building, Office 205<br/>Al Murar, Deira<br/>Dubai, UAE</p>
+                    <p className="text-slate-600">Diera Muteena Nahar Mall<br/>Dubai, UAE</p>
                   </div>
                 </div>
               </div>

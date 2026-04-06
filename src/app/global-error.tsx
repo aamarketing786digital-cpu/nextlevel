@@ -14,7 +14,7 @@ export default function GlobalError({
   void (typeof reset);
   return (
     <html>
-      <body className="min-h-screen bg-slate-950 flex items-center justify-center pt-24 md:pt-32">
+      <body className="min-h-screen bg-teal-950 flex items-center justify-center pt-24 md:pt-32">
         <div className="container mx-auto px-4 text-center max-w-2xl">
           {/* Error Icon */}
           <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-red-500/10 border border-red-500/30 mb-8">
@@ -36,7 +36,7 @@ export default function GlobalError({
             <Button
               onClick={reset}
               size="lg"
-              className="rounded-full bg-amber-500 hover:bg-amber-400 text-slate-950 transition-colors"
+              className="rounded-full bg-orange-500 hover:bg-orange-400 text-slate-950 transition-colors"
             >
               Try Again
             </Button>

@@ -4,8 +4,8 @@
 
 @layer base {
   :root {
-    /* === TECH-LUXURY THEME (Light Mode Default - ~80% of site) === */
-    /* Clean, crisp slate and white with refined gold accents */
+    /* === NEXT LEVEL MARKETERZ THEME (Light Mode Default - ~80% of site) === */
+    /* Clean, crisp slate and white with vibrant orange accents */
     
     /* Base Colors */
     --background: 0 0% 100%;       /* Pure White */
@@ -17,9 +17,9 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    /* Primary - Amber/Gold */
-    --primary: 43 77% 55%;         /* Amber 500 */
-    --primary-foreground: 222 47% 11%; /* Deep Slate 900 to fix WCAG contrast on gold */
+    /* Primary - Brand Orange */
+    --primary: 34 89% 55%;         /* Orange #F29727 */
+    --primary-foreground: 0 0% 100%; /* White for contrast on orange */
 
     /* Secondary - Slate structure */
     --secondary: 210 40% 98%;      /* Slate 50 */
@@ -29,8 +29,8 @@
     --muted: 210 40% 96.1%;        /* Slate 100 */
     --muted-foreground: 215 16% 47%; /* Slate 500 */
 
-    /* Accent - Tech Cyan/Blue */
-    --accent: 200 98% 39%;         /* Light blue */
+    /* Accent - Brand Teal */
+    --accent: 188 65% 21%;         /* Teal #14505A */
     --accent-foreground: 0 0% 100%;
 
     /* Destructive */
@@ -51,39 +51,39 @@
   }
 
   .dark, .section-dark {
-    /* === GOD-TIER DARK THEME (Hero, CTAs - ~20% of site) === */
-    /* Pitch black/slate-950 with cinematic lighting */
+    /* === NEXT LEVEL MARKETERZ DARK THEME (Hero, CTAs - ~20% of site) === */
+    /* Deep teal-tinted dark with vibrant orange accents */
     
-    --background: 225 39% 4%;      /* Very Deep Slate/Black #06080e */
+    --background: 188 65% 6%;      /* Very Deep Teal/Black */
     --foreground: 210 40% 98%;     /* Slate 50 */
     
-    --card: 225 39% 4%;
+    --card: 188 65% 6%;
     --card-foreground: 210 40% 98%;
     
-    --popover: 225 39% 4%;
+    --popover: 188 65% 6%;
     --popover-foreground: 210 40% 98%;
     
-    /* Primary Action */
-    --primary: 43 77% 55%;         /* Amber 500 */
-    --primary-foreground: 222 47.4% 11.2%; /* Dark Slate 900 for high contrast text on gold */
+    /* Primary Action - Brand Orange */
+    --primary: 34 89% 55%;         /* Orange #F29727 */
+    --primary-foreground: 0 0% 100%; /* White for contrast on orange */
     
     /* Elegant Dark Structure */
-    --secondary: 217.2 32.6% 17.5%; /* Slate 800 */
+    --secondary: 188 40% 15%;      /* Dark Teal */
     --secondary-foreground: 210 40% 98%;
     
     /* Subdued text/backgrounds */
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%; /* Slate 400 */
+    --muted: 188 40% 15%;
+    --muted-foreground: 188 15% 65%; /* Muted Teal */
     
-    --accent: 217.2 32.6% 17.5%;
+    --accent: 188 40% 15%;
     --accent-foreground: 210 40% 98%;
     
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
     
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 188 40% 15%;
+    --input: 188 40% 15%;
+    --ring: 34 89% 65%;
     
     /* Premium Frost Tokens */
     --glass-border: 255 255 255 / 0.1;
@@ -144,11 +144,11 @@
   
   /* Text Gradients */
   .text-gradient-gold {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-amber-600;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-orange-600;
   }
   
   .text-gradient-cyan {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-teal-500 to-teal-700;
   }
 }
 

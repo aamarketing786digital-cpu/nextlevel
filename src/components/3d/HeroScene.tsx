@@ -32,9 +32,9 @@ function NetworkSphere({ count = 200, radius = 5 }: { count?: number; radius?: n
     const p = new Float32Array(count * 3);
     const colorArray = new Float32Array(count * 3);
 
-    // Tech-Luxury Palette: Crisp Whites and Deep Amber/Gold
+    // Tech-Luxury Palette: Crisp Whites and Deep orange/Gold
     const color1 = new THREE.Color("#ffffff"); // Pure white core
-    const color2 = new THREE.Color("#fbbf24"); // Amber edge
+    const color2 = new THREE.Color("#fbbf24"); // orange edge
     const tempColor = new THREE.Color();
 
     for (let i = 0; i < count; i++) {

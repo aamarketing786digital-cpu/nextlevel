@@ -65,20 +65,20 @@ export function PainPoints() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
-              className="group relative bg-slate-50 border border-slate-100 rounded-2xl p-8 hover:shadow-md hover:shadow-amber-900/5 hover:border-amber-300/50 hover:-translate-y-1 transition-all duration-300"
+              className="group relative bg-slate-50 border border-slate-100 rounded-2xl p-8 hover:shadow-md hover:shadow-orange-900/5 hover:border-orange-300/50 hover:-translate-y-1 transition-all duration-300"
             >
               {/* Icon Badge with Gradient Background and Border */}
               <div className="mb-5 relative">
                 {/* Badge container with gradient background */}
-                <div className="relative flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-200/60 shadow-sm group-hover:border-amber-300 group-hover:shadow-md transition-all duration-300">
+                <div className="relative flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-orange-50 to-orange-50 border-2 border-orange-200/60 shadow-sm group-hover:border-orange-300 group-hover:shadow-md transition-all duration-300">
                   {/* Subtle inner highlight */}
                   <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/40 to-transparent" />
 
                   {/* Icon with color transition */}
-                  <pain.icon className="w-7 h-7 text-amber-500 group-hover:text-amber-600 group-hover:scale-110 transition-all duration-300" strokeWidth={1.5} />
+                  <pain.icon className="w-7 h-7 text-orange-500 group-hover:text-orange-600 group-hover:scale-110 transition-all duration-300" strokeWidth={1.5} />
                 </div>
               </div>
-              <h3 className="text-xl font-semibold text-slate-900 mb-3 group-hover:text-amber-600 transition-colors">
+              <h3 className="text-xl font-semibold text-slate-900 mb-3 group-hover:text-orange-600 transition-colors">
                 {pain.title}
               </h3>
               <p className="text-slate-600 leading-relaxed mb-5">
@@ -86,7 +86,7 @@ export function PainPoints() {
               </p>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-1.5 text-amber-600 font-medium text-sm hover:text-amber-700 transition-colors group-hover:gap-2.5"
+                className="inline-flex items-center gap-1.5 text-orange-600 font-medium text-sm hover:text-orange-700 transition-colors group-hover:gap-2.5"
               >
                 {pain.cta}
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
