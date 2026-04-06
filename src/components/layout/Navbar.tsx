@@ -218,21 +218,23 @@ export function Navbar() {
             <Link
               href="/contact"
               className={cn(
-                  "relative inline-flex h-10 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 transition-transform active:scale-95 hover:scale-105",
-                  isScrolled ? "hover:shadow-[0_0_20px_rgba(234,182,81,0.3)]" : "hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]"
+                  "relative inline-flex h-11 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-background transition-all duration-300 active:scale-95 group",
+                  isScrolled 
+                    ? "hover:shadow-[0_0_25px_-5px_rgba(249,150,28,0.5)] scale-105" 
+                    : "hover:shadow-[0_0_25px_-5px_rgba(249,150,28,0.3)] hover:scale-105"
               )}
             >
               <span className={cn(
-                "absolute inset-[-1000%]",
+                "absolute inset-[-1000%] animate-[spin_2s_linear_infinite]",
                 isScrolled
-                  ? "bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)] opacity-30"
-                  : "bg-[conic-gradient(from_90deg_at_50%_50%,#ffffff_0%,#ffffff_50%,#ffffff_100%)] opacity-40"
+                  ? "bg-[conic-gradient(from_90deg_at_50%_50%,#F9961C_0%,#ffffff_50%,#F9961C_100%)]"
+                  : "bg-[conic-gradient(from_90deg_at_50%_50%,#F9961C_0%,#ffffff_50%,#F9961C_100%)] opacity-80"
               )} />
               <span className={cn(
-                "inline-flex h-full w-full items-center justify-center rounded-full px-6 py-1 text-sm font-medium backdrop-blur-3xl transition-colors",
+                "inline-flex h-full w-full items-center justify-center rounded-full px-8 py-1 text-sm font-bold backdrop-blur-3xl transition-all duration-300",
                 isScrolled
-                  ? "bg-primary text-white hover:bg-primary/90"
-                  : "bg-white/10 text-white hover:bg-white/20"
+                  ? "bg-orange-500 text-white group-hover:bg-orange-600"
+                  : "bg-black/40 text-white group-hover:bg-orange-500/20 border border-white/5"
               )}>
                 Get Started
               </span>
