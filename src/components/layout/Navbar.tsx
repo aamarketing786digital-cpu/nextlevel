@@ -47,16 +47,14 @@ export function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="relative h-16 w-56 md:h-20 md:w-72 overflow-hidden flex items-center">
-               <div className="absolute top-1/2 left-0 -translate-y-1/2 w-56 h-56 md:w-72 md:h-72">
-                   <Image 
-                      src="/Nextlevel-Logo.png" 
-                      alt="NextLevel Marketerz Logo" 
-                      fill 
-                      className="object-contain object-left transition-all duration-300"
-                      priority
-                   />
-               </div>
+            <div className="relative h-10 w-48 md:h-12 md:w-56 transition-all duration-300 flex items-center">
+                 <Image 
+                    src={isScrolled ? "/Nextlevel-Logo-nav.png" : "/Nextlevel-Logo.png"} 
+                    alt="NextLevel Marketerz Logo" 
+                    fill 
+                    className="object-contain object-left transition-all duration-300"
+                    priority
+                 />
             </div>
           </Link>
 
@@ -258,15 +256,13 @@ export function Navbar() {
                 <div className="flex flex-col h-full relative"> 
                     <SheetTitle className="sr-only">Mobile Menu</SheetTitle>
                     <div className="flex items-center justify-between p-6 border-b border-white/10">
-                        <div className="relative h-20 w-64 overflow-hidden">
-                           <div className="absolute top-1/2 left-0 -translate-y-1/2 w-64 h-64">
-                                <Image 
-                                    src="/Nextlevel-Logo.png" 
-                                    alt="NextLevel Logo" 
-                                    fill 
-                                    className="object-contain object-left"
-                                />
-                            </div>
+                        <div className="relative h-10 w-48">
+                              <Image 
+                                  src="/Nextlevel-Logo.png" 
+                                  alt="NextLevel Logo" 
+                                  fill 
+                                  className="object-contain object-left"
+                              />
                         </div>
                         <SheetClose className="text-white hover:text-primary transition-colors focus:outline-none">
                              <X size={24} />

@@ -63,15 +63,13 @@ function FooterContent() {
             {/* Brand Column */}
             <div className="col-span-2 lg:col-span-2">
                  <Link href="/" className="flex items-center space-x-2 mb-6">
-                    <div className="relative h-20 w-64 md:h-24 md:w-80 overflow-hidden">
-                        <div className="absolute top-1/2 left-0 -translate-x-8 -translate-y-1/2 w-64 h-64 md:w-80 md:h-80">
-                            <Image 
-                                src="/Nextlevel-Logo.png" 
-                                alt="NextLevel Logo" 
-                                fill 
-                                className="object-contain object-left"
-                            />
-                        </div>
+                    <div className="relative h-12 w-48 md:h-16 md:w-64 transition-all duration-300">
+                        <Image 
+                            src="/Nextlevel-Logo.png" 
+                            alt="NextLevel Logo" 
+                            fill 
+                            className="object-contain object-left"
+                        />
                     </div>
                  </Link>
                  <p className="text-slate-400 text-lg leading-relaxed max-w-sm mb-6">
@@ -147,7 +145,7 @@ function FooterContent() {
                 &copy; {new Date().getFullYear()} Next Level Marketerz. Dubai, UAE.
             </div>
              {/* Big Text */}
-            <div className="font-display font-bold text-[10vw] leading-none text-white/5 select-none pointer-events-none">
+            <div className="font-display font-bold text-[8vw] leading-none text-white/5 select-none pointer-events-none">
                 AGENCY
             </div>
         </div>
