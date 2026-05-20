@@ -39,3 +39,12 @@ next-env.d.ts
 # playwright
 /playwright-report
 /test-results
+
+.claude/
+.specify/
+.agents/
+.opencode/
+.code/agent
+.code/projects
+/specs
+CLAUDE.md

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Outfit } from "next/font/google";
-import Script from "next/script";
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import { BodyWrapper } from "@/components/layout/BodyWrapper";
 import { LayoutShell } from "@/components/layout/LayoutShell";
 import "./globals.css";
@@ -52,27 +52,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${outfit.variable}`} suppressHydrationWarning>
       <head>
-        {/* Preconnect to critical origins */}
         <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
-
-        {/* Google Analytics GA4 - Deferred load for better performance */}
-        <Script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-PRHW62LLFS"
-          strategy="lazyOnload"
-        />
-        <Script id="google-analytics" strategy="lazyOnload">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-PRHW62LLFS', {
-              page_title: document.title,
-              page_location: window.location.href,
-            });
-          `}
-        </Script>
+        {process.env.NEXT_PUBLIC_GTM_ID && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />}
+        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+        )}
       </head>
       <BodyWrapper>
         <LayoutShell>{children}</LayoutShell>
