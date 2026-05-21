@@ -18,7 +18,7 @@ export function LandingPageLayout({ children }: { children: React.ReactNode }) {
             </span>
           </Link>
           <a
-            href="https://wa.me/971563377016"
+            href="https://wa.me/971568450650"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium px-5 py-2.5 rounded-full transition-colors shadow-lg shadow-emerald-600/20"

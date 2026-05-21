@@ -19,9 +19,9 @@ export function CtaBento() {
 
   // Contact info - Update these with actual NextLevel Marketerz details
   const CONTACT_INFO = {
-    phone: "+971-56-3377016",
+    phone: "+971 56 845 0650",
     email: "info@nextlevelmarketerz.com",
-    whatsapp: "+971563377016",
+    whatsapp: "+971568450650",
   };
 
   return (

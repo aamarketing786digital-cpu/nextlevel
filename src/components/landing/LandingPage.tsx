@@ -183,7 +183,7 @@ export function LandingPage({ config }: { config: LandingPageConfig }) {
     formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
-  const whatsappUrl = `https://wa.me/971563377016?text=${encodeURIComponent(
+  const whatsappUrl = `https://wa.me/971568450650?text=${encodeURIComponent(
     config.hero.ctaWhatsApp
   )}`;
 

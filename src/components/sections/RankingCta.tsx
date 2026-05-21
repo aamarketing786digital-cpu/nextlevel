@@ -71,7 +71,7 @@ export function RankingCta() {
             </h2>
 
             <p className="text-lg text-slate-600 mb-6 font-light">
-              Dial <span className="font-semibold text-slate-900">+971 563377016</span> for a free demo and discovery call!
+              Dial <span className="font-semibold text-slate-900">+971 56 845 0650</span> for a free demo and discovery call!
             </p>
 
             <p className="text-lg text-slate-500 mb-8 font-light">
@@ -132,10 +132,10 @@ export function RankingCta() {
                   {/* Floating Contact Pill */}
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                     <div className="pointer-events-auto flex items-center justify-center gap-3 bg-white/40 backdrop-blur-xl border border-white/40 shadow-xl rounded-full py-2 px-3 transition-transform duration-500 hover:scale-110 cursor-pointer">
-                      <a href="mailto:info@nextlevel.com" aria-label="Email Us" className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-lg text-blue-500 hover:bg-blue-50 transition-colors">
+                      <a href="mailto:info@nextlevelmarketerz.com" aria-label="Email Us" className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-lg text-blue-500 hover:bg-blue-50 transition-colors">
                         <Mail className="w-5 h-5" aria-hidden="true" />
                       </a>
-                      <a href="tel:+971563377016" aria-label="Call Us" className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-lg text-green-500 hover:bg-green-50 transition-colors">
+                      <a href="tel:+971568450650" aria-label="Call Us" className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-lg text-green-500 hover:bg-green-50 transition-colors">
                         <Phone className="w-5 h-5" aria-hidden="true" />
                       </a>
                     </div>
@@ -143,7 +143,7 @@ export function RankingCta() {
                 </div>
 
                 {/* Card 3: Bottom Left - Email Us (Tall) */}
-                <Link href="mailto:info@nextlevel.com" className="rounded-[2rem] bg-[#020617] p-8 flex flex-col justify-between group overflow-hidden relative shadow-2xl aspect-[4/5]">
+                <Link href="mailto:info@nextlevelmarketerz.com" className="rounded-[2rem] bg-[#020617] p-8 flex flex-col justify-between group overflow-hidden relative shadow-2xl aspect-[4/5]">
                   <div className="absolute inset-0 bg-gradient-to-t from-teal-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <h3 className="text-3xl text-white font-light relative z-10 group-hover:text-orange-400 transition-colors duration-300">Email Us!</h3>
                   <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white backdrop-blur-md self-start relative z-10 group-hover:bg-orange-500/20 group-hover:border-orange-500/30 group-hover:scale-110 transition-all duration-500 cursor-pointer">
@@ -155,11 +155,11 @@ export function RankingCta() {
               {/* Right Column of Bento */}
               <div className="flex-1 min-w-0 flex flex-col gap-4 md:gap-6 sm:mt-8 lg:mt-0">
                 {/* Card 2: Top Right - Call Us Now (Tall) */}
-                <Link href="tel:+971563377016" className="rounded-[2rem] bg-white border border-slate-100 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] p-8 flex flex-col justify-start group hover:border-orange-200 transition-colors duration-500 aspect-[4/5]">
+                <Link href="tel:+971568450650" className="rounded-[2rem] bg-white border border-slate-100 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] p-8 flex flex-col justify-start group hover:border-orange-200 transition-colors duration-500 aspect-[4/5]">
                   <p className="text-2xl text-slate-400 font-light mb-6 group-hover:text-orange-600 transition-colors duration-300">Call Us Now!</p>
                   <div className="text-3xl lg:text-4xl xl:text-4xl font-display font-medium text-slate-800 leading-[1.1] tracking-tight">
                     +971 <br />
-                    56 337 7016
+                    56 845 0650
                   </div>
                 </Link>
 
