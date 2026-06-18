@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -23,6 +24,7 @@ const services = [
     features: ["Lightning fast load times", "Built for conversions", "SEO-ready from day one"],
     theme: "light",
     gradient: "from-indigo-600/20 to-purple-500/20",
+    href: "/services/web-development",
   },
   {
     id: "seo",
@@ -32,6 +34,7 @@ const services = [
     features: ["Technical site audits", "Authority building", "Measurable rank growth"],
     theme: "dark",
     gradient: "from-green-600/20 to-emerald-500/20",
+    href: "/services/seo",
   },
   {
     id: "marketing",
@@ -41,6 +44,7 @@ const services = [
     features: ["Google & Meta Ads", "Audience targeting that works", "Transparent reporting"],
     theme: "light",
     gradient: "from-orange-600/20 to-yellow-500/20",
+    href: "/services/social-media-marketing",
   },
   {
     id: "design",
@@ -50,6 +54,7 @@ const services = [
     features: ["Conversion-focused UI", "Mobile-first approach", "Brand consistency"],
     theme: "dark",
     gradient: "from-pink-600/20 to-rose-500/20",
+    href: "/services/website-design",
   },
   {
     id: "ai",
@@ -59,6 +64,7 @@ const services = [
     features: ["Custom AI chatbots", "Process automation", "24/7 lead capture"],
     theme: "light",
     gradient: "from-blue-600/20 to-teal-500/20",
+    href: "/services/ai-chatbots",
   },
 ];
 
@@ -134,8 +140,10 @@ function MobileServices() {
                 ))}
               </ul>
 
-              <Button className="rounded-full px-6 py-3 text-sm group shadow-md shadow-primary/15 w-full">
-                Explore Service <ArrowUpRight className="ml-2 w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              <Button asChild className="rounded-full px-6 py-3 text-sm group shadow-md shadow-primary/15 w-full">
+                <Link href={service.href}>
+                  Explore Service <ArrowUpRight className="ml-2 w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </Link>
               </Button>
             </div>
           ))}
@@ -310,11 +318,13 @@ function DesktopServices() {
                            ))}
                        </ul>
 
-                        <div className="pt-8">
-                            <Button className="rounded-full px-8 py-6 text-lg group shadow-lg shadow-primary/20 hover:shadow-primary/30">
-                                Explore Service <ArrowUpRight className="ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                            </Button>
-                        </div>
+                         <div className="pt-8">
+                             <Button asChild className="rounded-full px-8 py-6 text-lg group shadow-lg shadow-primary/20 hover:shadow-primary/30">
+                                 <Link href={service.href}>
+                                     Explore Service <ArrowUpRight className="ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                 </Link>
+                             </Button>
+                         </div>
                    </div>
 
                    {/* Right: Visual */}

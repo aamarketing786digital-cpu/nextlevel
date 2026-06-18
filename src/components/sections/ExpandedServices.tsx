@@ -31,17 +31,18 @@ const SERVICE_CATEGORIES = {
     "TikTok Ads",
   ],
   "Lead Generation": [
+    "Lead Generation",
     "LinkedIn Lead Generation",
-    "B2B Lead Generation",
     "Real Estate Marketing",
     "Hospital Marketing",
     "Medical Clinic Marketing",
-    "Restaurant Marketing",
+    "Restaurant & Bar Marketing",
     "Hotel Marketing",
   ],
   "AI Solutions": [
     "WhatsApp Business API",
     "ZOHO Integration",
+    "AI Chatbots & Automation",
   ],
 } as const;
 
@@ -49,17 +50,22 @@ export function ExpandedServices() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-  // Get all service titles
-  const allServiceTitles = SERVICES.map(s => s.title);
+  // Get all core service titles from our categories
+  const coreServiceTitles = Object.values(SERVICE_CATEGORIES).flat();
+
+  // Get only the services that are defined in our categories
+  const allServiceTitles = SERVICES.filter(s =>
+    coreServiceTitles.some(cat => s.title.toLowerCase().includes(cat.toLowerCase()) || cat.toLowerCase().includes(s.title.toLowerCase()))
+  ).map(s => s.title);
 
   // Filter services by category
   const getFilteredServices = () => {
     if (!selectedCategory) return allServiceTitles.slice(0, 12);
     const categoryServices = SERVICE_CATEGORIES[selectedCategory as keyof typeof SERVICE_CATEGORIES];
     if (categoryServices) {
-      // Match services that contain the category keywords
+      // Match services that belong to the category
       return SERVICES.filter(s =>
-        categoryServices.some(cat => s.title.includes(cat))
+        categoryServices.some(cat => s.title.toLowerCase().includes(cat.toLowerCase()) || cat.toLowerCase().includes(s.title.toLowerCase()))
       ).map(s => s.title);
     }
     return allServiceTitles.slice(0, 12);

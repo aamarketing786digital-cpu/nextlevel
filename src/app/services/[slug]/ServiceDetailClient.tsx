@@ -18,6 +18,45 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+function renderTextWithLinks(text: string) {
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  const parts = [];
+  let lastIndex = 0;
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+    const [fullMatch, linkText, url] = match;
+    const matchIndex = match.index;
+
+    if (matchIndex > lastIndex) {
+      parts.push(text.substring(lastIndex, matchIndex));
+    }
+
+    const isInternal = url.startsWith('/');
+    if (isInternal) {
+      parts.push(
+        <Link key={matchIndex} href={url} className="text-orange-400 hover:text-orange-300 transition-colors">
+          {linkText}
+        </Link>
+      );
+    } else {
+      parts.push(
+        <a key={matchIndex} href={url} target="_blank" rel="noopener noreferrer" className="text-orange-400 hover:text-orange-300 transition-colors">
+          {linkText}
+        </a>
+      );
+    }
+
+    lastIndex = matchIndex + fullMatch.length;
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(text.substring(lastIndex));
+  }
+
+  return parts.length > 0 ? parts : text;
+}
+
 interface ServiceDetailClientProps {
   service: Service;
 }
@@ -255,7 +294,7 @@ export function ServiceDetailClient({ service }: ServiceDetailClientProps) {
             </h1>
 
             <p className="service-hero-desc text-xl md:text-2xl text-slate-400 font-light max-w-3xl mx-auto mb-12 leading-relaxed">
-              {service.description}
+              {renderTextWithLinks(service.description)}
             </p>
 
             {/* Glassmorphic Dock CTAs */}

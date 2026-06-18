@@ -73,6 +73,7 @@ export const SERVICE_SLUG_MAP: Record<string, string> = {
   "Website Hosting": "website-hosting",
   "WhatsApp Business API": "whatsapp-api",
   "ZOHO": "zoho-integration",
+  "AI Chatbots & Automation": "ai-chatbots",
   // Design Agency
   "Website Design Figma": "website-design",
   "Mobile App Design": "mobile-app-design",
@@ -925,6 +926,23 @@ export const SERVICES: Service[] = [
     features: ["Custom illustration", "Character animation", "Motion graphics", "Voiceover", "Sound effects"],
     technologies: ["After Effects", "Animate", "Illustrator", "Pro Tools"],
     pricing: { name: "Project-based", price: "Starting from $4,000", deliverables: ["Animation", "Sound", "Files", "Revisions"] },
+  },
+  {
+    id: "56",
+    slug: "ai-chatbots",
+    title: "AI Chatbots & Automation",
+    icon: "cpu",
+    shortDescription: "Custom AI chatbots and workflow automation.",
+    description: "We design and build custom AI-powered chatbots and workflow automation systems that capture leads 24/7, answer customer questions instantly, and streamline your operations. Leveraging [Octively](https://octively.com), we implement RAG capabilities and custom conversational flows to elevate your business.",
+    features: [
+      "Custom AI chatbots with advanced RAG",
+      "24/7 lead capture and qualification",
+      "Process & workflow automation",
+      "Chatbot analytics dashboards for key user insights",
+      "Detailed conversational tracking and reporting"
+    ],
+    technologies: ["Octively", "Zapier", "CRMs", "APIs"],
+    pricing: { name: "Project-based", price: "Starting from $2,500", deliverables: ["Chatbot deployment", "Workflow setup", "Analytics dashboard", "Support"] },
   },
 ] as const;
 
