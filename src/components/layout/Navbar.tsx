@@ -116,14 +116,15 @@ export function Navbar() {
                              <Link href={getServiceUrl("Influencer Marketing")} className="text-muted-foreground hover:text-primary transition-colors">Influencer Marketing</Link>
                            </div>
 
-                           {/* Paid Ads & Lead Gen */}
-                           <div className="flex flex-col space-y-3">
-                             <h4 className="text-foreground font-bold text-base mb-1">Paid Ads & Lead Gen</h4>
-                             <Link href={getServiceUrl("Google Ads")} className="text-muted-foreground hover:text-primary transition-colors">Google Ads</Link>
-                             <Link href={getServiceUrl("Facebook Ads")} className="text-muted-foreground hover:text-primary transition-colors">Meta Ads (Facebook & Instagram)</Link>
-                             <Link href={getServiceUrl("Lead Generation")} className="text-muted-foreground hover:text-primary transition-colors">Lead Generation</Link>
-                             <Link href={getServiceUrl("TikTok Ads")} className="text-muted-foreground hover:text-primary transition-colors">TikTok Ads</Link>
-                           </div>
+                            {/* Paid Ads, Lead Gen & AI */}
+                            <div className="flex flex-col space-y-3">
+                              <h4 className="text-foreground font-bold text-base mb-1">Paid Ads, Lead Gen & AI</h4>
+                              <Link href={getServiceUrl("Google Ads")} className="text-muted-foreground hover:text-primary transition-colors">Google Ads</Link>
+                              <Link href={getServiceUrl("Facebook Ads")} className="text-muted-foreground hover:text-primary transition-colors">Meta Ads (Facebook & Instagram)</Link>
+                              <Link href={getServiceUrl("Lead Generation")} className="text-muted-foreground hover:text-primary transition-colors">Lead Generation</Link>
+                              <Link href={getServiceUrl("TikTok Ads")} className="text-muted-foreground hover:text-primary transition-colors">TikTok Ads</Link>
+                              <Link href={getServiceUrl("AI Chatbots & Automation")} className="text-muted-foreground hover:text-primary transition-colors">AI Chatbots & Automation</Link>
+                            </div>
 
                            {/* Promo Card */}
                            <div className="flex flex-col justify-between rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 p-6 text-white shadow-lg">

@@ -39,6 +39,7 @@ export const FOOTER_LINKS = {
     { href: "/services/google-ads", label: "Google Ads" },
     { href: "/services/facebook-ads", label: "Meta Ads" },
     { href: "/services/linkedin-lead-gen", label: "Lead Generation" },
+    { href: "/services/ai-chatbots", label: "AI Chatbots & Automation" },
   ],
   industries: [
     { href: "/seo-for-restaurants-dubai", label: "SEO for Restaurants" },
@@ -938,7 +939,7 @@ export const SERVICES: Service[] = [
       "Custom AI chatbots with advanced RAG",
       "24/7 lead capture and qualification",
       "Process & workflow automation",
-      "Chatbot analytics dashboards for key user insights",
+      "Chatbot analytics dashboards",
       "Detailed conversational tracking and reporting"
     ],
     technologies: ["Octively", "Zapier", "CRMs", "APIs"],
