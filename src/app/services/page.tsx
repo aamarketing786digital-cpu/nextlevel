@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { ServicesShowcase } from "@/components/sections/ServicesShowcase";
 import { ExpandedServices } from "@/components/sections/ExpandedServices";
-import { CtaBento } from "@/components/sections/CtaBento";
+import { RankingCta } from "@/components/sections/RankingCta";
 
 export const metadata: Metadata = {
   title: "Our Services | NextLevel Marketerz",
@@ -38,7 +38,7 @@ export default function ServicesPage() {
       <ExpandedServices />
 
       {/* CTA Section - Premium Bento Grid */}
-      <CtaBento />
+      <RankingCta />
     </main>
   );
 }
