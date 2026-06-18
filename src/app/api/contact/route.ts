@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { contactFormSchema } from "@/lib/validation";
-import { sendEmail, addContact } from "@/lib/brevo";
+import { sendEmail, addContact } from "@/lib/resend";
 import { SERVICE_INTEREST_OPTIONS, BUDGET_RANGE_OPTIONS } from "@/lib/constants";
 
 // Simple in-memory rate limiter (for production, use Redis/Vercel KV)

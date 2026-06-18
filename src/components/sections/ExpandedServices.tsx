@@ -9,78 +9,39 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-// Service categories for organized display
+// Service categories for organized display — core services only
 const SERVICE_CATEGORIES = {
-  "Digital Marketing": [
-    "Search Engine Optimization",
-    "Social Media Marketing",
-    "Influencer Marketing",
-    "PR & Outreach",
-    "Email Marketing",
-    "Amazon Marketing",
-    "E-Commerce Marketplace",
-    "SMS Marketing",
-  ],
-  "Web & App Development": [
+  "Website & Design": [
     "Web Development",
-    "Mobile App Development",
-    "Website Hosting",
-    "WhatsApp Business API",
-    "ZOHO Integration",
-  ],
-  "Design": [
     "Website Design",
-    "Mobile App Design",
+    "Mobile App Development",
     "Graphic Design",
     "Branding",
   ],
-  "Paid Media": [
+  "SEO & Content": [
+    "Search Engine Optimization",
+    "Social Media Marketing",
+    "Email Marketing",
+    "Influencer Marketing",
+  ],
+  "Paid Ads": [
     "Google Ads",
     "Facebook Ads",
     "Instagram Ads",
-    "Snapchat Ads",
-    "X Ads",
-    "Reddit Ads",
-    "Pinterest Ads",
-    "Linkedin Ads",
     "TikTok Ads",
-    "Youtube Ads",
   ],
   "Lead Generation": [
     "LinkedIn Lead Generation",
-    "Hospital Marketing",
-    "Beauty & Wellness Marketing",
-    "Medical Clinic Marketing",
-    "Hotel Marketing",
-    "Restaurant Marketing",
     "B2B Lead Generation",
     "Real Estate Marketing",
-    "Education Marketing",
-    "Insurance Marketing",
-    "Fintech Marketing",
-    "IT Marketing",
-    "Security Marketing",
+    "Hospital Marketing",
+    "Medical Clinic Marketing",
+    "Restaurant Marketing",
+    "Hotel Marketing",
   ],
-  "Video Production": [
-    "Corporate Video Production",
-    "3D Video Production",
-    "SaaS Explainer Video",
-    "Financial Video",
-    "Social Video",
-    "Motion Graphics",
-  ],
-  "Explainer Videos": [
-    "Corporate Explainer Videos",
-    "B2B Explainer Videos",
-    "Tech Explainer Videos",
-  ],
-  "Animation": [
-    "3D Animation",
-    "Product Videos",
-    "2D Animation",
-  ],
-  "Events": [
-    "Exhibition Stand Design",
+  "AI Solutions": [
+    "WhatsApp Business API",
+    "ZOHO Integration",
   ],
 } as const;
 
@@ -120,18 +81,27 @@ export function ExpandedServices() {
 
       <Container className="relative z-10">
         <div className="max-w-5xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500/20 to-primary/10 border border-orange-500/20 mb-6">
-              <Sparkles className="w-8 h-8 text-orange-400" />
-            </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-6">
-              Our Comprehensive Services
-            </h2>
-            <p className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto">
-              All-in-one digital solutions to elevate your brand and accelerate growth
-            </p>
-          </div>
+           {/* Limited Time Offer */}
+           <div className="mb-12 flex justify-center">
+             <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-orange-500/20 to-orange-600/10 border border-orange-500/30">
+               <span className="flex items-center justify-center w-8 h-8 rounded-full bg-orange-500 text-white text-xs font-black">%</span>
+               <span className="text-orange-400 font-bold text-sm md:text-base">Limited Time Offer — 50% Off All Services</span>
+               <Link href="/contact" className="ml-2 px-4 py-1.5 rounded-full bg-orange-500 text-white text-xs font-bold hover:bg-orange-400 transition-colors">Get Started</Link>
+             </div>
+           </div>
+
+           {/* Header */}
+           <div className="text-center mb-16">
+             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500/20 to-primary/10 border border-orange-500/20 mb-6">
+               <Sparkles className="w-8 h-8 text-orange-400" />
+             </div>
+             <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-6">
+               What We Actually Do
+             </h2>
+             <p className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto">
+               No fluff, no filler. These are the services that move the needle for our clients.
+             </p>
+           </div>
 
           {/* Category Filter */}
           <div className="flex flex-wrap justify-center gap-3 mb-12">

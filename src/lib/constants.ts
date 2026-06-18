@@ -34,10 +34,11 @@ export const FOOTER_LINKS = {
   ],
   services: [
     { href: "/services/web-development", label: "Web Development" },
-    { href: "/services/social-media-marketing", label: "Social Media Marketing" },
-    { href: "/services/google-ads", label: "Paid Advertising" },
-    { href: "/services/graphic-design", label: "Graphic Design" },
     { href: "/services/seo", label: "SEO Services" },
+    { href: "/services/social-media-marketing", label: "Social Media Marketing" },
+    { href: "/services/google-ads", label: "Google Ads" },
+    { href: "/services/facebook-ads", label: "Meta Ads" },
+    { href: "/services/linkedin-lead-gen", label: "Lead Generation" },
   ],
   industries: [
     { href: "/seo-for-restaurants-dubai", label: "SEO for Restaurants" },

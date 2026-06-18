@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { newsletterSchema } from "@/lib/validation";
-import { addNewsletterSubscriber } from "@/lib/brevo";
+import { addNewsletterSubscriber } from "@/lib/resend";
 
 // Simple in-memory rate limiter for newsletter
 const newsletterRateLimitMap = new Map<string, { count: number; resetTime: number }>();

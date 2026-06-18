@@ -16,49 +16,49 @@ if (typeof window !== "undefined") {
 
 const services = [
   {
-    id: "ai",
-    title: "AI Solutions",
-    description: "Custom AI chatbots and automation workflows that streamline your operations and enhance customer engagement 24/7.",
-    icon: <Cpu className="w-8 h-8 md:w-12 md:h-12 text-primary" />,
-    features: ["80% faster response", "24/7 availability", "Automated scaling"],
-    theme: "dark",
-    gradient: "from-blue-600/20 to-teal-500/20",
-  },
-  {
     id: "dev",
     title: "Web Development",
-    description: "High-performance, scalable web applications built with modern technologies like Next.js, React, and TypeScript.",
+    description: "We build fast, modern websites that actually convert visitors into customers. Next.js, React, TypeScript — the stack that performs.",
     icon: <Code className="w-8 h-8 md:w-12 md:h-12 text-blue-500" />,
-    features: ["99.9% uptime", "<3s load time", "SEO optimized"],
+    features: ["Lightning fast load times", "Built for conversions", "SEO-ready from day one"],
     theme: "light",
     gradient: "from-indigo-600/20 to-purple-500/20",
   },
   {
-    id: "design",
-    title: "Premium Design",
-    description: "Award-winning UI/UX design that focuses on conversion, brand identity, and creating memorable digital experiences.",
-    icon: <Palette className="w-8 h-8 md:w-12 md:h-12 text-purple-500" />,
-    features: ["User-centric", "Brand consistency", "Mobile-first"],
+    id: "seo",
+    title: "SEO Services",
+    description: "Stop hoping Google finds you. We run technical audits, fix what is broken, build authority, and get you ranking where your customers are searching.",
+    icon: <Search className="w-8 h-8 md:w-12 md:h-12 text-green-500" />,
+    features: ["Technical site audits", "Authority building", "Measurable rank growth"],
     theme: "dark",
-    gradient: "from-pink-600/20 to-rose-500/20",
+    gradient: "from-green-600/20 to-emerald-500/20",
   },
   {
     id: "marketing",
-    title: "Digital Marketing",
-    description: "Data-driven marketing campaigns that target the right audience with precision, maximizing your ROI and growth.",
+    title: "Social Media & Ads",
+    description: "Google Ads, Meta Ads, TikTok — we run the campaigns that put your brand in front of people who are ready to buy. Not vanity impressions, real leads.",
     icon: <Zap className="w-8 h-8 md:w-12 md:h-12 text-yellow-500" />,
-    features: ["300% ROI avg", "Precision targeting", "Real-time analytics"],
+    features: ["Google & Meta Ads", "Audience targeting that works", "Transparent reporting"],
     theme: "light",
     gradient: "from-orange-600/20 to-yellow-500/20",
   },
   {
-    id: "seo",
-    title: "Advanced SEO",
-    description: "Dominate search rankings with white-hat strategies including technical audits, content optimization, and authority building.",
-    icon: <Search className="w-8 h-8 md:w-12 md:h-12 text-green-500" />,
-    features: ["Top rankings", "Organic growth", "Long-term value"],
+    id: "design",
+    title: "Website Design",
+    description: "Your website is your storefront. We design interfaces people actually want to use — clean layouts, clear CTAs, and branding that sticks.",
+    icon: <Palette className="w-8 h-8 md:w-12 md:h-12 text-purple-500" />,
+    features: ["Conversion-focused UI", "Mobile-first approach", "Brand consistency"],
     theme: "dark",
-    gradient: "from-green-600/20 to-emerald-500/20",
+    gradient: "from-pink-600/20 to-rose-500/20",
+  },
+  {
+    id: "ai",
+    title: "AI-Powered Solutions",
+    description: "AI chatbots, workflow automation, and smart integrations that handle the repetitive work so your team can focus on closing deals.",
+    icon: <Cpu className="w-8 h-8 md:w-12 md:h-12 text-primary" />,
+    features: ["Custom AI chatbots", "Process automation", "24/7 lead capture"],
+    theme: "light",
+    gradient: "from-blue-600/20 to-teal-500/20",
   },
 ];
 
@@ -94,9 +94,9 @@ function MobileServices() {
     <section ref={sectionRef} className="py-16 bg-background md:hidden">
       <Container>
         <div className="text-center mb-10 px-4">
-          <span className="text-orange-600 dark:text-orange-400 font-bold tracking-wide uppercase text-sm mb-3 block">Our Services</span>
+          <span className="text-orange-600 dark:text-orange-400 font-bold tracking-wide uppercase text-sm mb-3 block">50% Off — Limited Time</span>
           <h2 className="text-3xl font-display font-bold text-slate-900 mb-4">
-            What We <span className="text-primary">Deliver</span>
+            Services That <span className="text-primary">Drive Results</span>
           </h2>
         </div>
 
