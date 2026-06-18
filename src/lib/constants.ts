@@ -20,10 +20,8 @@ export const NAVIGATION_LINKS: NavLink[] = [
 
 // Social Media Links
 export const SOCIAL_LINKS: SocialLink[] = [
-  { platform: "twitter", url: "https://twitter.com/nextlevelmarketerz", icon: "twitter" },
-  { platform: "linkedin", url: "https://linkedin.com/company/nextlevelmarketerz", icon: "linkedin" },
-  { platform: "github", url: "https://github.com/nextlevelmarketerz", icon: "github" },
-  { platform: "dribbble", url: "https://dribbble.com/nextlevelmarketerz", icon: "dribbble" },
+  { platform: "instagram", url: "https://www.instagram.com/nextlevelmarketerzofficial/", icon: "instagram" },
+  { platform: "facebook", url: "https://www.facebook.com/nextlevelmarketerzofficial", icon: "facebook" },
 ] as const;
 
 // Footer Links

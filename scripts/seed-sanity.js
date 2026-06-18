@@ -20,9 +20,10 @@
  */
 
 import { createClient } from 'next-sanity'
-import 'dotenv/config'
+import { config } from 'dotenv'
+import { resolve } from 'path'
+config({ path: resolve(process.cwd(), '.env.local') })
 
-// Note: dotenv/config automatically loads .env and .env.local
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
@@ -121,8 +122,8 @@ const SAMPLE_BLOG_POSTS = [
     publishedAt: new Date('2025-01-15T10:00:00Z').toISOString(),
     tags: ['SEO', 'Digital Marketing', 'Trends', '2025'],
     faqs: [
-      { question: 'What is AI-driven SEO?', answer: 'AI-driven SEO uses artificial intelligence to analyze search patterns, optimize content automatically, and predict ranking changes.' },
-      { question: 'How important is voice search?', answer: 'Voice search is becoming crucial as more users rely on smart speakers and mobile voice assistants for searches.' },
+      { _key: 'faq1', question: 'What is AI-driven SEO?', answer: 'AI-driven SEO uses artificial intelligence to analyze search patterns, optimize content automatically, and predict ranking changes.' },
+      { _key: 'faq2', question: 'How important is voice search?', answer: 'Voice search is becoming crucial as more users rely on smart speakers and mobile voice assistants for searches.' },
     ],
     seo: {
       seoTitle: 'SEO Trends 2025: 10 Strategies to Boost Your Rankings',
@@ -186,6 +187,82 @@ const SAMPLE_BLOG_POSTS = [
       seoDescription: 'Learn how successful startups build memorable brands. A step-by-step guide to brand development.',
     },
   },
+  {
+    _type: 'post',
+    title: '🌐 The Future of Web Development: What to Expect in 2026',
+    slug: { _type: 'slug', current: 'future-web-development-2026' },
+    summary: 'Explore the cutting-edge technologies shaping the web. From WebAssembly to AI-driven UI generation, discover how web development is evolving. 💻✨',
+    status: 'published',
+    featured: true,
+    readTime: 10,
+    publishedAt: new Date('2025-02-01T10:00:00Z').toISOString(),
+    tags: ['Web Development', 'Technology', 'Trends', '2026'],
+    faqs: [
+      { question: 'Will AI replace web developers?', answer: 'AI will augment developers, automating repetitive tasks but requiring human oversight for complex logic and architecture.' },
+      { question: 'What framework should I learn?', answer: 'React/Next.js remain dominant, but emerging frameworks like Svelte and SolidJS are gaining traction for performance.' },
+    ],
+    seo: {
+      seoTitle: 'Future of Web Development 2026 | Trends & Technologies',
+      seoDescription: 'Discover the future of web development. Learn about AI, WebAssembly, and the frameworks that will dominate 2026.',
+    },
+  },
+  {
+    _type: 'post',
+    title: '🚀 Advanced SEO Strategies: Beyond Keyword Research',
+    slug: { _type: 'slug', current: 'advanced-seo-strategies-beyond-keywords' },
+    summary: 'Stop relying solely on keyword volume. Dive into technical SEO, semantic search, and entity-based optimization to truly dominate search engine results. 🎯🔍',
+    status: 'published',
+    featured: false,
+    readTime: 14,
+    publishedAt: new Date('2025-02-05T08:00:00Z').toISOString(),
+    tags: ['SEO', 'Technical SEO', 'Digital Marketing'],
+    faqs: [
+      { question: 'What is entity-based SEO?', answer: 'Entity-based SEO focuses on context and relationships between concepts (entities) rather than just matching exact keywords.' },
+      { question: 'How important are Core Web Vitals?', answer: 'Extremely important. Google uses them as a ranking factor, and they directly impact user experience and conversion rates.' },
+    ],
+    seo: {
+      seoTitle: 'Advanced SEO Strategies for 2026 | Technical & Semantic SEO',
+      seoDescription: 'Move beyond basic keywords. Learn advanced technical and semantic SEO strategies to dominate search engine rankings.',
+    },
+  },
+  {
+    _type: 'post',
+    title: '📈 Maximizing ROI: Comprehensive Guide to Digital Marketing Analytics',
+    slug: { _type: 'slug', current: 'maximizing-roi-digital-marketing-analytics' },
+    summary: 'Data is the lifeblood of modern marketing. Learn how to track the right metrics, attribute conversions accurately, and maximize your campaign ROI. 📊💡',
+    status: 'published',
+    featured: true,
+    readTime: 11,
+    publishedAt: new Date('2025-02-10T14:30:00Z').toISOString(),
+    tags: ['Digital Marketing', 'Analytics', 'ROI', 'Data'],
+    faqs: [
+      { question: 'What is attribution modeling?', answer: 'Attribution modeling is the rule or set of rules that determines how credit for sales and conversions is assigned to touchpoints in conversion paths.' },
+      { question: 'Which analytics tool is best?', answer: 'Google Analytics 4 is the industry standard, but tools like Mixpanel or Amplitude are better for product-led analytics.' },
+    ],
+    seo: {
+      seoTitle: 'Digital Marketing Analytics Guide | Maximize Your ROI',
+      seoDescription: 'Learn how to master digital marketing analytics. Track conversions, understand attribution, and improve your marketing ROI.',
+    },
+  },
+  {
+    _type: 'post',
+    title: '📱 Mastering TikTok and Reels for Business Growth',
+    slug: { _type: 'slug', current: 'mastering-tiktok-reels-business-growth' },
+    summary: 'Short-form video is the king of engagement. Uncover the secrets to creating viral content that drives brand awareness and actual sales. 🎬🔥',
+    status: 'published',
+    featured: false,
+    readTime: 9,
+    publishedAt: new Date('2025-02-15T09:00:00Z').toISOString(),
+    tags: ['Social Media', 'TikTok', 'Instagram Reels', 'Video Marketing'],
+    faqs: [
+      { question: 'Do I need professional equipment for TikTok?', answer: 'No! Authentic, smartphone-shot content often performs better than highly polished, over-produced videos.' },
+      { question: 'How often should a business post?', answer: 'Consistency is key. Aim for 3-5 times a week on TikTok or Reels to keep the algorithm favoring your content.' },
+    ],
+    seo: {
+      seoTitle: 'TikTok & Reels for Business | Short-Form Video Strategy',
+      seoDescription: 'Master short-form video marketing. Learn how to use TikTok and Instagram Reels to grow your business and drive sales.',
+    },
+  }
 ]
 
 const SAMPLE_CASE_STUDIES = [

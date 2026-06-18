@@ -73,7 +73,7 @@ export interface TeamMember {
 }
 
 export interface SocialLink {
-  platform: "linkedin" | "twitter" | "github" | "dribbble" | "behance";
+  platform: "linkedin" | "twitter" | "github" | "dribbble" | "behance" | "instagram" | "facebook";
   url: string;
   icon: string;
 }

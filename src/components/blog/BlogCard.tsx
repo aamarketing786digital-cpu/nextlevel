@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { Calendar, Clock, ArrowRight } from "lucide-react"
+import { Calendar, Clock, ArrowRight, Star } from "lucide-react"
 import { urlFor } from "@/sanity/lib/image"
 import type { SanityPostMinimal } from "@/types/sanity"
 import { motion } from "framer-motion"
@@ -60,7 +60,7 @@ export function BlogCard({ post, index = 0 }: BlogCardProps) {
             {post.featured && (
               <div className="absolute top-4 right-4">
                 <span className="px-3 py-1 rounded-full text-xs font-semibold bg-orange-500 text-white flex items-center gap-1">
-                  ⭐ Featured
+                  <Star className="w-3.5 h-3.5 fill-current" /> Featured
                 </span>
               </div>
             )}

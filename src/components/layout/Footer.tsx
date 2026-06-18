@@ -6,7 +6,7 @@ import Image from "next/image";
 import { FOOTER_LINKS, SOCIAL_LINKS } from "@/lib/constants";
 import { Container } from "./Container";
 
-import { Twitter, Linkedin, Github, Dribbble } from "lucide-react";
+import { Instagram, Facebook } from "lucide-react";
 
 export function Footer() {
   const footerRef = useRef<HTMLDivElement>(null);
@@ -44,10 +44,8 @@ export function Footer() {
 
 const getSocialIcon = (platform: string) => {
   switch (platform.toLowerCase()) {
-    case "twitter": return <Twitter size={18} />;
-    case "linkedin": return <Linkedin size={18} />;
-    case "github": return <Github size={18} />;
-    case "dribbble": return <Dribbble size={18} />;
+    case "instagram": return <Instagram size={18} />;
+    case "facebook": return <Facebook size={18} />;
     default: return <span>{platform.charAt(0)}</span>;
   }
 };

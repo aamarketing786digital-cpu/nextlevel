@@ -1,13 +1,14 @@
 import { Metadata } from "next";
 import { CompanyStory } from "@/components/sections/CompanyStory";
-import { TeamSection } from "@/components/sections/TeamSection";
+import { CeoMessage } from "@/components/sections/CeoMessage";
+// import { TeamSection } from "@/components/sections/TeamSection";
 import { Values } from "@/components/sections/Values";
 import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "About Us | NextLevel Marketerz",
   description:
-    "Learn about NextLevel Marketerz - our story, our team of visionaries, and the values that drive us to deliver exceptional results for our clients.",
+    "Learn about NextLevel Marketerz - our story, our CEO Aqsa Qureshi, and the values that drive us to deliver exceptional results for our clients.",
 };
 
 export default function AboutPage() {
@@ -26,8 +27,7 @@ export default function AboutPage() {
               About <span className="text-gradient-gold">Next Level Marketerz</span>
             </h1>
             <p className="text-lg md:text-xl text-slate-300 leading-relaxed font-light">
-              We're a team of passionate marketers, developers, and designers
-              united by a mission to transform businesses across the Middle East.
+              We're a passionate team united by a mission to transform businesses across the Middle East.
             </p>
           </div>
         </div>
@@ -39,8 +39,11 @@ export default function AboutPage() {
       {/* Values */}
       <Values />
 
-      {/* Team */}
-      <TeamSection />
+      {/* CEO Message */}
+      <CeoMessage />
+      
+      {/* Team (To be added below CEO later) */}
+      {/* <TeamSection /> */}
 
       {/* CTA Section */}
       <section className="py-16 md:py-24 bg-muted/30">

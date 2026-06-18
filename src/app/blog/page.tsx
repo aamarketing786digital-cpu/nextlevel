@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 import Link from "next/link"
+import { Star } from "lucide-react"
 import { client } from "@/sanity/lib/client"
 import { BlogCard } from "@/components/blog/BlogCard"
 import { Container } from "@/components/layout/Container"
@@ -45,7 +46,7 @@ export default async function BlogPage({
     "slug": slug.current,
     summary,
     mainImage{asset->{url}, alt},
-    "categories": categories[]{
+    "categories": categories[]->{
       "title": title,
       "slug": slug.current,
       "color": color
@@ -66,8 +67,9 @@ export default async function BlogPage({
   const categories = await client.fetch(categoriesQuery)
 
   // Featured posts
-  const featuredPosts = posts.filter((p) => p.featured)
-  const regularPosts = posts.filter((p) => !p.featured)
+  const allFeatured = posts.filter((p) => p.featured)
+  const featuredPosts = allFeatured.slice(0, 3)
+  const regularPosts = posts.filter((p) => !p.featured).concat(allFeatured.slice(3))
 
   return (
     <main className="min-h-screen bg-background">
@@ -90,7 +92,7 @@ export default async function BlogPage({
       </section>
 
       {/* Category Filter */}
-      <section className="py-8 border-b border-border sticky top-16 bg-background/95 backdrop-blur z-10">
+      <section className="py-8 border-b border-border bg-background">
         <Container>
           <div className="flex items-center gap-4 overflow-x-auto pb-2 scrollbar-hide">
             <Link
@@ -125,7 +127,7 @@ export default async function BlogPage({
         <section className="py-16">
           <Container>
             <h2 className="text-2xl md:text-3xl font-bold mb-8 flex items-center gap-2">
-              <span>⭐</span> Featured Posts
+              <Star className="w-6 h-6 text-orange-500 fill-orange-500" /> Featured Posts
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {featuredPosts.map((post, index) => (
@@ -134,6 +136,13 @@ export default async function BlogPage({
             </div>
           </Container>
         </section>
+      )}
+
+      {/* Divider */}
+      {featuredPosts.length > 0 && regularPosts.length > 0 && (
+        <Container>
+          <hr className="border-border" />
+        </Container>
       )}
 
       {/* All Posts */}
