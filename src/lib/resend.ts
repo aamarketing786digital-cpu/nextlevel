@@ -35,7 +35,7 @@ export async function sendEmail(options: SendEmailOptions): Promise<{ success: b
   }
 
   try {
-    const { data, error } = await resend.emails.send({
+    const { error } = await resend.emails.send({
       from: FROM_EMAIL,
       to: options.to.map((r) => r.email),
       subject: options.subject,
