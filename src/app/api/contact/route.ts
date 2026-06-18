@@ -95,41 +95,6 @@ export async function POST(request: NextRequest) {
       console.error("Failed to send agency email:", agencyEmailResult.error);
     }
 
-    // Send confirmation email to user
-    const userEmailHtml = `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h1 style="color: #c9a227;">Thank you for reaching out!</h1>
-        <p>Hi ${name.split(" ")[0]},</p>
-        <p>Thank you for your interest in NextLevel Marketerz. We've received your message and will get back to you within 24 hours.</p>
-        <h3>Your Message:</h3>
-        <p style="background: #f5f5f5; padding: 15px; border-radius: 5px;">${message.replace(/\n/g, "<br>")}</p>
-        <h3>What's Next?</h3>
-        <ul>
-          <li>We'll review your inquiry</li>
-          <li>A team member will reach out to discuss your project</li>
-          <li>We'll provide a tailored proposal based on your needs</li>
-        </ul>
-        <p>In the meantime, feel free to explore our <a href="https://nextlevelmarketerz.com/work">case studies</a> to see what we've done for other clients.</p>
-        <p style="margin-top: 30px;">
-          Best regards,<br>
-          <strong>The NextLevel Marketerz Team</strong>
-        </p>
-        <p style="font-size: 12px; color: #666;">
-          Dubai, UAE | info@nextlevelmarketerz.com
-        </p>
-      </div>
-    `;
-
-    const userEmailResult = await sendEmail({
-      to: [{ email, name }],
-      subject: "Thank you for contacting NextLevel Marketerz",
-      htmlContent: userEmailHtml,
-      replyTo: { email: "info@nextlevelmarketerz.com", name: "NextLevel Marketerz" },
-    });
-
-    if (!userEmailResult.success) {
-      console.error("Failed to send user email:", userEmailResult.error);
-    }
 
     return NextResponse.json(
       {
