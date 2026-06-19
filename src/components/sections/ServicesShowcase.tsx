@@ -8,7 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/button"; 
-import { ArrowUpRight, CheckCircle, Code, Cpu, Palette, Zap, Search } from "lucide-react"; 
+import { ArrowUpRight, CheckCircle, Code, Cpu, Zap, Search, Target } from "lucide-react"; 
 
 // Register ScrollTrigger
 if (typeof window !== "undefined") {
@@ -18,10 +18,10 @@ if (typeof window !== "undefined") {
 const services = [
   {
     id: "dev",
-    title: "Web Development",
-    description: "We build fast, modern websites that actually convert visitors into customers. Next.js, React, TypeScript — the stack that performs.",
+    title: "Web Design & Development",
+    description: "We design and build high-performance, conversion-focused websites. From stunning Figma layouts to lightning-fast Next.js code — we handle it all.",
     icon: <Code className="w-8 h-8 md:w-12 md:h-12 text-blue-500" />,
-    features: ["Lightning fast load times", "Built for conversions", "SEO-ready from day one"],
+    features: ["Custom UI/UX Figma design", "Lightning fast load times", "SEO-ready from day one"],
     theme: "light",
     gradient: "from-indigo-600/20 to-purple-500/20",
     href: "/services/web-development",
@@ -47,14 +47,14 @@ const services = [
     href: "/services/social-media-marketing",
   },
   {
-    id: "design",
-    title: "Website Design",
-    description: "Your website is your storefront. We design interfaces people actually want to use — clean layouts, clear CTAs, and branding that sticks.",
-    icon: <Palette className="w-8 h-8 md:w-12 md:h-12 text-purple-500" />,
-    features: ["Conversion-focused UI", "Mobile-first approach", "Brand consistency"],
+    id: "lead-gen",
+    title: "Lead Generation",
+    description: "We build targeted B2B and B2C campaigns that fill your pipeline. No vanity metrics, just qualified leads ready to talk to your sales team.",
+    icon: <Target className="w-8 h-8 md:w-12 md:h-12 text-purple-500" />,
+    features: ["Targeted LinkedIn outreach", "High-converting landing pages", "Automated email nurturing"],
     theme: "dark",
     gradient: "from-pink-600/20 to-rose-500/20",
-    href: "/services/website-design",
+    href: "/services/linkedin-lead-gen",
   },
   {
     id: "ai",
