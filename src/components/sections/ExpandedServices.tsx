@@ -40,8 +40,6 @@ const SERVICE_CATEGORIES = {
     "Hotel Marketing",
   ],
   "AI Solutions": [
-    "WhatsApp Business API",
-    "ZOHO Integration",
     "AI Chatbots & Automation",
   ],
 } as const;
